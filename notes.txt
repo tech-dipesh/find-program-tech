@@ -1,0 +1,66 @@
+first i start with package start.
+npm i -D nodemon (the -d mean it only worked for the development side, now it will not go for the production stage.)
+
+for the project the mvp features are:
+login/signup with the authentication
+when use signup for the first time, it should have the following things: Full Name/Company Name, Email, Password, Username
+Login: Email and Password
+listing the new developer site: in listing first developer tool name, when it was released, the logo of that tool, use case (less than 10 words), descriptive information, which tech stack, tags..
+Navbar and footer: it have the template of footer and navbar. 
+
+Search filters: in the top of the page, user can search the listing, with it will be rerending each time when the input value is changed, and based on the input value it wil show the output in the card format. (with the shortcut of control k user can search the any listing), 
+Tech Stack subheading: it will have the subheading, where user can go to any see the subheading of that particular listing
+Upvote feature: User can upvote or downvote any listing with both on when they search with filter, they can downvote and upvote
+any developer Descriptio:user cann go to any listning,, and in there it will have the desriptive information of that tool, with with website url, tags, comments section and show all coments sections, 
+while showing any listing description when user click on that listing: it will show the following thing with the designalbe way: 
+Database:1.  User login and signup Database 2. Listing of the developer tool 3. Like & Dislike 4. Comment
+
+Schema: 
+1. first schema woulld be user login and signup with only correct information user can loggin and signup.
+2. second schema is when user enter a any new listings: it should follow all of teh listing things: the title can only be the string, the devellper release year only can be low of 1950 and high of 2025 (in the else block it will shwo the flash error of year only can be the year from 1950 to 2025, the logo of the tool: the logo would be in image format, i will connect to the multer and cloudinary to accept that image format. desvritive information: it should have more than 50 charac length and 250 characters less than length. tech stack would be select option form, with the options are: Mern, Frontend, backend, Devops, Machine learning, cyber security, artficial intelligence, open source, data analysis, data science, robotics engineer)
+
+Error:
+for catching the every kind of error on every block i will use the try and catch block if the data is coming from the database or any kind of external sources i will use async and await function for faster response our response. for showing the every kind of block the minor block i will show with the connect flash dependency. if the major error occured i will show th 404 page not found error. (like sometimes user might go to url that doesn't exist).
+
+before user can pass the any security measurement, i will pass with eery code function block with the middleware function. 
+
+Frontend:
+Homepage: Top Developer Tools, Search the tools (it will redirectered to the search), See all of the listings (the listings would be the based on the alphabetical order), user also can filter with popular or alphabetical. 
+Content: it will show the content of our website, call to action where we tell a user to submit a developer tools, a background image for graphic of my project
+success stories: below content it will have some quotes and user testimonial, of what user it says.
+Join our community: My Discord community 
+Upcoming features: 
+Profile edit
+
+Privacy:
+Password: for making a password protected i will do hashing and salting before storing on database, and other feature such as 
+i will use the passport.js for authenticaton.
+so with the new version now it will not require the cookie-parser as now express session will comes with cookie-parser. 
+
+Access:
+with the user havinng the same username and created user usernmae is same that partiucular user can perform the edit/update and delete operation, otherwise other user of random user can't delete that particular listing, before performing that task i will ask the user to if they confirm that operation, with teh window.confirm(). 
+for commenting user should have the logged in before commenting, and after user commenting i will redirecterd them wheere they left rather then on the homepage. also on comments it will show the username of what username that person comments. if that commenting person username and session username is matched then that particular username can able to delete that comments. 
+
+Connecting backend to frontend integration:
+connect the nodejs and express routes to the react components. 
+
+Deployment:
+i will render the at right now with the vercel for Frontend and backend for the render, if i get any beter tool i can switch that. i will test with multiple times before launching it. 
+
+
+The process i have done is set up the joi, then i import on the app.js, now i will set up the mongodburl
+the next process is to make the ejs file and pass the backend to cients side. when i set the env file, i have to to require the env file with require("dotenv").config(). When you use dotenv, you need to call its .config() method to load the variables from the .env file
+the one things, is i have to associated the every data to associated with the id.
+the error i have catched is use the same name consistently.
+app.use is the method to pass the middleware before doing any operation of it. i have used the helmet for securign a express. it secures the http request.
+i have add the new keywrod on expressError class every time. in the expressError class we must use new keyword before it. 
+now i think i finisdhe the frontend today 3/15 with only using the react and tailwindcss. i have to download react-router-dom. 
+
+i addded teh custom frontend error handling on the tailwind form. 
+for the backend: i can't talk the frontend to backend,  you'll encounter Cross-Origin Resource Sharing (CORS) issues for solving that i have to use cors and pass middleware, without cors method will be blocked for security reason.
+in mongodb, it create automatically the collections. in my airbnb project ist calls on the middleware fo app.use pasing the next() so i also passed that: app.use((req, res, next)=>{
+  let newData=req.newtools
+  next();
+})
+#if we just npm create vite@latest . (it will directly created the vite folder with root directory)
+we can use like: axios/http (to send the request but most of the are using the axios ) while connecting the backend to frontend it is important to note that we have to use the proxy. while setting up the proxy in the vite.config.js the frontend file. we have to set the : server:{proxy:{"/api": 'http:localhost:4000"},} (now when there is the request coming on teh localhost:4000 comes the request it will automatically append to )
