@@ -12,13 +12,13 @@ export default function Footer(){
         </p>
         <div className="flex space-x-4">
           <a href="#" className="hover:text-blue-200 transition-colors">
-           <i class="fa-brands fa-github"></i>
+           <i className="fa-brands fa-github"></i>
           </a>
           <a href="#" className="hover:text-blue-200 transition-colors">
-          <i class="fa-brands fa-whatsapp"></i>
+          <i className="fa-brands fa-whatsapp"></i>
           </a>
           <a href="#" className="hover:text-blue-200 transition-colors">
-          <i class="fa-brands fa-linkedin"></i>
+          <i className="fa-brands fa-linkedin"></i>
           </a>
         </div>
       </div>
@@ -39,7 +39,7 @@ export default function Footer(){
         <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Contribute</h4>
         <div className="space-y-2">
           <a href="#" className="inline-flex items-center text-gray-200 hover:text-white transition-colors text-sm">
-          <i class="fa-brands fa-github mr-3"></i>
+          <i className="fa-brands fa-github mr-3"></i>
             GitHub Repository
           </a>
           <p className="text-gray-200 text-xs mt-4 leading-relaxed">

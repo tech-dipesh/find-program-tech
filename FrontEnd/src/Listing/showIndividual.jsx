@@ -27,14 +27,14 @@ export default function Showindividual() {
                   <div className="flex items-start justify-between">
                     <div>
                       <h1 className="text-3xl font-bold text-gray-900 mb-2">Nodejs</h1>
-                      <div class="flex gap-2 mb-3">
+                      <div className="flex gap-2 mb-3">
                         <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                           API Tools
                         </span>
-                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
+                        <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
                           Backend
                         </span>
-                        <span class="px-2 py-1 bg-green-100 text-blue-800 text-xs rounded">
+                        <span className="px-2 py-1 bg-green-100 text-blue-800 text-xs rounded">
                           Server Side
                         </span>
                       </div>
@@ -57,7 +57,7 @@ export default function Showindividual() {
                   <div className="mt-4 flex items-center gap-6 text-gray-600">
                     <span>🚀 Launched 2022</span>
                     <span>💬 5 Comments</span>
-                    <span> 10 <i class="fa-solid fa-heart ml-2"></i></span>
+                    <span> 10 <i className="fa-solid fa-heart ml-2"></i></span>
                   </div>
 
                   <p className="mt-6 text-gray-700 leading-relaxed">

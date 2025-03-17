@@ -35,8 +35,10 @@ module.exports.idEditGet=async (req, res) => {
 
 module.exports.idEditPost=async (req, res) => {
   try {
-    let id=req.params.body;
-    res.send("this is id edit post route");
+    let {id}=req.params;
+    // let id=req.params.body;
+    res.render("listing.ejs", {id});
+    // res.send("this is id edit post route");
   } 
   catch (error) {
     res.send(`error on the edit post route and the error is, ${error}`)
