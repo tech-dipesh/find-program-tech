@@ -5,6 +5,7 @@ const expressError=require("../middleware/expressError.js");
 
 module.exports.signupGet = async (req, res) => {
   try {
+    
     res.send("this is the signup get method.");
   } catch (error) {
     res.send(`error on the signup get route and the error is: ${error}`);

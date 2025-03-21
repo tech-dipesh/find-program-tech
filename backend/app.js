@@ -6,28 +6,31 @@ const dotenv = require("dotenv").config();
 const helmet = require("helmet");
 const cors = require("cors");
 const ejs=require("ejs")
-
+const path=require("path")
 const { userSchma, newListing } = require("./schema.js");
 const newTool = require("./Tool/model.js");
-const developerTools = require("./data.js");
+const data = require("./data/data.js");
 const SignupListing = require("./Register/model.js");
 const expressError = require("./middleware/expressError.js");
 const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
+const methodOverride=require("method-override");
+const flash=require("connect-flash");
 
 let port = process.env.MYCUSTOMPATH || 5000;
+//My engine setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(helmet());
+//My Middleware
+app.use(methodOverride("_method"))
+app.use(flash());
+app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
 
-// app.set("views", path.join(__dirname, "views"));
-
-// // serve the static files.
-
-// app.use(express.static(path.join(__dirname, "views")));
 
 main().catch((err) => console.log(err));
 
@@ -38,9 +41,9 @@ async function main() {
 }
 
 
-app.use("*", listingRoute);
-app.use("*", registerRoute)
-app.use("/show", listingRoute);
+app.use("/tools", listingRoute);
+app.use( listingRoute)
+app.use("/login", registerRoute);
 // app.use(expressError);
   // app.use("*", (req, res) => {
   //   try {
@@ -49,8 +52,12 @@ app.use("/show", listingRoute);
   //     res.send(error);
   //   }
   // });
+
 app.use((err, req, res, next) => {
-  res.status(500, "something wrong on app.js");
+  // res.status(500).render("listing.ejs");
+  res.locals.success=flash.success;
+  res.locals.error=flash.error;
+  next()
 });
 
 app.listen(port, () => {

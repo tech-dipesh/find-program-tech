@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit route: <%=tools._id %></title>
+</head>
+<body>
+  <!-- <form action="/tools/<%=tools._id%>" method="put"> -->
+      <form action="/tools/<%=tools._id%>/edit?_method=PUT" method="POST">
+
+      <input type="text" name="Name" value="<%=tools.Name%>" placeholder="Updaeted Name">
+      <br>
+      <input type="number" name="releaseYear" value="<%=tools.releaseYear%>" placeholder="Updated Release Year">
+      <br>
+      <input type="text" name="useCase" value="<%=tools.useCase%>" placeholder="Updated Use Case">
+      <br>
+      <input type="text" name="techStack" value="<%=tools.techStack%>" placeholder="New tech Stack">
+      <br>
+      <textarea name="Description" placeholder="Updated Description of the tool." cols="30" rows="10"><%=tools.Description%></textarea>
+      
+    <button>Edit Route</button>
+  </form>
+</body>
+</html>

@@ -22,7 +22,14 @@ const Toolvalidate=new Schema({
     max:[50, "Maximum should be less than 5 characters."],
   },
   techStack: String,
-  Tags: String,
+  Description: {
+    type: String,
+    // default: "Full Stack"
+  },
+  Date:{
+    type: String,
+    default: Date()
+  },
   UserName: {
     type: Schema.Types.ObjectId,
     ref: SignupListing

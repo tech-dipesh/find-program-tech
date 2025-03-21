@@ -1,49 +1,101 @@
 const express=require("express");
 const router=express.Router();
-const newTool=require("./model.js");
-const CommentListing=require("../Comment/model.js");
+const mongoose=require("mongoose");
 const expressError=require("../middleware/expressError.js");
-module.exports.ShowIdGet=async(req, res)=>{
-  // if(error){
-  // throw new expressError (500, "express error occured");
-  // }
-  try {
-    let id=req.params.body;
-    res.send(`this is id get route ${id}`)
-  } catch (error) {
-    res.send(`error on the show id get route and the error is: ${error}`)
-  }
-}
+const data=require("../data/data.js");
+const newSchema=require("../schema.js");
+const modelListing=require("./model.js");
+const newTool = require("./model.js");
 
-module.exports.showIdPost=async(req, res)=>{
-  try {
-    let id=req.params.body;
-    res.send(`this is id post route ${id}`)
-  } catch (error) {
-    res.send(`error on the show id post route, and the error is: ${error}`)
-  }
-}
-
+const { validationResult}=require("express-validator");
 module.exports.idEditGet=async (req, res) => {
   try {
-    let id=req.params.body;
-    res.send(`this is id post edit route: ${id}`)
+    let id=req.params.id
+    let tools=await modelListing.findById(id)
+    res.render("edit.ejs", {tools})
   } catch (error) {
     res.send(`error on the edit id get route and the error is: ${error}`)
   }
 }
 
-module.exports.idEditPost=async (req, res) => {
+module.exports.idEditPut=async (req, res) => {
   try {
-    let {id}=req.params;
-    // let id=req.params.body;
-    res.render("listing.ejs", {id});
-    // res.send("this is id edit post route");
+    
+    let id=req.params.id;
+    let {Name, Logo, releaseYear, useCase, techStack, Description, userName}=req.body;
+    let update=await modelListing.findByIdAndUpdate(id, {Name, Logo, releaseYear, useCase, techStack, Description, userName},{new: true})
+    console.log(update);
+    res.redirect(`/tools/${id}`)
   } 
   catch (error) {
     res.send(`error on the edit post route and the error is, ${error}`)
   }
 }
 
+module.exports.deleteListing=async (req, res)=>{
+  try {
+    let postId=req.params.id;
+    await modelListing.findByIdAndDelete(postId);
+    res.redirect(`/tools`)
+    console.log(`${postId} is deleted`);
+  } catch (error) {
+    res.status(402).send(`Error on the deleteRoute ${error}`)
+  }
+}
 
-// module.exports=controllerT ool;
+
+module.exports.individualListingGet=async (req, res)=>{
+  try {
+    let id=req.params.id;
+    let tools=await modelListing.findById(id)
+    res.render(`showindividual.ejs`, {tools});
+  } catch (error) {
+    res.status(402).send(`error on the individualListing ${error}`)
+  }
+}
+
+module.exports.showIdGet=async(req, res)=>{
+  // if(error){
+  // throw new expressError (500, "express error occured");
+  // }
+  try { 
+    let tools=await modelListing.find({});
+    // console.log(tools);
+    res.render("showlisting.ejs", {tools});
+    
+  } catch (error) {
+    res.send(`error on the show id get route and the error is: ${error}`)
+  }
+}
+
+
+module.exports.showIdPost=async(req, res)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // let req.flash=("error", "Message")
+    // this is for the checking before the trycatch error
+    // If there are validation errors, return them with a 400 status
+    const errors={errors:errors.array()}
+    return res.status(400).redirect("/tools", {errors: errors.array()});
+  }
+  
+  try {
+    let userId=new mongoose.Types.ObjectId();
+    // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
+    
+    let {Name, Logo, releaseYear, useCase, techStack, userName}=req.body;
+    const newTool=await modelListing.create({
+      Name, releaseYear, useCase, Logo, techStack, userName
+      // Name, releaseYear, useCase, Logo, techStack, userName: userId
+    });
+    const tools=await modelListing.find({});
+    // console.log(data);
+    res.redirect("/tools");
+  } catch (error) {
+    res.send(`error on the show id post route, and the error is: ${error}`)
+  }
+}
+
+
+
+// module.exports=controllerTool;

@@ -1,0 +1,38 @@
+<html>
+  <style>
+    body{
+      text-align: center;
+
+    }
+    form{
+      display: inline-block;
+    }
+    input{
+      display: flex;
+      height: 50px;
+      width: 150px;
+    }
+    button{
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <form action="/tools" method="post">
+      <input type="text" placeholder="Please enter your name" name="Name">
+      <br>
+      <input type="text"  placeholder="logo url" name="Logo">
+      <br>
+      <input type="number" placeholder="2020 (released Year)" name="releaseYear">
+      <br>
+      <input type="text" placeholder="what is used for:" name="useCase">
+      <br>
+      <input type="text" placeholder="Which tech stack is used" name="techStack">
+      <br>
+      <textarea name="Description" cols="10" rows="10" placeholder="Please enter the Description"></textarea>
+      <br>
+      <input type="text" placeholder="who developed it." name="userName">
+      <br><hr/>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

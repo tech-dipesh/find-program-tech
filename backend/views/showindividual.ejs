@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Individual <%=tools._id%></title>
+</head>
+<style>
+ 
+
+  div{
+    height: 500px;
+    width: 500px;
+    background-color: gray;
+  }
+</style>
+<body>
+  <h2>Individual Listing</h2>
+  <div>
+    <h2>Individual Id: <%=tools._id %></h2>
+    <h2>Logo Url: <%=tools.Logo %></h2>
+    <h2>Title <%=tools.Name %></h2>
+    <h2>Release Year: <%=tools.releaseYear %></h2>
+    <h2>Use Case: <%=tools.useCase %></h2>
+    <h2>TechStack: <%=tools.techStack %></h2>
+    <h3>Description: <%=tools.Description%></h3>
+    <h3>Time that was added: <%= tools.Date %></h3>
+  </div>
+  <br>
+  <a href="/tools/<%=tools._id%>/edit"><button>Edit</button></a>
+  <br><br><br>
+  <!-- <form action="/tools/<%=tools._id%>?method_DELETE" method="post"><button>Delete</button></form> -->
+  <form action="/tools/<%= tools._id %>?_method=DELETE" method="POST">
+    <button>Delete</button>
+  </form>
+  
+  
+</body>
+</html>

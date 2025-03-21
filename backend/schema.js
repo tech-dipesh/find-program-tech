@@ -13,5 +13,12 @@ let userSchema = joi.object({
   email: joi.string().required()
 })
 
+let newSchema=joi.object({
+  Name: joi.string().required(),
+  Logo: joi.string().default,
+  releaseYear: joi.number() .min(1920) .max(2025),
+  techStack: joi.string(),
+  Description: joi.string().min(20)
+})
 
-module.exports=userSchema;
+module.exports={userSchema, newSchema};

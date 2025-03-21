@@ -17,10 +17,10 @@ function App() {
     <>
      <div className="App">
        <MainFooter />
-      <Home />
+      {/* <Home /> */}
       {/* <Login/> */}
       {/* <Signup/> */}
-      {/* <Show/> */}
+      <Show/>
       {/* <Showindividual/> */}
       {/* <Newlisting/> */}
       {/* <ContactForm/> */}
