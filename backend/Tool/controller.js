@@ -3,7 +3,7 @@ const router=express.Router();
 const mongoose=require("mongoose");
 const expressError=require("../middleware/expressError.js");
 const data=require("../data/data.js");
-const newSchema=require("../schema.js");
+const newSchema=require("../middleware/schema.js");
 const modelListing=require("./model.js");
 const newTool = require("./model.js");
 
@@ -24,7 +24,6 @@ module.exports.idEditPut=async (req, res) => {
     let id=req.params.id;
     let {Name, Logo, releaseYear, useCase, techStack, Description, userName}=req.body;
     let update=await modelListing.findByIdAndUpdate(id, {Name, Logo, releaseYear, useCase, techStack, Description, userName},{new: true})
-    console.log(update);
     res.redirect(`/tools/${id}`)
   } 
   catch (error) {
@@ -60,9 +59,7 @@ module.exports.showIdGet=async(req, res)=>{
   // }
   try { 
     let tools=await modelListing.find({});
-    // console.log(tools);
     res.render("showlisting.ejs", {tools});
-    
   } catch (error) {
     res.send(`error on the show id get route and the error is: ${error}`)
   }
@@ -70,15 +67,6 @@ module.exports.showIdGet=async(req, res)=>{
 
 
 module.exports.showIdPost=async(req, res)=>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    // let req.flash=("error", "Message")
-    // this is for the checking before the trycatch error
-    // If there are validation errors, return them with a 400 status
-    const errors={errors:errors.array()}
-    return res.status(400).redirect("/tools", {errors: errors.array()});
-  }
-  
   try {
     let userId=new mongoose.Types.ObjectId();
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
@@ -92,10 +80,8 @@ module.exports.showIdPost=async(req, res)=>{
     // console.log(data);
     res.redirect("/tools");
   } catch (error) {
-    res.send(`error on the show id post route, and the error is: ${error}`)
+    // res.send(`error on the show id post route, and the error is: ${error}`)
   }
 }
 
-
-
-// module.exports=controllerTool;
+ 

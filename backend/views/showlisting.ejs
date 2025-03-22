@@ -16,14 +16,6 @@
     </style>
     <body>
       <h2>Any Custom Error:</h2>
-      <ul>
-      <%if(errors){%>
-       <% for(error of error){%>
-          <li>Req Flash Message <%error.msg %></li>
-        <%}%>
-      <%}%>
-      </ul>
-
         <a href="/new"><button>Create</button></a>
     <h2>This is listing.ejs</h2>
     <% for(array of tools){ %>
