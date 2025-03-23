@@ -25,12 +25,16 @@ app.set("views", path.join(__dirname, "views"));
 
 //My Middleware
 app.use(methodOverride("_method"))
-app.use(flash());
 app.use(session({
   secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false,
+  cookie:{
+    httpOnly:true,
+    maxAge: 2*60*1000
+  }
 }))
+app.use(flash());
 
 app.use(helmet())
 app.use(express.json())
@@ -47,9 +51,16 @@ async function main() {
 }
 
 
-app.use( listingRoute)
+app.use(( req, res, next) => {
+  // res.status(500).render("listing.ejs");
+  res.locals.success=req.flash("success")
+  res.locals.error=req.flash("error");
+  next()
+});
 
-app.use("/login", registerRoute);
+  app.use("/tools", listingRoute)
+  // app.use("/new", listingRoute)
+  app.use("/", registerRoute);
 // app.use(expressError);
 
   // app.use("*", (req, res) => {
@@ -60,13 +71,9 @@ app.use("/login", registerRoute);
   //   }
   // });
 
-app.use(( req, res, next) => {
-  // res.status(500).render("listing.ejs");
-  res.locals.success=req.flash("success")
-  res.locals.error=req.flash("error");
-  next()
-});
 
 app.listen(port, () => {
   console.log(`port is listening to: localhost:${port}`);
 });
+
+app.all("*",(req, res)=>res.redirect("tools"));

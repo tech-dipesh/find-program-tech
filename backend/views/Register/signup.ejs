@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<style>
+  body{
+    text-align: center;
+  }
+  form{
+    display: inline-block;
+  }
+</style>
+<body>
+  <h1>Signup Page</h1>
+  <h2>Already Have Account: <a href="/login">Login</a></h2>
+  <form action="/signup" method="post">
+    <input type="text" name="FullName" placeholder="Please enter your FullName:">
+    <br>
+    <input type="email" name="Email" placeholder="Valid Email:">
+    <br>
+    <input type="password" name="PassWord" placeholder="Strong Password:">
+    <br>
+    <input type="text" name="userName" placeholder="Unique UserName:">
+    <br>
+    <button>Submit</button>
+  </form>
+</body>
+</html>

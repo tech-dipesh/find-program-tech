@@ -6,8 +6,8 @@ const wrapAsync=require("../middleware/wrapAsync.js")
 const registerController=require("./controller.js");
 
 router.route("/signup")
-.get(wrapAsync (registerController.loginGet))
-.post(wrapAsync(registerController.loginPost));
+.get(wrapAsync (registerController.signupGet))
+.post(wrapAsync(registerController.signupPost));
 
 router.route("/login")
 .get(wrapAsync(registerController.loginGet))

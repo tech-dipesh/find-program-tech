@@ -6,16 +6,16 @@ const newTool=require("./model.js");
 const validateListing=require("../middleware/validateListing.js");
 
 
-router.route("/")
-.get(wrapAsync(controllerTool.showIdGet))
-.post(validateListing, wrapAsync (controllerTool.showIdPost))
-
-
 router.route("/new")
 .get(wrapAsync(async (req, res)=>{
   res.render("new.ejs");
 }))
 .post(wrapAsync(controllerTool.createNew))
+
+router.route("/")
+.get(wrapAsync(controllerTool.showIdGet))
+.post(validateListing, wrapAsync (controllerTool.showIdPost))
+
 
 
 router.route("/tools/:id/edit")

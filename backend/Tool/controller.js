@@ -46,7 +46,7 @@ module.exports.deleteListing=async (req, res)=>{
 module.exports.individualListingGet=async (req, res)=>{
   try {
     let id=req.params.id;
-    let tools=await modelListing.findById(id)
+    let tools=await modelListing.findById(id).populate("userName")
     res.render(`showindividual.ejs`, {tools});
   } catch (error) {
     res.status(402).send(`error on the individualListing ${error}`)
@@ -54,12 +54,12 @@ module.exports.individualListingGet=async (req, res)=>{
 }
 
 module.exports.showIdGet=async(req, res)=>{
-  // if(error){
-  // throw new expressError (500, "express error occured");
-  // }
+    // if(error){
+    // throw new expressError (500, "express error occured");
+    // }
   try { 
-    let tools=await modelListing.find({});
-    res.render("showlisting.ejs", {tools});
+    let tools=await modelListing.find({}).populate("userName");
+    res.render("index.ejs", {tools});
   } catch (error) {
     res.send(`error on the show id get route and the error is: ${error}`)
   }
@@ -70,14 +70,12 @@ module.exports.showIdPost=async(req, res)=>{
   try {
     let userId=new mongoose.Types.ObjectId();
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
-    
     let {Name, Logo, releaseYear, useCase, techStack, userName}=req.body;
     const newTool=await modelListing.create({
       Name, releaseYear, useCase, Logo, techStack, userName
       // Name, releaseYear, useCase, Logo, techStack, userName: userId
     });
-    const tools=await modelListing.find({});
-    // console.log(data);
+    // const tools=await modelListing.find({});
     res.redirect("/tools");
   } catch (error) {
     // res.send(`error on the show id post route, and the error is: ${error}`)

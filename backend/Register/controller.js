@@ -2,11 +2,12 @@ const express=require("express");
 const router=express.Router();
 const signupListing=require("./model.js");
 const expressError=require("../middleware/expressError.js");
+const { default: mongoose } = require("mongoose");
 
 module.exports.signupGet = async (req, res) => {
   try {
-    
-    res.send("this is the signup get method.");
+    let newUser=await signupListing.find({})
+    res.render("Register/signup.ejs", {newUser});
   } catch (error) {
     res.send(`error on the signup get route and the error is: ${error}`);
   }
@@ -14,7 +15,11 @@ module.exports.signupGet = async (req, res) => {
 
 module.exports.signupPost = async (req, res) => {
   try {
-    res.send("this is the signup post method.");
+    // let {signupId}=new mongoose.Types.ObjectId();
+    let {fullName, Email, PassWord, userName}=req.body;
+    let newUser=await signupListing.create({fullName, Email, PassWord, userName});
+    console.log(newUser);
+    res.redirect("/tools");
   } catch (error) {
     res.send(`error on the signup post route and the error is: ${error}`);
   }
@@ -22,7 +27,8 @@ module.exports.signupPost = async (req, res) => {
 
 module.exports.loginGet = async (req, res) => {
   try {
-    res.send("this is the get login get method.");
+    let dataUser=await signupListing.find({})
+    res.render("Register/login.ejs", {dataUser})
   } catch (error) {
     res.send(`error on the login get route and the error is: ${error}`);
   }
@@ -30,7 +36,20 @@ module.exports.loginGet = async (req, res) => {
 
 module.exports.loginPost = async (req, res) => {
   try {
-    res.send("this is the post login post method.");
+    let {userName, PassWord}=req.body;
+    let dataUser=await signupListing.findOne({userName})
+    
+    if(!dataUser){
+      req.flash("error", "Username doesn't exist")
+        return res.redirect("/login")
+    }
+    if(PassWord!==dataUser.PassWord){
+      req.flash("error", "Password doesn't match");
+      return res.redirect("/login");
+    }
+    req.flash("success", "congratulation you put the correct address");
+    res.redirect("/tools")
+    // res.send("this is the post login post method.");
   } catch (error) {
     res.send(`error on the login post route and the error is: ${error}`);
   }
