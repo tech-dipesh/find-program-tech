@@ -59,7 +59,11 @@ module.exports.showIdGet=async(req, res)=>{
     // throw new expressError (500, "express error occured");
     // }
   try { 
-    let tools=await modelListing.find({}).populate("userName");
+    // let tools=await modelListing.find({}).populate("userName");
+    let tools=await modelListing.find({}) .populate({
+      path: "userName",
+      select: "userName" // Populate only the "userName" field
+    });;
     res.render("index.ejs", {tools});
   } catch (error) {
     res.send(`error on the show id get route and the error is: ${error}`)

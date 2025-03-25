@@ -9,6 +9,7 @@ const expressError = require("./middleware/expressError.js");
 const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
+let {isLoggedIn}=require("./middleware/isLoggedIn.js");
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
@@ -20,7 +21,8 @@ const methodOverride=require("method-override");
 const flash=require("connect-flash");
 const session=require("express-session");
 let passport=require("passport");
-let passportLocal=require("passport-local");
+let localStrategy=require("passport-local");
+let bcrypt=require("bcrypt");
 
 let port = process.env.MYCUSTOMPATH || 5000;
 //My engine setup
@@ -36,15 +38,20 @@ app.use(session({
   cookie:{
     // expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     httpOnly:true,
-    maxAge: 2*60*1000
+    maxAge: 5*60*1000
   }
 }))
+
+
 app.use((req, res, next) => {
   res.locals.currentUser = req.user; // Requires Passport.js/session setup
   next();
 });
-app.use(flash());
 
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(isLoggedIn)
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -67,15 +74,15 @@ app.use(( req, res, next) => {
   next()
 });
 
-  app.use("/tools", listingRoute)
-  // app.use("/new", listingRoute)
-  app.use("/", registerRoute);
+app.use("/tools", listingRoute)
+// app.use("/new", listingRoute)
+app.use("/", registerRoute);
 // app.use(expressError);
 
-  // app.use("*", (req, res) => {
+// app.use("*", (req, res) => {
   //   try {
-  //     res.send(`Your are trying to access the:is doesn't exist yet.`);
-  //   } catch (error) {
+    //     res.send(`Your are trying to access the:is doesn't exist yet.`);
+    //   } catch (error) {
   //     res.send(error);
   //   }
   // });
