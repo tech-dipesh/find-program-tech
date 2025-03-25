@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const SignupListing = require("../Register/model.js");
+const signupListing = require("../Register/model.js");
 const CommentSchema = new Schema({
   _id: Schema.Types.ObjectId,
   Comment: {
@@ -9,7 +9,7 @@ const CommentSchema = new Schema({
   },
   userName: {
     type: String,
-    ref: SignupListing,
+    ref: "signupListing",
   },
 });
 // const CommentListing=mongoose.model("CommentListing", CommentSchema)

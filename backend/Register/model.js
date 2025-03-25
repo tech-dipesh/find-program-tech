@@ -6,5 +6,5 @@ const Signup = new mongoose.Schema({
   userName: String,
   PassWord: String,
 });
-let SignupListing = mongoose.model("signupListing", Signup);
-module.exports = SignupListing;
+let signupListing = mongoose.model("signupListing", Signup);
+module.exports = signupListing;
