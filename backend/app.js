@@ -30,6 +30,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie:{
+    // expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     httpOnly:true,
     maxAge: 2*60*1000
   }

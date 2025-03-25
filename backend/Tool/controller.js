@@ -8,6 +8,7 @@ const modelListing=require("./model.js");
 const newTool = require("./model.js");
 
 const { validationResult}=require("express-validator");
+const signupListing = require("../Register/model.js");
 module.exports.idEditGet=async (req, res) => {
   try {
     let id=req.params.id
@@ -66,20 +67,23 @@ module.exports.showIdGet=async(req, res)=>{
 }
 
 
-module.exports.showIdPost=async(req, res)=>{
-  try {
-    let userId=new mongoose.Types.ObjectId();
-    // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
-    let {Name, Logo, releaseYear, useCase, techStack, userName}=req.body;
-    const newTool=await modelListing.create({
-      Name, releaseYear, useCase, Logo, techStack, userName
-      // Name, releaseYear, useCase, Logo, techStack, userName: userId
-    });
-    // const tools=await modelListing.find({});
-    res.redirect("/tools");
-  } catch (error) {
-    // res.send(`error on the show id post route, and the error is: ${error}`)
-  }
-}
-
- 
+// module.exports.showIdPost=async(req, res)=>{
+//   try {
+//     // let userId=new mongoose.Types.ObjectId();
+//     // let userId=req.session.userId;
+//     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
+//     // let user=await signupListing.findOne({userName: req.body.userName});
+//     let {Name, Logo, releaseYear, useCase, techStack}=req.body;
+    
+//     const newTool=await modelListing.create({
+//       Name, releaseYear, useCase, Logo, techStack, userName: req.user._id
+//       // Name, releaseYear, useCase, Logo, techStack, userName: userId
+//     });
+//     console.log(newTool);
+//     // const tools=await modelListing.find({});
+//     res.redirect("/tools");
+//   } catch (error) {
+//     req.flash("error", "error on the show id post route, and the error is: ");
+//     res.send(`error on the show id post route, and the error is: ${error}`)
+//   }
+// }
