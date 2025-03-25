@@ -31,14 +31,24 @@ app.set("views", path.join(__dirname, "views"));
 
 //My Middleware
 app.use(methodOverride("_method"))
+// app.use(session({
+//   secret: process.env.SECRET,
+//   resave: true,
+//   saveUninitialized: false,
+//   cookie:{
+//     // expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//     httpOnly:true,
+//     maxAge: 5*60*1000
+//   }
+// }))
 app.use(session({
   secret: process.env.SECRET,
-  resave: true,
+  resave: false,  // Changed from true
   saveUninitialized: false,
-  cookie:{
-    // expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    httpOnly:true,
-    maxAge: 5*60*1000
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Use secure in production
+    maxAge: 1000 * 60 * 60 * 24 // 24 hours
   }
 }))
 
@@ -55,6 +65,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  
   next();
 });
 
@@ -70,8 +81,6 @@ async function main() {
 
 app.use(( req, res, next) => {
   // res.status(500).render("listing.ejs");
-  res.locals.success=req.flash("success")
-  res.locals.error=req.flash("error");
   next()
 });
 

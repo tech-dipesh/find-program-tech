@@ -6,16 +6,13 @@ const newTool=require("./model.js");
 const validateListing=require("../middleware/validateListing.js");
 const {isLoggedIn}=require("../middleware/isLoggedIn.js");
 
-router.route("/new")
-.get(isLoggedIn, wrapAsync(async (req, res)=>{
+router.get("/new", (isLoggedIn, wrapAsync(async (req, res)=>{
   res.render("new.ejs");
-}))
-.post(wrapAsync(controllerTool.createNew))
+})));
 
 router.route("/")
-.get(isLoggedIn, wrapAsync(controllerTool.showIdGet))
-.post(isLoggedIn, validateListing, wrapAsync (controllerTool.showIdPost))
-
+  .get(isLoggedIn, wrapAsync(controllerTool.showIdGet))
+  .post(isLoggedIn, wrapAsync(controllerTool.showIdPost));
 
 
 router.route("/tools/:id/edit")

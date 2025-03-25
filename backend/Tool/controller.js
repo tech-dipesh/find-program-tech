@@ -48,6 +48,7 @@ module.exports.individualListingGet=async (req, res)=>{
   try {
     let id=req.params.id;
     let tools=await modelListing.findById(id).populate("userName")
+
     res.render(`showindividual.ejs`, {tools});
   } catch (error) {
     res.status(402).send(`error on the individualListing ${error}`)
@@ -59,7 +60,8 @@ module.exports.showIdGet=async(req, res)=>{
     // throw new expressError (500, "express error occured");
     // }
   try { 
-let tools = await modelListing.find({}).populate({ path: "userName", select: "userName" });
+// let tools = await modelListing.find({}).populate({ path: "userName", select: "userName" });
+let tools = await modelListing.find({})
     res.render("index.ejs", {tools});
   } catch (error) {
     res.send(`error on the show id get route and the error is: ${error}`)
@@ -91,7 +93,12 @@ let tools = await modelListing.find({}).populate({ path: "userName", select: "us
 
 module.exports.showIdPost = async (req, res) => {
   try {
+    if(!req.user){
+      req.flash("error", "please login first!");
+      return res.redirect("/login")
+    }
     const { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
+    console.log(`Data is stored on ${req.body}`);
     const newTool = await modelListing.create({ 
       Name, 
       Logo, 
@@ -99,7 +106,7 @@ module.exports.showIdPost = async (req, res) => {
       useCase, 
       techStack, 
       Description,
-      userName: req.user._id
+      // userName: req.user._id
     });
     console.log("New Tool Created:", newTool);
     res.redirect("/tools");
