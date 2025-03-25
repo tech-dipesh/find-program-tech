@@ -16,8 +16,8 @@ module.exports.signupGet = async (req, res) => {
 module.exports.signupPost = async (req, res) => {
   try {
     // let {signupId}=new mongoose.Types.ObjectId();
-    let {fullName, Email, PassWord, userName}=req.body;
-    let newUser=await signupListing.create({fullName, Email, PassWord, userName});
+    let {yourName, Email, PassWord, userName}=req.body;
+    let newUser=await signupListing.create({yourName, Email, PassWord, userName});
     console.log(newUser);
     res.redirect("/tools");
   } catch (error) {

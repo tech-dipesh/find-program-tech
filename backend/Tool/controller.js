@@ -59,11 +59,7 @@ module.exports.showIdGet=async(req, res)=>{
     // throw new expressError (500, "express error occured");
     // }
   try { 
-    // let tools=await modelListing.find({}).populate("userName");
-    let tools=await modelListing.find({}) .populate({
-      path: "userName",
-      select: "userName" // Populate only the "userName" field
-    });;
+let tools = await modelListing.find({}).populate({ path: "userName", select: "userName" });
     res.render("index.ejs", {tools});
   } catch (error) {
     res.send(`error on the show id get route and the error is: ${error}`)
@@ -103,7 +99,7 @@ module.exports.showIdPost = async (req, res) => {
       useCase, 
       techStack, 
       Description,
-      userName: req.user._id // Ensure user is logged in
+      userName: req.user._id
     });
     console.log("New Tool Created:", newTool);
     res.redirect("/tools");
