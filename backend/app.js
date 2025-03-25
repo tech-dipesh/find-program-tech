@@ -1,12 +1,6 @@
 const express = require("express");
 const app = express();
 const value = require("./Tool/model.js");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv").config();
-const helmet = require("helmet");
-const cors = require("cors");
-const ejs=require("ejs")
-const path=require("path")
 const { userSchma, newListing } = require("./middleware/schema.js");
 const newTool = require("./Tool/model.js");
 const data = require("./data/data.js");
@@ -15,9 +9,19 @@ const expressError = require("./middleware/expressError.js");
 const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
+
+const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
+const helmet = require("helmet");
+const cors = require("cors");
+const ejs=require("ejs")
+const path=require("path")
 const methodOverride=require("method-override");
 const flash=require("connect-flash");
 const session=require("express-session");
+let passport=require("passport");
+let passportLocal=require("passport-local");
+
 let port = process.env.MYCUSTOMPATH || 5000;
 //My engine setup
 app.set("view engine", "ejs");
@@ -35,6 +39,10 @@ app.use(session({
     maxAge: 2*60*1000
   }
 }))
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user; // Requires Passport.js/session setup
+  next();
+});
 app.use(flash());
 
 app.use(helmet())

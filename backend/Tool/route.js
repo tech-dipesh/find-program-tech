@@ -4,22 +4,22 @@ const wrapAsync=require("../middleware/wrapAsync.js")
 const controllerTool=require("./controller.js");
 const newTool=require("./model.js");
 const validateListing=require("../middleware/validateListing.js");
-
+const {isLoggedIn}=require("../middleware/isLoggedIn.js");
 
 router.route("/new")
-.get(wrapAsync(async (req, res)=>{
+.get(isLoggedIn, wrapAsync(async (req, res)=>{
   res.render("new.ejs");
 }))
 .post(wrapAsync(controllerTool.createNew))
 
 router.route("/")
-.get(wrapAsync(controllerTool.showIdGet))
-.post(validateListing, wrapAsync (controllerTool.showIdPost))
+.get(isLoggedIn, wrapAsync(controllerTool.showIdGet))
+.post(isLoggedIn, validateListing, wrapAsync (controllerTool.showIdPost))
 
 
 
 router.route("/tools/:id/edit")
-.get(wrapAsync(controllerTool.idEditGet))
+.get(isLoggedIn, wrapAsync(controllerTool.idEditGet))
 .put( wrapAsync(controllerTool.idEditPut))
 
 router.route("/tools/:id")

@@ -3,7 +3,7 @@ const Schema=mongoose.Schema;
 const signupListing=require("../Register/model.js");
 
 const Toolvalidate=new Schema({
-  Name: String,
+  fullName: String,
   Logo:{
     type: String,
     set: (v) =>
@@ -30,10 +30,15 @@ const Toolvalidate=new Schema({
     type: String,
     default: Date()
   },
+  // userName: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "signupListing"
+  // },
   userName: {
     type: Schema.Types.ObjectId,
-    ref: "signupListing"
+    ref: "signupListing" 
   }
+  
 })
 let newTool=mongoose.model("newTool", Toolvalidate)
 module.exports=newTool;

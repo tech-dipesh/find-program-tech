@@ -47,6 +47,7 @@ module.exports.loginPost = async (req, res) => {
       req.flash("error", "Password doesn't match");
       return res.redirect("/login");
     }
+    req.session.userId = dataUser._id; 
     req.flash("success", "congratulation you put the correct address");
     res.redirect("/tools")
     // res.send("this is the post login post method.");
