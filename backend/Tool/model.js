@@ -3,7 +3,7 @@ const Schema=mongoose.Schema;
 const signupListing=require("../Register/model.js");
 
 const Toolvalidate=new Schema({
-  fullName: String,
+  Name: String,
   Logo:{
     type: String,
     set: (v) =>

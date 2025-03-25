@@ -95,9 +95,9 @@ module.exports.showIdGet=async(req, res)=>{
 
 module.exports.showIdPost = async (req, res) => {
   try {
-    const { fullName, Logo, releaseYear, useCase, techStack, Description } = req.body;
+    const { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
     const newTool = await modelListing.create({ 
-      fullName, 
+      Name, 
       Logo, 
       releaseYear, 
       useCase, 
