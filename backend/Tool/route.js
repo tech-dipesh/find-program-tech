@@ -3,6 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../middleware/wrapAsync.js");
 const controllerTool = require("./controller.js");
 const { isLoggedIn } = require("../middleware/isLoggedIn.js");
+const {LikeListing}=require("../Comment/route.js");
 
 // Route for new tool page
 router.get("/new", isLoggedIn, (req, res) => {
@@ -18,6 +19,8 @@ router.route("/")
 router.route("/:id")
   .get(wrapAsync(controllerTool.individualListingGet))
   .delete(wrapAsync(controllerTool.deleteListing));
+
+router.post("/:id/like", isLoggedIn, (LikeListing));
 
 // Route for editing a tool
 router.route("/:id/edit")

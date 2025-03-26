@@ -6,7 +6,7 @@ const data=require("../data/data.js");
 const newSchema=require("../middleware/schema.js");
 const modelListing=require("./model.js");
 const newTool = require("./model.js");
-
+let Approval=require("../Comment/likemodel.js");
 const { validationResult}=require("express-validator");
 const signupListing = require("../Register/model.js");
 module.exports.idEditGet=async (req, res) => {
@@ -52,10 +52,18 @@ module.exports.individualListingGet = async (req, res) => {
       req.flash('error', 'Tool not found');
       return res.redirect('/tools');
     }
-
+    //  let approval = await Approval.findOne({ toolId: id });
+    // if (!approval) {
+    //   approval = new Approval({ toolId: id });
+    //   await approval.save();
+    // }
+    let Like=0;
+    let DisLike=0;
+      // Like: approval.likes,
+      // DisLike: approval.dislikes,
     res.render('showindividual.ejs', { 
       tools,
-      error: req.flash('error')
+      error: req.flash('error'), Like, DisLike
     });
   } catch (error) {
     console.error("Error fetching individual tool:", error);

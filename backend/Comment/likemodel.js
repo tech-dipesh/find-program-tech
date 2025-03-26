@@ -1,13 +1,19 @@
 const mongoose=require("mongoose");
-const {Schema}=mongoose.Schema;
+const {Schema}=mongoose;
 
 const likeDislike=new Schema({
+  toolId: {
+    type: Schema.Types.ObjectId,
+    ref: 'modelListing',
+    required: true,
+    unique: true
+  },
   Likes: {
-    Type: String,
+    type: Number,
     default: 0
   },
   DisLike: {
-    Type: String,
+    type: Number,
     default: 0
   }
 })  
