@@ -18,7 +18,7 @@ module.exports.signupPost = async (req, res) => {
     // let {signupId}=new mongoose.Types.ObjectId();
     let {yourName, Email, PassWord, userName}=req.body;
     let newUser=await signupListing.create({yourName, Email, PassWord, userName});
-    console.log(newUser);
+    req.session.userId = newUser._id;
     res.redirect("/tools");
   } catch (error) {
     res.send(`error on the signup post route and the error is: ${error}`);

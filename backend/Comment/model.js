@@ -8,7 +8,7 @@ const CommentSchema = new Schema({
     required: true,
   },
   userName: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: "signupListing",
   },
 });

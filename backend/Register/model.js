@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const { Schema } = require("../Tool/model");
+// const { Schema } = require("../Tool/model");
+const {Schema}=mongoose;
 const Signup = new mongoose.Schema({
   yourName: String,
   Email: String,

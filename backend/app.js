@@ -81,6 +81,8 @@ async function main() {
 
 app.use(( req, res, next) => {
   // res.status(500).render("listing.ejs");
+  res.locals.success=req.flash("success")
+  res.locals.error=req.flash("error");
   next()
 });
 

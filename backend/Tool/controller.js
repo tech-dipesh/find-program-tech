@@ -43,75 +43,83 @@ module.exports.deleteListing=async (req, res)=>{
   }
 }
 
-
-module.exports.individualListingGet=async (req, res)=>{
+module.exports.individualListingGet = async (req, res) => {
   try {
-    let id=req.params.id;
-    let tools=await modelListing.findById(id).populate("userName")
+    let id = req.params.id;
+    let tools = await modelListing.findById(id);
 
-    res.render(`showindividual.ejs`, {tools});
-  } catch (error) {
-    res.status(402).send(`error on the individualListing ${error}`)
-  }
-}
-
-module.exports.showIdGet=async(req, res)=>{
-    // if(error){
-    // throw new expressError (500, "express error occured");
-    // }
-  try { 
-// let tools = await modelListing.find({}).populate({ path: "userName", select: "userName" });
-let tools = await modelListing.find({})
-    res.render("index.ejs", {tools});
-  } catch (error) {
-    res.send(`error on the show id get route and the error is: ${error}`)
-  }
-}
-
-
-// module.exports.showIdPost=async(req, res)=>{
-//   try {
-//     if(!req.user._id){
-//       req.flash("error", "Please First login before creating a new listing")
-//       return res.redirect("/tools/new")
-//     }
-//     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
-//     // let user=await signupListing.findOne({userName: req.body.userName});
-//     let {Name, Logo, releaseYear, useCase, techStack}=req.body;
-//     const newTool=await modelListing.create({
-//       Name, releaseYear, useCase, Logo, techStack, userName: req.user._id
-//     });
-//     console.log(newTool);
-//     // const tools=await modelListing.find({});
-//     res.redirect("/tools");
-//   } catch (error) {
-//     req.flash("error", "error on the show id post route, and the error is: ");
-//     res.send(`error on the show id post route, and the error is: ${error}`)
-//   }
-// }
-
-
-module.exports.showIdPost = async (req, res) => {
-  try {
-    if(!req.user){
-      req.flash("error", "please login first!");
-      return res.redirect("/login")
+    if (!tools) {
+      req.flash('error', 'Tool not found');
+      return res.redirect('/tools');
     }
-    const { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
-    console.log(`Data is stored on ${req.body}`);
-    const newTool = await modelListing.create({ 
-      Name, 
-      Logo, 
-      releaseYear, 
-      useCase, 
-      techStack, 
-      Description,
-      // userName: req.user._id
+
+    res.render('showindividual.ejs', { 
+      tools,
+      error: req.flash('error')
     });
-    console.log("New Tool Created:", newTool);
-    res.redirect("/tools");
   } catch (error) {
-    req.flash("error", error.message);
-    res.redirect("/tools/new");
+    console.error("Error fetching individual tool:", error);
+    req.flash('error', 'Failed to fetch tool details');
+    res.redirect('/tools');
   }
 };
+
+module.exports.showIdGet = async(req, res) => {
+  try { 
+    let tools = await modelListing.find({});
+    res.render("index.ejs", {
+      tools,
+      success: req.flash('success'),
+      error: req.flash('error')
+    });
+  } catch (error) {
+    console.error("Error fetching tools:", error);
+    res.send(`Error on the show id get route: ${error}`);
+  }
+};
+module.exports.showIdPost=async(req, res)=>{
+  try {
+    if(!req.user._id){
+      req.flash("error", "Please First login before creating a new listing")
+      return res.redirect("/tools/new")
+    }
+    // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
+    // let user=await signupListing.findOne({userName: req.body.userName});
+    let {Name, Logo, releaseYear, useCase, techStack}=req.body;
+    const newTool=await modelListing.create({
+      Name, releaseYear, useCase, Logo, techStack, userName: req.user._id
+    });
+    console.log(newTool);
+    // const tools=await modelListing.find({});
+    res.redirect("/tools");
+  } catch (error) {
+    req.flash("error", "error on the show id post route, and the error is: ");
+    res.send(`error on the show id post route, and the error is: ${error}`)
+  }
+}
+
+
+// module.exports.showIdPost = async (req, res) => {
+//   try {
+//     // if(!req.user){
+//     //   req.flash("error", "please login first!");
+//     //   return res.redirect("/login")
+//     // }
+//     const { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
+//     console.log(`Data is stored on ${req.body}`);
+//     const newTool = await modelListing.create({ 
+//       Name, 
+//       Logo, 
+//       releaseYear, 
+//       useCase, 
+//       techStack, 
+//       Description,
+//       userName: req.user._id
+//     });
+//     console.log("New Tool Created:", newTool);
+//     res.redirect("/tools");
+//   } catch (error) {
+//     req.flash("error", error.message);
+//     res.redirect("/tools/new");
+//   }
+// };

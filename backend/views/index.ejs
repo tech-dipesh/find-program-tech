@@ -39,11 +39,11 @@
     <a href="/login" class="login"><button>Login</button></a>
     <% for(array of tools){ %>
       <div>
-       <h2>Name: <%=array.Name %></h2>
-       <h2>Released Year:<%=array.releaseYear %></h2>
-       <h2>useCase:<%=array.useCase %></h2>
-       <h2>CurrentTime:<%=array.Date %></h2>
-       <h2>userName: <%=array.userName %></h2>
+        <h2>Name: <%=array.Name %></h2>
+        <h2>Released Year: <%=array.releaseYear %></h2>
+        <h2>Use Case: <%=array.useCase %></h2>
+        <h2>Current Time: <%=array.Date %></h2>
+        <h2>User Name: <%= array.userName || 'Unknown' %></h2>
       </div>
       <a href="/tools/<%=array._id %>"><button>View Details</button></a>
     <%}%>
