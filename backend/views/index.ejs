@@ -16,6 +16,7 @@
       background-color: blue;
       cursor: pointer;
     }
+   
     .signup{
       top: 20px;
       right:10px;
@@ -23,6 +24,11 @@
     }
     .login{
       top: 100px;
+      right:10px;
+      position: absolute;
+    }
+    .logout{
+      top: 20px;
       right:10px;
       position: absolute;
     }
@@ -35,8 +41,14 @@
       <h2>Any Custom Error:</h2>
         <a href="/tools/new"><button>Create</button></a>
     <h2>This is listing.ejs</h2>
+    <%if(!currUser){%>
     <a href="/signup" class="signup"><button>SignUp</button></a>
     <a href="/login" class="login"><button>Login</button></a>
+    <%}%>
+    <%if(currUser){%>
+    <a href="/logout" class="logout"><button>Logout</button></a>
+    <%}%>
+
     <% for(array of tools){ %>
       <div>
         <h2>Name: <%=array.Name %></h2>

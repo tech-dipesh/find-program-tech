@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Individual <%=tools._id%></title>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <style>
  
@@ -18,8 +19,7 @@
   <h2>Individual Listing</h2>
   <div>
     <h2>Individual Id: <%=tools._id %></h2>
-    <h2>Logo Url: <%=tools.Logo %></h2>
-    <img src="<%=array.releaseYear %>" alt="<%=array.Name%>">
+    <img src="<%=tools.Logo %>" alt="<%=tools.Name%>">
     <h2>Title <%=tools.Name %></h2>
     <h2>Release Year: <%=tools.releaseYear %></h2>
     <h2>Use Case: <%=tools.useCase %></h2>
@@ -34,7 +34,10 @@
   <form action="/tools/<%= tools._id %>?_method=DELETE" method="POST">
     <button>Delete</button>
   </form>
-  
+  <hr/>
+  <h1>Total Likes: <%=Like%></h1>
+ 
+    <h2>Total Dislike: <%=DisLike%></h2>
   
 </body>
 </html>

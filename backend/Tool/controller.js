@@ -79,47 +79,25 @@ module.exports.showIdGet = async(req, res) => {
 };
 module.exports.showIdPost=async(req, res)=>{
   try {
-    if(!req.user._id){
-      req.flash("error", "Please First login before creating a new listing")
-      return res.redirect("/tools/new")
-    }
+    console.log(req.user);
+    // if(!req.user._id){
+    //   req.flash("error", "Please First login before creating a new listing")
+    //   return res.redirect("/tools/new")
+    // }
+    // let userName=await signupListing.find({userName})
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
     // let user=await signupListing.findOne({userName: req.body.userName});
-    let {Name, Logo, releaseYear, useCase, techStack}=req.body;
+    let {Name, Logo, releaseYear, useCase, techStack, Description}=req.body;
+    
     const newTool=await modelListing.create({
-      Name, releaseYear, useCase, Logo, techStack, userName: req.user._id
+      Name, releaseYear, useCase, Logo, techStack, Description, userName: req.user.userName,
     });
     console.log(newTool);
+    
     // const tools=await modelListing.find({});
-    res.redirect("/tools");
+    res.redirect("/tools", {currUser: req.user});
   } catch (error) {
     req.flash("error", "error on the show id post route, and the error is: ");
     res.send(`error on the show id post route, and the error is: ${error}`)
   }
 }
-
-
-// module.exports.showIdPost = async (req, res) => {
-//   try {
-//     // if(!req.user){
-//     //   req.flash("error", "please login first!");
-//     //   return res.redirect("/login")
-//     // }
-//     const { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
-//     console.log(`Data is stored on ${req.body}`);
-//     const newTool = await modelListing.create({ 
-//       Name, 
-//       Logo, 
-//       releaseYear, 
-//       useCase, 
-//       techStack, 
-//       Description,
-//       userName: req.user._id
-//     });
-//     console.log("New Tool Created:", newTool);
-//     res.redirect("/tools");
-//   } catch (error) {
-//     req.flash("error", error.message);
-//     res.redirect("/tools/new");
-//   }
-// };

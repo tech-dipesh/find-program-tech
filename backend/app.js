@@ -9,7 +9,6 @@ const expressError = require("./middleware/expressError.js");
 const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
-let {isLoggedIn}=require("./middleware/isLoggedIn.js");
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
@@ -56,7 +55,6 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(isLoggedIn)
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -77,12 +75,23 @@ async function main() {
   console.log("connected to the database");
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
-
+app.use(async (req, res, next) => {
+  if (req.session.userId) {
+    try {
+      const user = await signupListing.findById(req.session.userId);
+      req.user = user;
+    } catch (error) {
+      return next(error);
+    }
+  }
+  next();
+});
 
 app.use(( req, res, next) => {
   // res.status(500).render("listing.ejs");
   res.locals.success=req.flash("success")
   res.locals.error=req.flash("error");
+  res.locals.currUser=req.user
   next()
 });
 

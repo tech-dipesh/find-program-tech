@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const Schema=mongoose.Schema;
 const signupListing=require("../Register/model.js");
+const { required } = require("joi");
 
 const Toolvalidate=new Schema({
   Name: String,
@@ -30,14 +31,14 @@ const Toolvalidate=new Schema({
     type: String,
     default: Date()
   },
+  userName: {
+    type: String,
+    required: true
+  },
   // userName: {
   //   type: Schema.Types.ObjectId,
-  //   ref: "signupListing"
-  // },
-  userName: {
-    type: Schema.Types.ObjectId,
-    ref: "signupListing" 
-  }
+  //   ref: "signupListing" 
+  // }
   
 })
 let newTool=mongoose.model("newTool", Toolvalidate)

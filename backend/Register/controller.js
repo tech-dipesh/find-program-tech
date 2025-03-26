@@ -58,16 +58,14 @@ module.exports.loginPost = async (req, res) => {
 
 module.exports.logoutGet = async (req, res) => {
   try {
-    res.send("this is logout get");
+    req.logout((err)=>{
+      if(err){
+        next(err);
+      }
+      req.flash("success", "you have succesfully logged out!")
+      res.redirect("index.ejs", )
+    })
   } catch (error) {
     res.send(`error on the logout get route and the error is: ${error}`);
-  }
-};
-
-module.exports.logoutPost = async (req, res) => {
-  try {
-    res.send("this is logout post");
-  } catch (error) {
-    res.send(`error on the logout post route and the error is: ${error}`);
   }
 };
