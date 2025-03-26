@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Individual <%=tools._id%></title>
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
 </head>
 <style>
- 
-
   div{
     height: 500px;
     width: 500px;
     background-color: gray;
+  }
+  button{
+    cursor: pointer;
   }
 </style>
 <body>
@@ -35,7 +38,13 @@
     <button>Delete</button>
   </form>
   <hr/>
-  <h1>Total Likes: <%= Like %></h1>
-  <h2>Total Dislikes: <%= DisLike %></h2>
+  <form action="/<%=tools._id%>/Like" method="post">
+    <button><i class="fa-solid fa-thumbs-up" style="color: #74C0FC;"></i></button>
+    <h2>Likes: <%=Like%></h2>
+</form>
+  <form action="/<%=tools._id%>/DisLike" method="post">
+    <button><i class="fa-solid fa-thumbs-down" style="color: #74C0FC;"></i></button>
+    <h2>Dislike: <%=DisLike%></h2>
+</form>
 </body>
 </html>

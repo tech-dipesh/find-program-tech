@@ -61,10 +61,7 @@ module.exports.individualListingGet = async (req, res) => {
     let DisLike=0;
       // Like: approval.likes,
       // DisLike: approval.dislikes,
-    res.render('showindividual.ejs', { 
-      tools,
-      error: req.flash('error'), Like, DisLike
-    });
+    res.render('showindividual.ejs', { tools, Like, DisLike});
   } catch (error) {
     console.error("Error fetching individual tool:", error);
     req.flash('error', 'Failed to fetch tool details');
