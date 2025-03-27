@@ -38,11 +38,12 @@
     <button>Delete</button>
   </form>
   <hr/>
-  <form action="/<%=tools._id%>/Like" method="post">
+  <form action="/tools/<%=tools._id%>/Like" method="post">
+    
     <button><i class="fa-solid fa-thumbs-up" style="color: #74C0FC;"></i></button>
     <h2>Likes: <%=Like%></h2>
 </form>
-  <form action="/<%=tools._id%>/DisLike" method="post">
+  <form action="/tools/<%=tools._id%>/DisLike" method="post">
     <button><i class="fa-solid fa-thumbs-down" style="color: #74C0FC;"></i></button>
     <h2>Dislike: <%=DisLike%></h2>
 </form>
