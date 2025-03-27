@@ -1,47 +1,51 @@
-const express=require("express");
-const router=express.Router();
-const mongoose=require("mongoose");
-const expressError=require("../middleware/expressError.js");
-const data=require("../data/data.js");
-const newSchema=require("../middleware/schema.js");
-const modelListing=require("./model.js");
+const express = require("express");
+const router = express.Router();
+const mongoose = require("mongoose");
+const { isValidObjectId } = require("mongoose");
+const expressError = require("../middleware/expressError.js");
+const data = require("../data/data.js");
+const newSchema = require("../middleware/schema.js");
+const modelListing = require("./model.js");
 const newTool = require("./model.js");
-let Approval=require("../Comment/likemodel.js");
-const { validationResult}=require("express-validator");
+let Approval = require("../Comment/likemodel.js");
+const { validationResult } = require("express-validator");
 const signupListing = require("../Register/model.js");
-module.exports.idEditGet=async (req, res) => {
+module.exports.idEditGet = async (req, res) => {
   try {
-    let id=req.params.id
-    let tools=await modelListing.findById(id)
-    res.render("edit.ejs", {tools})
+    let id = req.params.id;
+    let tools = await modelListing.findById(id);
+    res.render("edit.ejs", { tools });
   } catch (error) {
-    res.send(`error on the edit id get route and the error is: ${error}`)
+    res.send(`error on the edit id get route and the error is: ${error}`);
   }
-}
+};
 
-module.exports.idEditPut=async (req, res) => {
+module.exports.idEditPut = async (req, res) => {
   try {
-    
-    let id=req.params.id;
-    let {Name, Logo, releaseYear, useCase, techStack, Description, userName}=req.body;
-    let update=await modelListing.findByIdAndUpdate(id, {Name, Logo, releaseYear, useCase, techStack, Description, userName},{new: true})
-    res.redirect(`/tools/${id}`)
-  } 
-  catch (error) {
-    res.send(`error on the edit post route and the error is, ${error}`)
+    let id = req.params.id;
+    let { Name, Logo, releaseYear, useCase, techStack, Description, userName } =
+      req.body;
+    let update = await modelListing.findByIdAndUpdate(
+      id,
+      { Name, Logo, releaseYear, useCase, techStack, Description, userName },
+      { new: true }
+    );
+    res.redirect(`/tools/${id}`);
+  } catch (error) {
+    res.send(`error on the edit post route and the error is, ${error}`);
   }
-}
+};
 
-module.exports.deleteListing=async (req, res)=>{
+module.exports.deleteListing = async (req, res) => {
   try {
-    let postId=req.params.id;
+    let postId = req.params.id;
     await modelListing.findByIdAndDelete(postId);
-    res.redirect(`/tools`)
+    res.redirect(`/tools`);
     console.log(`${postId} is deleted`);
   } catch (error) {
-    res.status(402).send(`Error on the deleteRoute ${error}`)
+    res.status(402).send(`Error on the deleteRoute ${error}`);
   }
-}
+};
 
 // module.exports.individualListingGet = async (req, res) => {
 //   try {
@@ -73,39 +77,36 @@ module.exports.individualListingGet = async (req, res) => {
     const id = req.params.id;
     const tools = await modelListing.findById(id);
     const approval = await Approval.findOne({ toolId: id });
-
-    if (!tools) {
-      req.flash('error', 'Tool not found');
-      return res.redirect('/tools');
+    if (!isValidObjectId(id)) {
+      req.flash("error", "Invalid tool ID format");
+      return res.redirect("/tools");
     }
-
-    res.render('showindividual.ejs', { 
+    res.render("showindividual.ejs", {
       tools,
       Like: approval ? approval.Likes : 0,
-      disLike: approval ? approval.disLike : 0
+      disLike: approval ? approval.disLike : 0,
     });
   } catch (error) {
     console.error("Error fetching individual tool:", error);
-    req.flash('error', 'Failed to fetch tool details');
-    res.redirect('/tools');
+    req.flash("error", "Failed to fetch tool details");
+    res.redirect("/tools");
   }
 };
 
-
-module.exports.showIdGet = async(req, res) => {
-  try { 
+module.exports.showIdGet = async (req, res) => {
+  try {
     let tools = await modelListing.find({});
     res.render("index.ejs", {
       tools,
-      success: req.flash('success'),
-      error: req.flash('error')
+      success: req.flash("success"),
+      error: req.flash("error"),
     });
   } catch (error) {
     console.error("Error fetching tools:", error);
     res.send(`Error on the show id get route: ${error}`);
   }
 };
-module.exports.showIdPost=async(req, res)=>{
+module.exports.showIdPost = async (req, res) => {
   try {
     console.log(req.user);
     // if(!req.user._id){
@@ -115,17 +116,23 @@ module.exports.showIdPost=async(req, res)=>{
     // let userName=await signupListing.find({userName})
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
     // let user=await signupListing.findOne({userName: req.body.userName});
-    let {Name, Logo, releaseYear, useCase, techStack, Description}=req.body;
-    
-    const newTool=await modelListing.create({
-      Name, releaseYear, useCase, Logo, techStack, Description, userName: req.user.userName,
+    let { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
+
+    const newTool = await modelListing.create({
+      Name,
+      releaseYear,
+      useCase,
+      Logo,
+      techStack,
+      Description,
+      userName: req.user.userName,
     });
     console.log(newTool);
-    
+
     // const tools=await modelListing.find({});
-    res.redirect("/tools", {currUser: req.user});
+    res.redirect("/tools", { currUser: req.user });
   } catch (error) {
     req.flash("error", "error on the show id post route, and the error is: ");
-    res.send(`error on the show id post route, and the error is: ${error}`)
+    res.send(`error on the show id post route, and the error is: ${error}`);
   }
-}
+};

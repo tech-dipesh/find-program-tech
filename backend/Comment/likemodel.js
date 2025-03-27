@@ -19,11 +19,9 @@ const likeDislikeSchema=new Schema({
   }
 },
 { 
-  // Remove unique constraint and allow multiple entries
+  //only unique constraint i can add on the database.
   timestamps: true 
 })  
 
-// Ensure only one document per toolId
-// likeDislikeSchema.index({ toolId: 1 }, { unique: true });
-module.exports.Approval = mongoose.model("Approval", likeDislikeSchema);
-// module.exports.Approval=mongoose.model("Approval", likeDislike);
+// module.exports.Approval = mongoose.model("Approval", likeDislikeSchema);
+module.exports = mongoose.model("Approval", likeDislikeSchema);

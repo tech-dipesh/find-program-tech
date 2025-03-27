@@ -3,33 +3,27 @@ const router = express.Router();
 const Approval = require("./likemodel.js");
 const modelListing = require("../Tool/model.js");
 
-// Like Controller
-
 module.exports.Like = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    // Find Approval document linked to the tool
-    let approval = await Approval.findOne({ toolId: id });
-
-    if (!approval) {
-      approval = new Approval({ 
-        toolId: id, // Use `id` here
-        Likes: 1,
-        DisLike: 0
-      });
-    } else {
-      approval.Likes += 1;
+    try {
+      const id = req.params.id;
+      let approval = await Approval.findOne({ toolId: id });
+      if (!approval) {
+        approval = new Approval({ 
+          toolId: id,
+          Likes: 1,
+          disLike: 0
+        });
+      } else {
+        approval.Likes += 1;
+      }
+      await approval.save();
+      res.redirect(`/tools/${id}`);
+    } catch (error) {
+      console.error('Error on the like route:', error);
+      res.redirect(`/tools/${id}`);
     }
-
-    await approval.save();
-    res.redirect(`/tools/${id}`); // Use `id` here
-  } catch (error) {
-    req.flash("error", "Failed to process like");
-    res.redirect(`/tools/${id}`);
-  }
-};
-
+  };
+  
 // module.exports.DisLike=async (req, res)=>{
 //   try {
 //     let id = req.params.id;
@@ -42,16 +36,15 @@ module.exports.Like = async (req, res) => {
 //     await tool.save();
 //     res.redirect(`/tools/${tool._id}`);
 //   } catch (error) {
-//     res.status("402").send(`Error on the Like Individual Listing and the error is ${error}`)
-//   }
-// }
+  //     res.status("402").send(`Error on the Like Individual Listing and the error is ${error}`)
+  //   }
+  // }
+
 
 module.exports.disLike = async (req, res) => {
   try {
     const id = req.params.id;
-    // Correct finding method and use toolId
     let approval = await Approval.findOne({ toolId: id });
-
     if (!approval) {
       approval = new Approval({ 
         toolId: id,
@@ -59,14 +52,14 @@ module.exports.disLike = async (req, res) => {
         disLike: 1
       });
     } else {
-      approval.disLike += 1; // Increment instead of decrement
+      approval.disLike += 1;
     }
-
     await approval.save();
+    console.log('Dislike saved:', approval);
     res.redirect(`/tools/${id}`);
   } catch (error) {
     console.error("Dislike error:", error);
     req.flash("error", "Failed to process dislike");
     res.redirect(`/tools/${id}`);
   }
-}
+};
