@@ -43,31 +43,54 @@ module.exports.deleteListing=async (req, res)=>{
   }
 }
 
+// module.exports.individualListingGet = async (req, res) => {
+//   try {
+//     let id = req.params.id;
+//     let tools = await modelListing.findById(id);
+
+//     if (!tools) {
+//       req.flash('error', 'Tool not found');
+//       return res.redirect('/tools');
+//     }
+//     //  let approval = await Approval.findOne({ toolId: id });
+//     // if (!approval) {
+//     //   approval = new Approval({ toolId: id });
+//     //   await approval.save();
+//     // }
+//     const approval = await Approval.findOne({ toolId: id }) || { likes: 0, dislikes: 0 };
+//       // Like: approval.likes,
+//       // DisLike: approval.dislikes,
+//     res.render('showindividual.ejs', { tools, Like: approval.likes, Dislike: approval.DisLike});
+//   } catch (error) {
+//     console.error("Error fetching individual tool:", error);
+//     req.flash('error', 'Failed to fetch tool details');
+//     res.redirect('/tools');
+//   }
+// };
+
 module.exports.individualListingGet = async (req, res) => {
   try {
-    let id = req.params.id;
-    let tools = await modelListing.findById(id);
+    const id = req.params.id;
+    const tools = await modelListing.findById(id);
+    const approval = await Approval.findOne({ toolId: id });
 
     if (!tools) {
       req.flash('error', 'Tool not found');
       return res.redirect('/tools');
     }
-    //  let approval = await Approval.findOne({ toolId: id });
-    // if (!approval) {
-    //   approval = new Approval({ toolId: id });
-    //   await approval.save();
-    // }
-    let Like=0;
-    let DisLike=0;
-      // Like: approval.likes,
-      // DisLike: approval.dislikes,
-    res.render('showindividual.ejs', { tools, Like, DisLike});
+
+    res.render('showindividual.ejs', { 
+      tools,
+      Like: approval ? approval.Likes : 0,
+      disLike: approval ? approval.disLike : 0
+    });
   } catch (error) {
     console.error("Error fetching individual tool:", error);
     req.flash('error', 'Failed to fetch tool details');
     res.redirect('/tools');
   }
 };
+
 
 module.exports.showIdGet = async(req, res) => {
   try { 
