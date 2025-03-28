@@ -96,8 +96,13 @@ module.exports.individualListingGet = async (req, res) => {
 module.exports.showIdGet = async (req, res) => {
   try {
     let tools = await modelListing.find({});
+    const user = await signupListing.findById(req.session.userId);
+    // fullName=req.user.fullName;
+    let fullName= req.user ? req.user.yourName : null;
+    
+    console.log(fullName);
     res.render("index.ejs", {
-      tools,
+      tools, fullName,
       success: req.flash("success"),
       error: req.flash("error"),
     });
