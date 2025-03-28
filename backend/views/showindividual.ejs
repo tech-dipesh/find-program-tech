@@ -31,8 +31,10 @@
     <h3>Time that was added: <%= tools.Date %></h3>
   </div>
   <br>
+  <%=if(req.user && req.user==tools._id){%>
   <a href="/tools/<%=tools._id%>/edit"><button>Edit</button></a>
   <br><br><br>
+ <%= }%>
   <!-- <form action="/tools/<%=tools._id%>?method_DELETE" method="post"><button>Delete</button></form> -->
   <form action="/tools/<%= tools._id %>?_method=DELETE" method="POST">
     <button>Delete</button>

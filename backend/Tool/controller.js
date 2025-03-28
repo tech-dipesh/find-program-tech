@@ -98,7 +98,7 @@ module.exports.showIdGet = async (req, res) => {
     let tools = await modelListing.find({});
     const user = await signupListing.findById(req.session.userId);
     // fullName=req.user.fullName;
-    let fullName= req.user ? req.user.yourName : null;
+    let fullName= req.user ? req.user.yourName : "guest";
     
     console.log(fullName);
     res.render("index.ejs", {
