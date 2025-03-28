@@ -12,6 +12,10 @@ const Signup = new mongoose.Schema({
   PassWord: String,
 });
 
-signupListing.plugin(passportLocalMongoose);
+// signupListing.plugin(passportLocalMongoose);
+Signup.plugin(passportLocalMongoose, {
+  usernameField: 'userName',
+});
+
 let signupListing = mongoose.model("signupListing", Signup);
 module.exports = signupListing;

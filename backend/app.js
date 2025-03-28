@@ -9,6 +9,7 @@ const expressError = require("./middleware/expressError.js");
 const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
+let User=require("./Register/model.js");
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
@@ -53,13 +54,17 @@ app.use(session({
 
 
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-
+//Passport.js Middleware routes
+app.use(passport.initialize());
+app.use(passport.session());
+// app.use()
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;

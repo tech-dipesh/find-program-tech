@@ -17,13 +17,18 @@ module.exports.signupPost = async (req, res) => {
   try {
     // let {signupId}=new mongoose.Types.ObjectId();
     let {yourName, Email, PassWord, userName}=req.body;
-    let newUser=await signupListing.create({yourName, Email, PassWord, userName});
+    // const registeredUser = await signupListing.register(yourName, Email, PassWord, userName);
+    let newUser=await new signupListing({yourName, Email, PassWord, userName});
+    const SaltedValule = signupListing.register(newUser, userName);
+
     req.session.userId = newUser._id;
     res.redirect("/tools");
   } catch (error) {
     res.send(`error on the signup post route and the error is: ${error}`);
   }
 };
+
+
 
 module.exports.loginGet = async (req, res) => {
   try {
