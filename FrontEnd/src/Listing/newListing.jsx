@@ -11,8 +11,7 @@ export default function Newlisting() {
 
   const onSubmit = (data) => console.log(data)
 
-  console.log(watch("example"))
-
+  
   //it will only get the only one error at the time.
   const firstError = Object.values(errors)[0];
 

@@ -22,10 +22,10 @@ function App() {
         {/* <MainFooter /> */}
         {/* <Home /> */}
         {/* <Login/> */}
-        {/* <Signup/> */}
+        <Signup/>
         {/* <Show /> */}
         {/* <Showindividual/> */}
-        <Newlisting />
+        {/* <Newlisting /> */}
         {/* <Error/> */}
         {/* <ContactForm/> */}
         {/* <Link to="/Contact-us">Contact Form</Link> */}

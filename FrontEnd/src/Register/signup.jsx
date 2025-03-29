@@ -1,8 +1,19 @@
 import Logo from "../assets/logo.png";
 import Footer from "../Layout/footer";
 import MainNavbar from "../Layout/mainNavbar";
+import { useForm } from "react-hook-form"
 import FormError from "../Miscellaneous/Error";
 export default function Signup() {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors, isSubmitting },
+      } = useForm()
+    
+      const onSubmit = (data) => console.log(data)
+  //it will only get the only one error at the time.
+    
     const firstError = Object.values(errors)[0];
     return (
         <>
@@ -21,7 +32,7 @@ export default function Signup() {
 
 
                             <form className="... group
-                            space-y-4 md:space-y-6 novalidate " action="#">
+                            space-y-4 md:space-y-6 novalidate " action="#" >
                                 <div>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
 
