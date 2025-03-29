@@ -1,8 +1,9 @@
 import Logo from "../assets/logo.png";
 import Footer from "../Layout/footer";
 import MainNavbar from "../Layout/mainNavbar";
-
+import FormError from "../Miscellaneous/Error";
 export default function Signup() {
+    const firstError = Object.values(errors)[0];
     return (
         <>
             <MainNavbar />
