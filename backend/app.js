@@ -80,6 +80,13 @@ async function main() {
   console.log("connected to the database");
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 app.use(async (req, res, next) => {
   if (req.session.userId) {
     try {

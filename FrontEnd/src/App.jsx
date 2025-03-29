@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -13,20 +13,22 @@ import Showindividual from './Listing/showIndividual.jsx'
 import Newlisting from './Listing/newListing.jsx'
 import ContactForm from './Miscellaneous/contactForm.jsx'
 import Axios from "axios"
-function App() {
+import Error from './Miscellaneous/Error.jsx';
 
+function App() {
   return (
     <>
       <div className="App">
-        <MainFooter />
-        <Home />
+        {/* <MainFooter /> */}
+        {/* <Home /> */}
         {/* <Login/> */}
         {/* <Signup/> */}
-        <Show />
+        {/* <Show /> */}
         {/* <Showindividual/> */}
         <Newlisting />
+        {/* <Error/> */}
         {/* <ContactForm/> */}
-        <Link to="/Contact-us">Contact Form</Link>
+        {/* <Link to="/Contact-us">Contact Form</Link> */}
       </div>
     </>
   )
