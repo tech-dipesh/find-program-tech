@@ -68,6 +68,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.status(500).json({ error: 'Something broke!' });
   next();
 });
 
@@ -122,7 +123,7 @@ app.use("/", registerRoute);
   // });
 
 
-app.listen(port, () => {
+app.listen(5000, () => {
   console.log(`port is listening to: localhost:${port}`);
 });
 

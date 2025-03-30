@@ -2,7 +2,7 @@ import Node from "../assets/nodejs.webp";
 import Express from "../assets/express-js.png";
 import MainNavbar from "../Layout/mainNavbar";
 import Footer from "../Layout/footer";
-import { getAllItems } from '../api'; 
+import { getAllItems } from '../service/api'; 
 import { useEffect, useState } from "react";
 export default function Show(){
   const [tools, setTools] = useState([]);

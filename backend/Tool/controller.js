@@ -99,13 +99,13 @@ module.exports.showIdGet = async (req, res) => {
     const user = await signupListing.findById(req.session.userId);
     // fullName=req.user.fullName;
     let fullName= req.user ? req.user.yourName : "guest";
-    
     console.log(fullName);
-    res.render("index.ejs", {
-      tools, fullName,
-      success: req.flash("success"),
-      error: req.flash("error"),
-    });
+    // res.render("index.ejs", {
+    //   tools, fullName,
+    //   success: req.flash("success"),
+    //   error: req.flash("error"),
+    // });
+    res.json({success: true, tools})
   } catch (error) {
     console.error("Error fetching tools:", error);
     res.send(`Error on the show id get route: ${error}`);
