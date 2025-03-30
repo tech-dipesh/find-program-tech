@@ -15,20 +15,23 @@ import Axios from "axios"
 import { NoUrl } from './Miscellaneous/Nourl.jsx';
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="tools">
-          <Route index element={<Show />} />
-          <Route path="new" element={<Newlisting />} />
-          <Route path="random" element={<Showindividual />} />
-        </Route>
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} />
-        <Route path='contact' element={<ContactForm />} />
-        <Route path="*" element={<NoUrl />} />
-      </Routes>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<Home />} />
+    //     <Route path="tools">
+    //       <Route index element={<Show />} />
+    //       <Route path="new" element={<Newlisting />} />
+    //       <Route path="random" element={<Showindividual />} />
+    //     </Route>
+    //     <Route path='login' element={<Login />} />
+    //     <Route path='signup' element={<Signup />} />
+    //     <Route path='contact' element={<ContactForm />} />
+    //     <Route path="*" element={<NoUrl />} />
+    //   </Routes>
+    // </BrowserRouter>
+    <>
+    <Show/>
+    </>
   )
 }
 

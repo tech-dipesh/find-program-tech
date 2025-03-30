@@ -108,3 +108,9 @@ now i finally add the validation form with first i import a lucide-react and cre
 { required: { value: true, message: "Please write the Use Case" } })} (it will print there.)
 
 i have changed the logo of frontend, Then i use the browserRoute and Routes and routes to navigate betweent the routes.
+<Route path="*" element={<NoUrl />} /> (with this it will only catcth those url who doesn't exist.)
+    <Route path="tools">
+          <Route index element={<Show />} />
+          <Route path="new" element={<Newlisting />} />
+          <Route path="random" element={<Showindividual />} />
+        </Route> (it will be teh nested url.)

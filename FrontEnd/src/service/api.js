@@ -1,8 +1,11 @@
 import axios from "axios";
+// In FrontEnd/src/api.js
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // Your backend URL
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
+  withCredentials: true, // Add this for session cookies
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
 });
 

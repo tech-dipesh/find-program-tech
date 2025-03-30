@@ -6,7 +6,6 @@ const newTool = require("./Tool/model.js");
 const data = require("./data/data.js");
 const signupListing = require("./Register/model.js");
 const expressError = require("./middleware/expressError.js");
-const wrapAsync = require("./middleware/wrapAsync.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
 let User=require("./Register/model.js");
@@ -68,7 +67,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -81,9 +80,9 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: 'http://localhost:5173', // Your React port
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 
