@@ -30,7 +30,6 @@ export default function Signup() {
                                 Create a New Account
                             </h1>
 
-
                             <form className="... group
                             space-y-4 md:space-y-6 novalidate " action="#" >
                                 <div>

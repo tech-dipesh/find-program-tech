@@ -1,6 +1,7 @@
 import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import FormError from "../Miscellaneous/Error"
+import MainNavbar from "../Layout/mainNavbar"
 export default function Newlisting() {
   const {
     register,
@@ -17,6 +18,7 @@ export default function Newlisting() {
 
   return (
     <>
+    <MainNavbar/>
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 border-b pb-4">Submit New Tool</h2>
         {/*       

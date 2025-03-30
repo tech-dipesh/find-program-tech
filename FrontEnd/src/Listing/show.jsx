@@ -1,10 +1,14 @@
 import Node from "../assets/nodejs.webp";
 import Express from "../assets/express-js.png";
+import MainNavbar from "../Layout/mainNavbar";
+import Footer from "../Layout/footer";
 export default function Show(){
   return (
     <>
+    <MainNavbar/>
+    {/* <div className="mt-10"></div> */}
     <div className="flex flex-col items-center min-h-screen p-4 bg-gray-50">
-  <div className="w-full max-w-3xl mx-auto space-y-6">
+  <div className="w-full max-w-3xl mx-auto space-y-6 mt-25">
     <div className="relative flex flex-col p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="flex items-start gap-4">
         <img 
@@ -81,6 +85,7 @@ export default function Show(){
 
   </div>
 </div>
+<Footer/>
     </>
   )
 }

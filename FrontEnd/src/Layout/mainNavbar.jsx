@@ -18,12 +18,12 @@ export default function MainNavbar() {
     <nav className="fixed bg-white dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
 
-        <a href="https://linkedin.com/in/dipeshacademy/" className="flex items-center -ml-50 space-x-3">
+        <a href="https://linkedin.com/in/dipeshacademy/" className="flex items-center -ml-30 space-x-3">
           <img src={logo} className="h-8" alt="Developer Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Developer Listing</span>
         </a>
 
-        <div className="flex items-center space-x-4 ml-50">
+        <div className="flex items-center space-x-4 ml-30">
           <div className="flex relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -66,7 +66,7 @@ export default function MainNavbar() {
             </div>
           </div>
         </div>
-        <ul className="flex space-x-6 font-medium">
+        <ul className="flex space-x-6 mr-10 font-medium">
           <li>
             <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Home</a>
           </li>
@@ -80,7 +80,7 @@ export default function MainNavbar() {
             <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Contact</a>
           </li>
         </ul>
-        <div className="absolute right-4 top-4">
+        <div className="absolute right-2 top-4">
           {/* <Link to="/login">
           <button className="text-white bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg">
             Get started/Login
