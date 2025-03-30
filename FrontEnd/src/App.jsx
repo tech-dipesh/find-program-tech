@@ -16,18 +16,19 @@ import { NoUrl } from './Miscellaneous/Nourl.jsx';
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="tools" element={<Show/>}>
-      <Route path="new" element={<Newlisting/>}/>
-      <Route path="id" element={<Showindividual/>}/>
-      <Route path='login' element={<Login/>}/>
-      <Route path='signup' element={<Signup/>}/>
-      <Route path='contact' element={<ContactForm/>}/>
-      <Route path="*" element={<NoUrl/>}/>
-      </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="tools">
+          <Route index element={<Show />} />
+          <Route path="new" element={<Newlisting />} />
+          <Route path="random" element={<Showindividual />} />
+        </Route>
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<Signup />} />
+        <Route path='contact' element={<ContactForm />} />
+        <Route path="*" element={<NoUrl />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

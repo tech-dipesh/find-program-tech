@@ -1,6 +1,11 @@
+import Footer from "../Layout/footer";
+import MainNavbar from "../Layout/mainNavbar";
+
 export default function ContactForm() {
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-8">
+    <>
+    <MainNavbar/>
+        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md p-8">
       <div className="text-center mb-8 mt-20">
           <div className="mb-4 inline-block p-4 bg-indigo-50 rounded-full w-12 h-12 ">
             <i className="fa-solid fa-envelope text-xl text-indigo-600"></i>
@@ -70,5 +75,7 @@ export default function ContactForm() {
         </button>
       </form>
     </div>
+    <Footer/>
+    </>
   )
 }

@@ -17,11 +17,10 @@ export default function MainNavbar() {
   return (
     <nav className="fixed bg-white dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
-
-        <a href="https://linkedin.com/in/dipeshacademy/" className="flex items-center -ml-30 space-x-3">
-          <img src={logo} className="h-8" alt="Developer Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Developer Listing</span>
-        </a>
+       <Link to="/" className="flex items-center -ml-30 space-x-3">
+       <img src={logo} className="h-8" alt="Developer Logo" />
+       <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Developer Listing</span>
+       </Link>
 
         <div className="flex items-center space-x-4 ml-30">
           <div className="flex relative">
@@ -67,29 +66,13 @@ export default function MainNavbar() {
           </div>
         </div>
         <ul className="flex space-x-6 mr-10 font-medium">
-          <li>
-            <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Home</a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Listing</a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Services</a>
-          </li>
-          <li>
-            <a href="#" className="text-gray-900 dark:text-white hover:text-blue-700">Contact</a>
-          </li>
+          <Link to="/tools" className='text-gray-900 dark:text-white hover:text-blue-700'>All Listings</Link>
+          <Link to="/tools/random" className='text-gray-900 dark:text-white hover:text-blue-700'>Random Listings</Link>
+          <Link to="/tools/new" className='text-gray-900 dark:text-white hover:text-blue-700'>New Listinsg</Link>
+          <Link to="/contact" className='text-gray-900 dark:text-white hover:text-blue-700'>Contact Us</Link>
         </ul>
-        <div className="absolute right-2 top-4">
-          {/* <Link to="/login">
-          <button className="text-white bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg">
-            Get started/Login
-          </button></Link> */}
-          <button className="text-white bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg">
-            Get started/Login
-          </button>
-          
-        </div>
+
+          <Link to='/login' className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg">Get Started/Login</Link>
       </div>
     </nav>
   )

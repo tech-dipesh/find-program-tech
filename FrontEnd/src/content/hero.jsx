@@ -15,7 +15,7 @@ export default function Hero(){
               Explore Now
             </button>
             <button className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-xl text-lg hover:border-blue-500 transition-all">
-              <a href="https://www.youtube.com/watch?v=sHnG8tIYMB4">
+              <a href="https://www.linkedin.com/in/dipeshacademy">
               Watch Demo</a>
             </button>
           </div>

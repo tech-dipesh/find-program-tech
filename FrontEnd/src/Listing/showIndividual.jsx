@@ -2,10 +2,13 @@ import { useState } from "react";
 import Nodejs from "../assets/nodejs.webp";
 import Upvote from "./upvote";
 import Description from "./description";
+import MainNavbar from "../Layout/mainNavbar";
+import Footer from "../Layout/footer";
 export default function Showindividual() {
 
   return (
     <>
+    <MainNavbar/>
       <main>
         <div className="min-h-screen bg-gray-50 py-8 px-4">
           <div className="max-w-4xl mx-auto mt-20">
@@ -120,6 +123,7 @@ export default function Showindividual() {
         </div>
 
       </main>
+      <Footer/>
     </>
   )
 }
