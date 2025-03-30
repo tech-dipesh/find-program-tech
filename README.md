@@ -24,3 +24,10 @@ I face lot's of error during this project, which helps me to build the solid fou
 
 # Next 
 I will later work on the project that include the WebSocket, TailWind and the WebRTC, which would be the Real Time Updation And lot's of things.
+
+# Setup On Your Local Server:
+1. Open the Terminal and type folllowing code: ```git clone https://github.com/tech-dipesh/find-program-tech.git```
+2. Type ```npm install```
+3. Type ```code .``` to open the vs Code
+4. Type ```cd frontend``` to go to frontend page
+5. Type ```npm run dev``` to run the server
