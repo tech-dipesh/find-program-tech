@@ -1,5 +1,5 @@
-import Software1 from "../assets/Software1.jpg"
-import Software2 from "../assets/Software2.jpg"
+import Software1 from "../assets/software1.jpg"
+import Software2 from "../assets/software2.jpg"
 export default function Testimonial(){
   return (
     <>
