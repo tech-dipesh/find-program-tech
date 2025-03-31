@@ -10,7 +10,21 @@ export default function Newlisting() {
     formState: { errors, isSubmitting },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async(formData) => {
+    try {
+      let response=await axios.post("http://localhost:5000/tools/new", formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      
+    } catch (error) {
+      throw new Error(error);
+      
+    }
+    console.log(data)
+    console.log(data.Name)
+  }
 
   
   //it will only get the only one error at the time.
@@ -21,14 +35,6 @@ export default function Newlisting() {
     <MainNavbar/>
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 border-b pb-4">Submit New Tool</h2>
-        {/*       
-                {errors.Name &&  <div className="bg-gray-900 p-4 -mt-10 ml-20 rounded-md shadow-lg absolute ">
-                    <div className="flex items-center space-x-3">
-                      <AlertCircle className="h-5 w-5 text-red-500" />
-                      <div className="text-red-500 text-sm font-medium">{errors.Name.message}</div>
-                    </div>
-                  </div>} */}
-        {/* <FormError error={errors.Name} /> */}
         {/* {firstError && <FormError error={errors.Name} />} */}
         {firstError && <FormError error={firstError} />}
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -87,10 +93,10 @@ export default function Newlisting() {
                 Release Date *
               </label>
               <input
-                type="number" min="1950" max="2025"
+                type="number"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 {...register("releaseYear",
-                  { required: { value: true, message: "Make sure to Write the release year." }, minLength: { value: 1920, message: "Write legiit Relase Year, After 1920" }, maxLength: { value: 2025, message: "Over 2025 can't be existed." } }
+                  { required: { value: true, message: "Make sure to Write the release year." }, minLenminth: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear()+1, message: "Over 2025 can't be existed." } }
                 )}
               />
             </div>
@@ -129,11 +135,11 @@ export default function Newlisting() {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Detailed Description *
             </label>
-            <textarea
+            <input
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent h-32"
               placeholder="Describe features, benefits, and unique value proposition"
               {...register("description",
-                { required: { value: true, message: "Please write some Long Description" }, minLength: { value: 20, message: "It should have at least 20 character Length." } }
+                { required: { value: true, message: "Please write some Long Description" }, minLength: { value: 20, message: "It should have at least 20 character Length, for Description." } }
               )}
             />
           </div>
@@ -146,7 +152,7 @@ export default function Newlisting() {
               </label>
               <div className="flex flex-wrap gap-2 p-2 border rounded-lg">
                 <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                  React
+                  
                   <button className="ml-2 text-blue-600 hover:text-blue-800">×</button>
                 </span>
                 <input
@@ -163,7 +169,7 @@ export default function Newlisting() {
           {/* {firstError && <FormError error={errors.techStack} />} */}
 
           <div className="pt-6 border-t">
-            <button className="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-lg">
+            <button disabled={isSubmitting} className="w-full py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-lg">
               Submit Listing
             </button>
           </div>
