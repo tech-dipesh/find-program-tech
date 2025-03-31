@@ -2,7 +2,7 @@ import axios from "axios";
 // In FrontEnd/src/api.js
 const API = axios.create({
   baseURL: 'http://localhost:5000',
-  withCredentials: true, // Add this for session cookies
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'

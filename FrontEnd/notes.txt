@@ -114,3 +114,58 @@ i have changed the logo of frontend, Then i use the browserRoute and Routes and 
           <Route path="new" element={<Newlisting />} />
           <Route path="random" element={<Showindividual />} />
         </Route> (it will be teh nested url.)
+
+
+# Thank god i finally connected the backend to frontend, first step that i have done is on the backend is install the cors and setup the cors:
+frontend/app.js:
+ app.use(cors({
+  origin: 'http://localhost:5173', // Your React port
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+})); (in here i pased teh cors, with the origin mean teh address of the frontend, and the method that i will perform is get, post , put and delete method. )
+(in here why does it need to use teh credentials to true allows cookies for auth header for the express and authentication it is need to use it. )
+
+Then the next steps i have done is, app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+}); (in here i pass on the header, )
+The res.header is not mandatory to use when conncting to frontend to backend. so it helps us : Adds X-Custom-Header: HelloFromServer to every response
+it will be no impact when we don't use it it just missing the header nothing else. the cors header is mainly critical for security propose. we can add the:
+Adds X-Custom-Header: HelloFromServer (if we want for every server.)
+WE can use the multiple headers, 
+
+Use case: Useful for tracking requests in network analysis
+ res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true"); (we can use this manly but we can only simple use the conterrol allow headers, so other is not that mandatory.)
+
+frontend/controller.js:
+res.json(success:true, tools); (in here the success message is standard practice for the response, if we don't use the success the success and failure message can't show. )
+
+backend/api.jsx:
+const API = axios.create({
+  baseURL: 'http://localhost:5000',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+});
+when we use the withCredentials can send the cookies and authentication header to frontend from the backend.
+so in the headers file it mean the what format of data is sending in here it is sending the data in the form of json and accepting/recieve in also on the form of json format. if we don't use it sever might not parse the send data and also on the accept maybe it can recieve unexcpeted data. 
+ so we can export individual pattern that we can use on other value:  export const getAllItems = () => API.get('/tools');
+export default API; (make sure to use the api in uppercase for better convention. )
+
+backend/app.jsx:
+first we need to setup the axios on app.jsx
+
+
+#
+Real-World Scenario
+Without proper CORS/headers setup:
+Frontend makes request to backend
+Browser blocks request due to CORS policy
+Even if response comes through, cookies/sessions won't work
+Server might reject requests with JSON data

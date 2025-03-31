@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 export default function Footer(){
   return (
     <>
-<footer className="bg-[#101828] text-white mt-2">
+<footer className="bg-[#101828] z-40 text-white mt-2">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
       {/* About Section */}
@@ -34,7 +34,7 @@ export default function Footer(){
       <div className="space-y-4">
         <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Contribute</h4>
         <div className="space-y-2">
-          <Link className="inline-flex items-center text-gray-200 hover:text-white transition-colors text-sm" to="https://github.com/tech-dipesh/find-program-tech-issues"><i className="fa-brands fa-github mr-3"></i></Link>
+          <Link className="inline-flex items-center text-gray-200 hover:text-white transition-colors text-sm" to="https://github.com/tech-dipesh/find-program-tech/issues"><i className="fa-brands fa-github mr-3"></i></Link>
           <p className="text-gray-200 text-xs mt-4 leading-relaxed">
             Found an issue? Help us improve by submitting a PR or opening an issue.
           </p>

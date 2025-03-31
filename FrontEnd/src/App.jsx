@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './content/allHomepage.jsx'
 import Login from './Register/login.jsx'
@@ -15,23 +13,20 @@ import Axios from "axios"
 import { NoUrl } from './Miscellaneous/Nourl.jsx';
 function App() {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="tools">
-    //       <Route index element={<Show />} />
-    //       <Route path="new" element={<Newlisting />} />
-    //       <Route path="random" element={<Showindividual />} />
-    //     </Route>
-    //     <Route path='login' element={<Login />} />
-    //     <Route path='signup' element={<Signup />} />
-    //     <Route path='contact' element={<ContactForm />} />
-    //     <Route path="*" element={<NoUrl />} />
-    //   </Routes>
-    // </BrowserRouter>
-    <>
-    <Show/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="tools">
+          <Route index element={<Show />} />
+          <Route path="new" element={<Newlisting />} />
+          <Route path="random" element={<Showindividual />} />
+        </Route>
+        <Route path='login' element={<Login />} />
+        <Route path='signup' element={<Signup />} />
+        <Route path='contact' element={<ContactForm />} />
+        <Route path="*" element={<NoUrl />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

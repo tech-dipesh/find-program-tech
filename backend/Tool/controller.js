@@ -107,8 +107,9 @@ module.exports.showIdGet = async (req, res) => {
     // });
     res.json({success: true, tools})
   } catch (error) {
-    console.error("Error fetching tools:", error);
-    res.send(`Error on the show id get route: ${error}`);
+    // console.error("Error fetching tools:", error);
+    res.status(500).json({ error: "Server error" });
+    // res.send(`Error on the show id get route: ${error}`);
   }
 };
 module.exports.showIdPost = async (req, res) => {
@@ -133,7 +134,6 @@ module.exports.showIdPost = async (req, res) => {
       userName: req.user.userName,
     });
     console.log(newTool);
-
     // const tools=await modelListing.find({});
     res.redirect("/tools", { currUser: req.user });
   } catch (error) {
