@@ -15,5 +15,4 @@ export const createItem = (newItem) => API.post('/tools', newItem);
 export const updateItem = (id, updatedItem) => API.put(`/tools/${id}`, updatedItem);
 export const deleteItem = (id) => API.delete(`/tools/${id}`);
 
-// Export the API instance in case you need direct access
 export default API;

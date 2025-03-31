@@ -81,11 +81,12 @@ module.exports.individualListingGet = async (req, res) => {
       req.flash("error", "Invalid tool ID format");
       return res.redirect("/tools");
     }
-    res.render("showindividual.ejs", {
-      tools,
-      Like: approval ? approval.Likes : 0,
-      disLike: approval ? approval.disLike : 0,
-    });
+    // res.render("showindividual.ejs", {
+    //   tools,
+    //   Like: approval ? approval.Likes : 0,
+    //   disLike: approval ? approval.disLike : 0,
+    // });
+    res.json({success: true, tools, Like: approval?approval.Likes:0, disLike:approval?approval.disLike: 0})
   } catch (error) {
     console.error("Error fetching individual tool:", error);
     req.flash("error", "Failed to fetch tool details");

@@ -169,3 +169,34 @@ Frontend makes request to backend
 Browser blocks request due to CORS policy
 Even if response comes through, cookies/sessions won't work
 Server might reject requests with JSON data
+
+
+
+
+The other error i am facing is that when try to fetch the individual listing i need to fetch id as a :id on the app.jsx of Route.
+ const { id } = useParams();
+  const [show, setshow] = useState(null);
+
+  useEffect(() => {
+    const fetchTool = async () => {
+      try {
+        const response = await getItemById(id);
+        setshow(response.data);
+      } catch (error) {
+        console.error('Error fetching tool:', error);
+      }
+    };
+    fetchTool();
+  }, [id]);
+(we also have to pass teh id so we can identify the individual items, and then we can pass the useState with the show and setShow, we have to psas the useEffect with the try andn catch block teh getitemebyid is coming from the api, and in the end we should call the ofetch tool and pass the id.)
+common beginner mistake made is:
+const id = props.match.params.id; // Old class component way
+// CORRECT ✅ Functional component way
+const { id } = useParams();  (they trying to access the id with params.id which is class component way rather then we can use the useParams for the functional component way)
+// WRONG ❌
+useEffect(() => { ... }, []); // Empty array = runs only once
+// CORRECT ✅
+useEffect(() => { ... }, [id]);  (we have to rerun each time if id is changed so at that time we need to pass the id which is necessery.)
+
+
+##on the useEffect of Showindividual i am not able to understand that code, i need revision of that code.

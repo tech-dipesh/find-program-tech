@@ -19,7 +19,7 @@ function App() {
         <Route path="tools">
           <Route index element={<Show />} />
           <Route path="new" element={<Newlisting />} />
-          <Route path="random" element={<Showindividual />} />
+          <Route path=":id" element={<Showindividual />} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />

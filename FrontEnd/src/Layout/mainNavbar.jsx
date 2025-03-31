@@ -15,7 +15,7 @@ export default function MainNavbar() {
   ];
 
   return (
-    <nav className="fixed bg-white z-40 dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
+    <nav className="fixed bg-white  z-40 dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
        <Link to="/" className="flex items-center -ml-30 space-x-3">
        <img src={logo} className="h-8" alt="Developer Logo" />
@@ -67,7 +67,7 @@ export default function MainNavbar() {
         </div>
         <ul className="flex space-x-6 mr-10 font-medium">
           <Link to="/tools" className='text-gray-900 dark:text-white hover:text-blue-700'>All Listings</Link>
-          <Link to="/tools/random" className='text-gray-900 dark:text-white hover:text-blue-700'>Random Listings</Link>
+          <Link to="/tools" className='text-gray-900 dark:text-white hover:text-blue-700'>Random Listings</Link>
           <Link to="/tools/new" className='text-gray-900 dark:text-white hover:text-blue-700'>New Listinsg</Link>
           <Link to="/contact" className='text-gray-900 dark:text-white hover:text-blue-700'>Contact Us</Link>
         </ul>
