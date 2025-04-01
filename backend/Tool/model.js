@@ -12,6 +12,10 @@ const Toolvalidate=new Schema({
         ? "https://i.sstatic.net/pwbPp7fg.jpg"
         : v,
   },
+  companyName: {
+      type: String,
+      min: 3,
+  },
   releaseYear:{
     type: Number,
     min: [1800, "The minimum year should be the 1800."],
@@ -22,7 +26,10 @@ const Toolvalidate=new Schema({
     min:[5, "Minimum should be more than 5 characters."],
     max:[50, "Maximum should be less than 5 characters."],
   },
-  techStack: String,
+  techStack: {
+    type: String,
+    required: true
+  },
   Description: {
     type: String,
     // default: "Full Stack"

@@ -2,6 +2,8 @@ import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import FormError from "../Miscellaneous/Error"
 import MainNavbar from "../Layout/mainNavbar"
+import Footer from "../Layout/footer.jsx"
+// import Footer from "../Layout/footer"
 import axios from "axios"
 export default function Newlisting() {
   const {
@@ -10,7 +12,7 @@ export default function Newlisting() {
     watch,
     formState: { errors, isSubmitting },
   } = useForm()
-  
+
   const onSubmit = async(formData) => {
     try {
       
@@ -103,7 +105,7 @@ export default function Newlisting() {
               />
             </div>
             {/* {firstError && <FormError error={errors.releaseYear} />} */}
-
+{/* 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Tool Logo *
@@ -112,7 +114,7 @@ export default function Newlisting() {
                 <input type="file" className="hidden" accept="image/*" />
                 <span className="text-gray-500">Drag & drop or click to upload</span>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* <FormError error={errors.oneLine} /> */}
           
@@ -126,13 +128,12 @@ export default function Newlisting() {
               type="text"
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 'Automated API testing platform for developers'"
-              {...register("oneLine",
+              {...register("useCase",
                 { required: { value: true, message: "Please write the Use Case" }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
               )}
             />
           </div>
           {/* {firstError && <FormError error={errors.oneLine} />} */}
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Detailed Description *
@@ -140,7 +141,7 @@ export default function Newlisting() {
             <input
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent h-32"
               placeholder="Describe features, benefits, and unique value proposition"
-              {...register("description",
+              {...register("Description",
                 { required: { value: true, message: "Please write some Long Description" }, minLength: { value: 20, message: "It should have at least 20 character Length, for Description." } }
               )}
             />
@@ -177,6 +178,7 @@ export default function Newlisting() {
           </div>
         </form>
       </div>
+      <Footer/>
     </>
   )
 }

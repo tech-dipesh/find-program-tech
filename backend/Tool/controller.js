@@ -124,13 +124,14 @@ module.exports.showIdPost = async (req, res) => {
     // let userName=await signupListing.find({userName})
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
     // let user=await signupListing.findOne({userName: req.body.userName});
-    let { Name, Logo, releaseYear, useCase, techStack, Description } = req.body;
+    let { Name, companyName, releaseYear, useCase, Description, techStack} = req.body;
 
     const newTool = await modelListing.create({
-      Name,
+      Name, 
+      companyName,  
       releaseYear,
       useCase,
-      Logo,
+      // Logo,
       techStack,
       Description,
       userName: req.user.userName,
