@@ -7,9 +7,10 @@ const { default: mongoose } = require("mongoose");
 module.exports.signupGet = async (req, res) => {
   try {
     let newUser=await signupListing.find({})
-    res.render("Register/signup.ejs", {newUser});
+    // res.render("Register/signup.ejs", {newUser});
+        res.json(newUser)
   } catch (error) {
-    res.send(`error on the signup get route and the error is: ${error}`);
+    res.status(201).json(`Error on the signup get json: ${error}`)
   }
 };
 
@@ -33,9 +34,11 @@ module.exports.signupPost = async (req, res) => {
 module.exports.loginGet = async (req, res) => {
   try {
     let dataUser=await signupListing.find({})
-    res.render("Register/login.ejs", {dataUser})
+    // res.render("Register/login.ejs", {dataUser})
+    res.json(dataUser);
   } catch (error) {
-    res.send(`error on the login get route and the error is: ${error}`);
+    // res.send(`error on the login get route and the error is: ${error}`);
+    res.status(201).json(`Error on the login get json: ${error}`)
   }
 };
 
