@@ -16,11 +16,14 @@ export default function Newlisting() {
   const onSubmit = async(formData) => {
     try {
       
-      let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
+      // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
+            let newTool = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        withCredentials: true 
       })
+      
       console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
       // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
