@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import FormError from "../Miscellaneous/Error"
 import MainNavbar from "../Layout/mainNavbar"
+import axios from "axios"
 export default function Newlisting() {
   const {
     register,
@@ -9,21 +10,22 @@ export default function Newlisting() {
     watch,
     formState: { errors, isSubmitting },
   } = useForm()
-
+  
   const onSubmit = async(formData) => {
     try {
-      let response=await axios.post("http://localhost:5000/tools/new", formData, {
+      
+      let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
         headers: {
           'Content-Type': 'application/json',
         }
       })
-      
+      console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
-      throw new Error(error);
-      
+      // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
+      console.error(`Error on the while submitting data from the frontend to sending data to backend: ${error}`)
     }
-    console.log(data)
-    console.log(data.Name)
+    // console.log(data) 
+    // console.log(data.Name)
   }
 
   
@@ -56,8 +58,8 @@ export default function Newlisting() {
                       message: "Please Give the descriptive Name"
                     },
                     maxLength: {
-                      value: 15,
-                      message: "Name can't be a more than 15 character Length"
+                      value: 20,
+                      message: "Name can't be a more than 20 character Length"
                     }
                   }
                 )}
@@ -96,7 +98,7 @@ export default function Newlisting() {
                 type="number"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 {...register("releaseYear",
-                  { required: { value: true, message: "Make sure to Write the release year." }, minLenminth: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear()+1, message: "Over 2025 can't be existed." } }
+                  { required: { value: true, message: "Make sure to Write the release year." }, min: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear()+1, message: "Over 2025 can't be existed." } }
                 )}
               />
             </div>
@@ -125,7 +127,7 @@ export default function Newlisting() {
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 'Automated API testing platform for developers'"
               {...register("oneLine",
-                { required: { value: true, message: "Please write the Use Case" }, maxLength: { value: 15, message: "It can't be more than 15 characater length." } }
+                { required: { value: true, message: "Please write the Use Case" }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
               )}
             />
           </div>

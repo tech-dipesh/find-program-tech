@@ -114,10 +114,11 @@ module.exports.showIdGet = async (req, res) => {
   }
 };
 module.exports.showIdPost = async (req, res) => {
+  console.log(`Requested data is: ${req.body}`);
   try {
     console.log(req.user);
     // if(!req.user._id){
-    //   req.flash("error", "Please First login before creating a new listing")
+    //   req.flash("error",e "Please First login before creating a new listing")
     //   return res.redirect("/tools/new")
     // }
     // let userName=await signupListing.find({userName})
@@ -134,11 +135,14 @@ module.exports.showIdPost = async (req, res) => {
       Description,
       userName: req.user.userName,
     });
-    console.log(newTool);
+    // console.log(newTool);
+    const tool=await newTool.save()
     // const tools=await modelListing.find({});
-    res.redirect("/tools", { currUser: req.user });
+    // res.redirect("/tools", { currUser: req.user });
+    res.status("201").json(tool)
   } catch (error) {
     req.flash("error", "error on the show id post route, and the error is: ");
-    res.send(`error on the show id post route, and the error is: ${error}`);
+    // res.send(`error on the show id post route, and the error is: ${error}`);
+    res.status(500).json({ error: error.message });
   }
 };
