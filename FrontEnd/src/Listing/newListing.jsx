@@ -15,7 +15,7 @@ export default function Newlisting() {
 
   const onSubmit = async(formData) => {
     try {
-      
+      console.log("your form data is", formData);
       // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
             let newTool = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
@@ -24,10 +24,10 @@ export default function Newlisting() {
         withCredentials: true 
       })
       
-      console.log(`Frontend data is: ${newTool.data}`);
+      // console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
       // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
-      console.error(`Error on the while submitting data from the frontend to sending data to backend: ${error}`)
+      console.error("Error on the while submitting data from the frontend to sending data to backend:", error.response ? error.response.data : error.message)
     }
     // console.log(data) 
     // console.log(data.Name)

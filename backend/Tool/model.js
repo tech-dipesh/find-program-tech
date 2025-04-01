@@ -23,7 +23,7 @@ const Toolvalidate=new Schema({
   },
   useCase:{
     type: String,
-    min:[5, "Minimum should be more than 5 characters."],
+    min:[15, "Minimum should be more than 5 characters."],
     max:[50, "Maximum should be less than 5 characters."],
   },
   techStack: {
@@ -38,10 +38,10 @@ const Toolvalidate=new Schema({
     type: String,
     default: Date()
   },
-  userName: {
-    type: String,
-    required: true
-  },
+  // userName: {
+  //   type: String,
+  //   required: true
+  // },
   // userName: {
   //   type: Schema.Types.ObjectId,
   //   ref: "signupListing" 

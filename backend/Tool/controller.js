@@ -134,13 +134,13 @@ module.exports.showIdPost = async (req, res) => {
       // Logo,
       techStack,
       Description,
-      userName: req.user.userName,
+      // userName: req.user.userName,
     });
     // console.log(newTool);
     const tool=await newTool.save()
     // const tools=await modelListing.find({});
     // res.redirect("/tools", { currUser: req.user });
-    res.status("201").json(tool)
+    res.status(201).json(tool)
   } catch (error) {
     req.flash("error", "error on the show id post route, and the error is: ");
     // res.send(`error on the show id post route, and the error is: ${error}`);
