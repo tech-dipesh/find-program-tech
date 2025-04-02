@@ -6,6 +6,7 @@ const CommentSchema = new Schema({
   Comment: {
     type: String,
     required: true,
+    min: [5, "It should have at least 5 Character Length."]
   },
   userName: {
     type: Schema.Types.ObjectId,

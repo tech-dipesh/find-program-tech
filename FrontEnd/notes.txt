@@ -221,3 +221,6 @@ the withCredentials is determined whether your browser will send teh cookie or n
 i have used the react-router-dom which have the benefits of: React Router DOM allows your React application to display different components based on the URL without reloading the entire page. It essentially gives your single-page application (SPA) the ability to navigate between different views while maintaining state.
 so while i trying to setup the login configuration:
 i face the several error: the tool i have used is, useNavigate from teh react-router-dom, which i used for the navigate a page when user put successfull details while signup, then i catch the error on catch block with error.response the response is the function name, and i show the console message at there, all of the functionality is working on backend. with the check condition of username and password. 
+
+as for the useEffect while extracting the id from the useParams as useparams is a function react-router-dom which we importing, as we need to call a useParams, useParams().
+also on the axios.post(`http:localhost:5000/tools/${id}/comment`) (it should be the {id} not {:id} as it doesn't need to fetch at a id with req.params.id)

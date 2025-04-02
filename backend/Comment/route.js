@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Approval = require("./likemodel.js");
 const modelListing = require("../Tool/model.js");
-
+const signupListing = require("../Register/model.js");
+const { CommentListing}  = require("./model.js");
 module.exports.Like = async (req, res) => {
     try {
       const id = req.params.id;
@@ -63,3 +64,16 @@ module.exports.disLike = async (req, res) => {
     res.redirect(`/tools/${id}`);
   }
 };
+
+module.exports.Comment=async (req, res)=>{
+  try {
+    const userName=signupListing;
+    const id=req.params.id;
+    const comments=await CommentListing.findOne({_id})
+    const comment=req.body;
+    let Cmt=await comments.save({comment});
+    console.log(Cmt);
+  } catch (error) {
+    res.status(401).json("Error on the comment on individual listing", error)
+  }
+}

@@ -14,5 +14,6 @@ export const getItemById = (id) => API.get(`/tools/${id}`);
 export const createItem = (newItem) => API.post('/tools', newItem);
 export const updateItem = (id, updatedItem) => API.put(`/tools/${id}`, updatedItem);
 export const deleteItem = (id) => API.delete(`/tools/${id}`);
+export const CommentItem = (id) => API.post(`/tools/${id}/comment`);
 
 export default API;
