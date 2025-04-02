@@ -157,10 +157,10 @@ export default function Newlisting() {
                 Tech Stack *
               </label>
               <div className="flex flex-wrap gap-2 p-2 border rounded-lg">
-                <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                {/* <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
 
-                  <button className="ml-2 text-blue-600 hover:text-blue-800">×</button>
-                </span>
+                  <button className="ml-2 text-blue-6 00 hover:text-blue-800">×</button>
+                </span> */}
                 <input
                   type="text"
                   className="flex-1 min-w-[120px] p-1 outline-none"
