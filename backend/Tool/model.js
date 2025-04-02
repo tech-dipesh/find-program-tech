@@ -1,7 +1,6 @@
 const mongoose=require("mongoose");
 const Schema=mongoose.Schema;
 const signupListing=require("../Register/model.js");
-const { required } = require("joi");
 
 const Toolvalidate=new Schema({
   Name: String,

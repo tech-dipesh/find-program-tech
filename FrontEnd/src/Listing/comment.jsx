@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nodejs from "../assets/nodejs.webp";
 import { useForm } from "react-hook-form"
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { CommentItem } from '../service/api';
 
 export const Comment = () => {
+  let [CommentItem, setCommentItem]=useState()
+  
   let navigate=useNavigate()
   let {id}=useParams;
   const {register,
   handleSubmit,
-  watch,
   formState: { errors },
 } = useForm()
 
