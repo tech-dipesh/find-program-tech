@@ -21,12 +21,11 @@ export default function Footer(){
 
       {/* Resources */}
       <div className="space-y-4">
-        <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Resources</h4>
-        <ul className="space-y-2">
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Documentation</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Blog</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Tutorials</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">API Status</a></li>
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Link</h4>
+        <ul className="space-y-4">
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="https://github.com/tech-dipesh/find-program-tech/blob/main/README.md">Documentation</Link></p>
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="/">Blog (Coming Soon)</Link></p>
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="/">Tutorials (Coming Soon)</Link></p>
         </ul>
       </div>
 
@@ -43,12 +42,11 @@ export default function Footer(){
 
       {/* Legal */}
       <div className="space-y-4">
-        <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Legal</h4>
-        <ul className="space-y-2">
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Terms of Service</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Code of Conduct</a></li>
-          <li><a href="#" className="text-gray-200 hover:text-white transition-colors text-sm">Cookie Policy</a></li>
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-blue-200">Miscellaneous</h4>
+        <ul className="space-y-5">
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="">Why? (Coming Soon)</Link></p>
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="">Future Plan? (Coming Soon)</Link></p>
+          <p className="text-gray-200 hover:text-white transition-colors text-sm"><Link to="">Help Me? (Coming Soon)</Link></p>
         </ul>
       </div>
     </div>

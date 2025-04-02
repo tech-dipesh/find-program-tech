@@ -13,17 +13,17 @@ export default function Newlisting() {
     formState: { errors, isSubmitting },
   } = useForm()
 
-  const onSubmit = async(formData) => {
+  const onSubmit = async (formData) => {
     try {
       console.log("your form data is", formData);
       // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
-            let newTool = await axios.post("http://localhost:5000/tools", formData, {
+      let newTool = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        withCredentials: true 
+        withCredentials: true
       })
-      
+
       // console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
       // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
@@ -33,13 +33,13 @@ export default function Newlisting() {
     // console.log(data.Name)
   }
 
-  
+
   //it will only get the only one error at the time.
   const firstError = Object.values(errors)[0];
 
   return (
     <>
-    <MainNavbar/>
+      <MainNavbar />
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 border-b pb-4">Submit New Tool</h2>
         {/* {firstError && <FormError error={errors.Name} />} */}
@@ -103,12 +103,12 @@ export default function Newlisting() {
                 type="number"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 {...register("releaseYear",
-                  { required: { value: true, message: "Make sure to Write the release year." }, min: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear()+1, message: "Over 2025 can't be existed." } }
+                  { required: { value: true, message: "Make sure to Write the release year." }, min: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear() + 1, message: "Over 2025 can't be existed." } }
                 )}
               />
             </div>
             {/* {firstError && <FormError error={errors.releaseYear} />} */}
-{/* 
+            {/* 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Tool Logo *
@@ -120,7 +120,7 @@ export default function Newlisting() {
             </div> */}
           </div>
           {/* <FormError error={errors.oneLine} /> */}
-          
+
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -158,7 +158,7 @@ export default function Newlisting() {
               </label>
               <div className="flex flex-wrap gap-2 p-2 border rounded-lg">
                 <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                  
+
                   <button className="ml-2 text-blue-600 hover:text-blue-800">×</button>
                 </span>
                 <input
@@ -181,7 +181,7 @@ export default function Newlisting() {
           </div>
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

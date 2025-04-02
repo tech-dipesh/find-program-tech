@@ -21,7 +21,6 @@ module.exports.signupPost = async (req, res) => {
     // const registeredUser = await signupListing.register(yourName, Email, PassWord, userName);
     let newUser=await new signupListing({yourName, Email, PassWord, userName});
     const SaltedValule = signupListing.register(newUser, userName);
-
     req.session.userId = newUser._id;
     res.redirect("/tools");
   } catch (error) {
@@ -49,11 +48,11 @@ module.exports.loginPost = async (req, res) => {
     
     if(!dataUser){
       req.flash("error", "Username doesn't exist")
-        return res.redirect("/login")
+        return res.json("/login")
     }
     if(PassWord!==dataUser.PassWord){
       req.flash("error", "Password doesn't match");
-      return res.redirect("/login");
+      return res.json("/login");
     }
     req.session.userId = dataUser._id; 
     req.flash("success", "congratulation you put the correct address");
