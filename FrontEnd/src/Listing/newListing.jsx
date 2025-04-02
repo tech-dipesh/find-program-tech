@@ -17,7 +17,7 @@ export default function Newlisting() {
     try {
       console.log("your form data is", formData);
       // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
-      let newTool = await axios.post("http://localhost:5000/tools", formData, {
+      let formData = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
           'Content-Type': 'application/json',
         },

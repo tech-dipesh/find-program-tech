@@ -3,9 +3,10 @@ import Footer from "../Layout/footer";
 import MainNavbar from "../Layout/mainNavbar";
 import { useForm } from "react-hook-form";
 import FormError from "../Miscellaneous/Error";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function Signup() {
+  let navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,14 +15,15 @@ export default function Signup() {
   }=useForm()
 
   const onSubmit = async (newUser) => {
-    console.log(newUser);
+    console.log("succesfully Sign Up.");
     try {
-      let newUser=await axios.post(("http://localhost:5000/signup"), signupData, {
+      let signupData=await axios.post(("http://localhost:5000/signup"), newUser, {
         headers:{
           "Content-Type": "application/json"
         },
         withCredentials: true
       })
+      navigate("/");
     } catch (error) {
       console.error("Eror on the signup onSubmit function and the error is:", error)
     }

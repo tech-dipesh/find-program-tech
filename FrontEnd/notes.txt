@@ -201,4 +201,21 @@ useEffect(() => { ... }, [id]);  (we have to rerun each time if id is changed so
 
 ##on the useEffect of Showindividual i am not able to understand that code, i need revision of that code.
 
-value: /^[a-z0-9_-]+$/, (it should be the followgin regex pattern as this is for the userName)
+value: /^[a-z0-9_-]+$/, (it should be the followgin regex pattern as this is for the userName).
+
+Now i am able to save data on the backend:   const onSubmit = async (newUser) => {
+    console.log(newUser);
+    try {
+      let signupData=await axios.post(("http://localhost:5000/signup"), newUser, {
+        headers:{
+          "Content-Type": "application/json"
+        },
+        withCredentials: true
+      })
+    } catch (error) {
+      console.error("Eror on the signup onSubmit function and the error is:", error)
+    }
+  } (in here i passed the variable, with content-type should send the data in the form of json )
+the withCredentials is determined whether your browser will send teh cookie or not.
+##so i have to navigate the user to homepage after the login, so i use the usenaviagate of react-router-dom.
+i have used the react-router-dom which have the benefits of: React Router DOM allows your React application to display different components based on the URL without reloading the entire page. It essentially gives your single-page application (SPA) the ability to navigate between different views while maintaining state.

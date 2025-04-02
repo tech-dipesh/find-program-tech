@@ -1,16 +1,16 @@
 import Logo from "../assets/logo.png";
 import Footer from "../Layout/footer";
 import MainNavbar from "../Layout/mainNavbar";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 export default function Login() {
+  let Navigate=useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -27,16 +27,20 @@ export default function Login() {
     } catch (error) {
       console.error("Error on login:", error);
       if(userName===useranme){
-        setError("username doesn't found");
+        let error=("username doesn't found");
       }
       if(password===password){
-        setError("password doesn't match");
+        let error=("password doesn't match");
       }
     }
   };
 // if
   return (
     <>
+    {/* {setError} */}
+   {/* { (error){
+      <h2 className="bg-red-500">error.message</h2>
+    }} */}
       <MainNavbar />
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
