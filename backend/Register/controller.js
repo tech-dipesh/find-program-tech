@@ -47,19 +47,22 @@ module.exports.loginPost = async (req, res) => {
     let dataUser=await signupListing.findOne({userName})
     
     if(!dataUser){
-      req.flash("error", "Username doesn't exist")
-        return res.json("/login")
+      // req.flash("error", "Username doesn't exist")
+        return res.status(401).json({ message: 'Invalid username or password' })
     }
     if(PassWord!==dataUser.PassWord){
-      req.flash("error", "Password doesn't match");
-      return res.json("/login");
+      // req.flash("error", "Password doesn't match");
+      // return res.json("/login");
+      return res.status(401).json({ message: 'Invalid username or password' })
     }
     req.session.userId = dataUser._id; 
-    req.flash("success", "congratulation you put the correct address");
-    res.redirect("/tools")
-    // res.send("this is the post login post method.");
+    // req.flash("success", "congratulation you put the correct address");
+
+    // res.redirect("/tools")
+    res.json({ message: 'Login successful' });
   } catch (error) {
-    res.send(`error on the login post route and the error is: ${error}`);
+    // res.send(`error on the login post route and the error is: ${error}`);
+    res.status(402).json({message: "sever error on login post"});
   }
 };
 

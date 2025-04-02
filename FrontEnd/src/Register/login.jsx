@@ -19,21 +19,20 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         withCredentials: true,
-      });
-      if(response.data.success){
-        Navigate("/");
-      }
-
+      }); 
+      console.log("Login is succesfull", response.data);
+      Navigate("/");
     } catch (error) {
       console.error("Error on login:", error);
-      if(userName===useranme){
-        let error=("username doesn't found");
-      }
-      if(password===password){
-        let error=("password doesn't match");
-      }
+     if(error.response){
+      console.log("Server Error:", error.response.data);
+     }
     }
   };
+
+ 
+      
+     
 // if
   return (
     <>
@@ -55,23 +54,24 @@ export default function Login() {
               </h1>
               <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Your email
+                  <label htmlFor="userName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Your userName
                   </label>
                   <input
-                    type="email"
-                    id="email"
-                    placeholder="name@gmail.com"
+                    type="text"
+                    id="userName"
+                    placeholder="UserName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                    {...register("email", {
-                      required: "Email is required",
+                    {...register("userName", {
+                      required: "userName is required",
                       pattern: {
-                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: "Please enter a valid email address",
+                        // value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        value: /^[a-z0-9-_]+$/,
+                        message: "Only letter, number, hyphen and dash is allowed",
                       },
                     })}
                   />
-                  {errors.email && <span className="mt-2 text-sm text-red-500">{errors.email.message}</span>}
+                  {errors.userName && <span className="mt-2 text-sm text-red-500">{errors.userName.message}</span>}
                 </div>
 
                 <div>

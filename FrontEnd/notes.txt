@@ -219,3 +219,5 @@ Now i am able to save data on the backend:   const onSubmit = async (newUser) =>
 the withCredentials is determined whether your browser will send teh cookie or not.
 ##so i have to navigate the user to homepage after the login, so i use the usenaviagate of react-router-dom.
 i have used the react-router-dom which have the benefits of: React Router DOM allows your React application to display different components based on the URL without reloading the entire page. It essentially gives your single-page application (SPA) the ability to navigate between different views while maintaining state.
+so while i trying to setup the login configuration:
+i face the several error: the tool i have used is, useNavigate from teh react-router-dom, which i used for the navigate a page when user put successfull details while signup, then i catch the error on catch block with error.response the response is the function name, and i show the console message at there, all of the functionality is working on backend. with the check condition of username and password. 
