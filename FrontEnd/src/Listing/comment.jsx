@@ -7,7 +7,7 @@ import { CommentItem } from '../service/api';
 export const Comment = () => {
   let [CommentItem, setCommentItem]=useState()
   
-  let navigate=useNavigate()
+  let navigate=useNavigate([])
   let {id}=useParams;
   const {register,
   handleSubmit,
@@ -20,14 +20,14 @@ useEffect(() => {
   const fetchingComment=async (data) => {
     try {
       await CommentItem(id)
-      let CommentItem=await axios.post(`http://localhost:5000/${id}/comment`,{
+      let newComment=await axios.get(`http://localhost:5000/${id}/comment`,{
         "content-type": "application/json",
       },
       {withCredentials: true}
     )
     console.log("send data successfully", CommentItem.data),
-    navigate("/resid")
-    // useCredintials: true
+    // navigate("/resid")
+    setCommentItem(newComment.id)
     } catch (error) {
       console.error("Error on the comment post id listings", error)
     }
@@ -35,6 +35,16 @@ useEffect(() => {
   fetchingComment()
 }, [id])
 
+const onsubmit=async ()=>{
+  try {
+    const response=await axios.post(`http://localhost:5000/{id}/comment`({
+      "content-type": "application/json",
+    }, {withCredentials: true}, {withCredentials:true}))
+  setCommentItem(newComment.data)
+  } catch (error) {
+    console.error("error message", error.message)
+  }
+}
   return (
     <>
      <div className="bg-white rounded-xl shadow-md p-6">
@@ -79,13 +89,6 @@ useEffect(() => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <button
-                  className="px-6 py-2 text-indigo-600 hover:bg-indigo-50 rounded-lg"
-                >Show All Comments
-                </button>
               </div>
             </div>
     </>

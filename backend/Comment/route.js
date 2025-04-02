@@ -67,16 +67,20 @@ module.exports.disLike = async (req, res) => {
 
 module.exports.Comment=async (req, res)=>{
   try {
-    let comment=await signupListing.findById(req.params.id)
-    if(!comment){
+    let listing=await signupListing.findById(req.params.id)
+    if(!listing){
       throw new expressError("404", "listings is not found inside the comment modules")
     }
     let newComment=await new CommentListing({
-      Comment: req.body.signupListing.Comment,
-      userName: req.body.signupListing.userName
+      // Comment: req.body.signupListing.Comment,
+      // userName: req.body.signupListing.userName
+      Comment: req.body.Comment,
+      userName: req.body.userName
     })
-    let Cmt=await newComment.save();
+    let savedComment=await newComment.save();
+    res.statu(401).json(savedComment)
   } catch (error) {
-    res.status(401).json("Error on the comment on individual listing", error)
+    console.error("Error on catch error", error)
+    res.status(401).json({message: "Error on the comment on individual listing", error: error.message})
   }
 }
