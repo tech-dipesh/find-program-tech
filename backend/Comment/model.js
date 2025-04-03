@@ -12,6 +12,10 @@ const CommentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "signupListing",
   },
+  date:{
+    type: Date,
+    default: Date.now
+  }
 });
 // const CommentListing=mongoose.model("CommentListing", CommentSchema)
 module.exports.CommentListing = mongoose.model("CommentListing", CommentSchema);

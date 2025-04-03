@@ -1,3 +1,4 @@
+
 export default function Upvote() {
   return (
     <div className="flex flex-col items-center gap-3">

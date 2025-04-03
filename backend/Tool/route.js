@@ -3,9 +3,8 @@ const router = express.Router();
 const wrapAsync = require("../middleware/wrapAsync.js");
 const controllerTool = require("./controller.js");
 const { isLoggedIn } = require("../middleware/isLoggedIn.js");
-const {LikeListing, Comment}=require("../Comment/route.js");
+const {LikeListing, getComment, postComment}=require("../Comment/route.js");
 let {Like, disLike}=require("../Comment/route.js");
-let Comment=require("../Comment/route.js")
 // router.get("/new", isLoggedIn, (req, res) => {
 //   res.render("new.ejs");
 // });
@@ -36,7 +35,9 @@ router.route("/")
   router.post("/:id/Like", wrapAsync(Like))
   router.post("/:id/disLike",  wrapAsync(disLike));;
 
-router.post("/:id/comment", wrapAsync, (Comment))
+router.route("/:id/comment")
+.get( wrapAsync(getComment))
+.post( wrapAsync(postComment))
 
 router.route("/:id")
   .get(wrapAsync(controllerTool.individualListingGet))

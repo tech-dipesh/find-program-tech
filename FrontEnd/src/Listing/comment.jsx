@@ -2,94 +2,113 @@ import React, { useEffect, useState } from 'react'
 import Nodejs from "../assets/nodejs.webp";
 import { useForm } from "react-hook-form"
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { CommentItem } from '../service/api';
+import API, { postComment } from '../service/api';
+// import API, { CommentItem, CommentItem as postCommentAPI } from '../service/api';
+import axios from 'axios';
 
 export const Comment = () => {
-  let [CommentItem, setCommentItem]=useState()
-  
-  let navigate=useNavigate([])
-  let {id}=useParams;
-  const {register,
-  handleSubmit,
-  formState: { errors },
-} = useForm()
+  let [comments, setComments] = useState([])
 
-const onSubmit = (data) => console.log(data)
+  let navigate = useNavigate([])
+  let { id } = useParams();
+  const { register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm()
 
-useEffect(() => {
-  const fetchingComment=async (data) => {
+  const onSubmit = (data) => console.log(data)
+
+  useEffect(() => {
+    const fetchingComment = async (data) => {
+      try {
+        let response = await API.get(`/tools/${id}/comment`,
+          
+          //  {  "content-type": "application/json",
+        // },
+          // { withCredentials: true }
+        );
+
+        setComments(response.data)
+          // navigate("/resid")
+      } catch (error) {
+        console.error("Error on the comment post id listings", error)
+      }
+    }
+    if(id){
+    fetchingComment()
+    }
+  }, [id, comments.length])
+
+  const onsubmit = async (data) => {
     try {
-      await CommentItem(id)
-      let newComment=await axios.get(`http://localhost:5000/${id}/comment`,{
-        "content-type": "application/json",
-      },
-      {withCredentials: true}
-    )
-    console.log("send data successfully", CommentItem.data),
-    // navigate("/resid")
-    setCommentItem(newComment.id)
+      // const response = await axios.post(`http://localhost:5000/{id}/comment`,
+    //   {Comment: data.comment},
+    //   {headers: {
+    //    "content-type": "application/json",
+    //  },
+    //   withCredentials: true })
+      const response = await postComment
+      (id, { Comment: data.Comment });
+
+      // setCommentItem(newComment.data)
+      // this is for the new comment wrap into the list with new comments
+      setComments(prevComment=>[...prevComment, response.data])
+      // it will reset the form when the form is submitted with blank value:
+      reset()
     } catch (error) {
-      console.error("Error on the comment post id listings", error)
+      console.error("error message", error.message)
     }
   }
-  fetchingComment()
-}, [id])
-
-const onsubmit=async ()=>{
-  try {
-    const response=await axios.post(`http://localhost:5000/{id}/comment`({
-      "content-type": "application/json",
-    }, {withCredentials: true}, {withCredentials:true}))
-  setCommentItem(newComment.data)
-  } catch (error) {
-    console.error("error message", error.message)
-  }
-}
   return (
     <>
-     <div className="bg-white rounded-xl shadow-md p-6">
-              <h2 className="text-2xl font-semibold mb-6">Comments 10</h2>
-              <form className="mb-8" onSubmit={handleSubmit(onSubmit)}>
-              {errors.Comment && <span className="flex items-center justify-center mt-2 ml-1/2 text-m text-red-500">{errors.Comment.message}</span>}
+      <div className="bg-white rounded-xl shadow-md p-6">
+        <h2 className="text-2xl font-semibold mb-6">Comments: {comments.length}</h2>
+        <form className="mb-8" onSubmit={handleSubmit(onsubmit)}>
+          {errors.Comment && <span className="flex items-center justify-center mt-2 ml-1/2 text-m text-red-500">{errors.Comment.message}</span>}
 
-                <input 
-                  type='text'
-                  className="w-full mt-1 h-30 p-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  rows="4"
-                  placeholder="Add your comment..."
-                  {...register("Comment", { required: {value: true, message: "Comment field is required"}, minLength:{value:5, message: "It should have at least 5 length Character."} })}
-                />
-                <div className="mt-4 flex justify-end">
-                  <button
-                    type="submit"
-                    className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-                  >
-                    Post Comment
-                  </button>
-                </div>
-              </form>
-
-              <div className="space-y-6">
-                <div className="border-b pb-6">
-                  <div className="flex items-start gap-4">
-                    <img
-                      src={Nodejs}
-                      alt="Nodejs"
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold">dipak</h3>
-                        <span className="text-gray-500 text-sm">1 days ago</span>
-                      </div>
-                      <p className="text-gray-700">it made for the easiness i love that.</p>
-                      <div className="mt-3 flex items-center gap-4">
-
-                      </div>
-                    </div>
+          <input
+            type='text'
+            className="w-full mt-1 h-30 p-4 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            rows="4"
+            placeholder="Add your comment..."
+            {...register("Comment", { required: { value: true, message: "Comment field is required" }, minLength: { value: 5, message: "It should have at least 5 length Character." } })}
+          />
+          <div className="mt-4 flex justify-end">
+            <button
+              type="submit"
+              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+            >
+              Post Comment
+            </button>
+          </div>
+        </form>
+        {/* {for (const comments of CommentItem) { */}
+        {/* //as it doesn't return aything we should use parenthese instead of curly brace inside code. */}
+        {/* {CommentItem && CommentItem.map((Comment)=>( */}
+        {Object.values(comments).map((Comment, index) => (
+        // {for (for Comment in commentData){
+          <div className="space-y-6" key={Comment._id || index}>
+            <div className="border-b pb-6">
+              <div className="flex items-start gap-4">
+                <img
+                  src={Nodejs}
+                  alt="Nodejs"
+                  className="w-10 h-10 rounded-full object-cover"
+                  />
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-semibold">{Comment.userName}</h3>
+                    {/* <span className="text-gray-500 text-sm">{Comment.date}</span> */}
+                    <span className="text-gray-500 text-sm"> {new Date(Comment.date).toLocaleDateString()}</span>
                   </div>
+                  <p className="text-gray-700">{Comment.Comment}</p>
                 </div>
               </div>
+            </div>
+          </div>
+        // }}
+                ))}
             </div>
     </>
   )
