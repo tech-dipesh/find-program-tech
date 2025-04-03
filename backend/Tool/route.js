@@ -32,8 +32,14 @@ router.route("/")
   .get(wrapAsync(controllerTool.showIdGet))
   .post( wrapAsync(controllerTool.showIdPost));
 
-  router.post("/:id/Like", wrapAsync(Like))
-  router.post("/:id/disLike",  wrapAsync(disLike));;
+  // router.post("/:id/Like", wrapAsync(Like))
+  // router.post("/:id/disLike",  wrapAsync(disLike));;
+
+  const { handleVote, getVotes } = require("../Comment/route");
+
+router.post('/:id/like', wrapAsync((req, res) => handleVote(req, res, 'like')));
+router.post('/:id/dislike', wrapAsync((req, res) => handleVote(req, res, 'dislike')));
+router.get('/:id/votes', wrapAsync(getVotes));
 
 router.route("/:id/comment")
 .get( wrapAsync(getComment))

@@ -4,22 +4,26 @@ const Approval = require("./likemodel.js");
 const modelListing = require("../Tool/model.js");
 const signupListing = require("../Register/model.js");
 const { CommentListing}  = require("./model.js");
+const Post=require("../Tool/model.js")
 const { default: mongoose } = require("mongoose");
 module.exports.Like = async (req, res) => {
     try {
       const id = req.params.id;
-      let approval = await Approval.findOne({ toolId: id });
-      if (!approval) {
-        approval = new Approval({ 
-          toolId: id,
-          Likes: 1,
-          disLike: 0
-        });
-      } else {
-        approval.Likes += 1;
-      }
-      await approval.save();
-      res.redirect(`/tools/${id}`);
+      // let approval = await Approval.findOne({ toolId: id });
+      // if (!approval) {
+      //   approval = new Approval({ 
+      //     toolId: id,
+      //     Likes: 1,
+      //     disLike: 0
+      //   });
+      // } else {
+      //   approval.Likes += 1;
+      // }
+      const post=await Approval.findById(Id)
+      post.Likes+=1
+      await post.save();
+      // res.redirect(`/tools/${id}`);
+      res.json({likes: post.likes})
     } catch (error) {
       console.error('Error on the like route:', error);
       res.redirect(`/tools/${id}`);
@@ -46,18 +50,20 @@ module.exports.Like = async (req, res) => {
 module.exports.disLike = async (req, res) => {
   try {
     const id = req.params.id;
-    let approval = await Approval.findOne({ toolId: id });
-    if (!approval) {
-      approval = new Approval({ 
-        toolId: id,
-        Likes: 0,
-        disLike: 1
-      });
-    } else {
-      approval.disLike += 1;
-    }
+    let approval = await Approval.findById({ toolId: id });
+    
+    // if (!approval) {
+    //   approval = new Approval({ 
+    //     toolId: id,
+    //     Likes: 0,
+    //     disLike: 1
+    //   });
+    // } else {
+    //   approval.disLike += 1;
+    // }
+
     await approval.save();
-    console.log('Dislike saved:', approval);
+    res.json(500).json({disLike: approval.dislike})
     res.redirect(`/tools/${id}`);
   } catch (error) {
     console.error("Dislike error:", error);
@@ -69,6 +75,7 @@ module.exports.disLike = async (req, res) => {
 module.exports.postComment=async (req, res)=>{
   try {
     let postId=req.params.id;
+    // let postId=new objectId(req.params.id)
     console.log("Request Body", req.body);
     console.log("User INfo", req.user);
     // if(!req.user){
@@ -78,7 +85,7 @@ module.exports.postComment=async (req, res)=>{
     let newComment=await new CommentListing({
       // Comment: req.body.signupListing.Comment,
       // userName: req.body.signupListing.userName
-      _id: new mongoose.Types.ObjectId(),
+      // _id: new mongoose.Types.ObjectId(),
       Comment: req.body.Comment,
       userName: req.user._id || "guest",
       date: new Date(),
@@ -96,8 +103,9 @@ module.exports.postComment=async (req, res)=>{
 
 module.exports.getComment=async(req, res)=>{
   try {
-    let postId=req.params.id;
-    const comments=await CommentListing.find().populate("userName", "userName")
+    let postId=req.params.id
+    // let postId=new objectId(req.params.id);
+    const comments=await CommentListing.find({postId}).populate("userName", "userName")
     res.status(200).json(comments)
   } catch (error) {
     console.error("Error on get comments and the error is", error.message)

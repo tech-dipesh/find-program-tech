@@ -5,16 +5,8 @@ import {Link} from "react-router-dom";
 import { getUserActivity  } from '../service/api';
 
 export default function MainNavbar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState('USA');
   const [userActivity, setUserActivity]=useState()
-  const countries = [
-    { name: 'USA', flag: '🇺🇸' },
-    { name: 'China', flag: '🇨🇳' },
-    { name: 'Great Britain', flag: '🇩🇪' },
-    { name: 'Italy', flag: '🇮🇹' }
-  ];
-
+  
   //it's for the checking whether user is logged in or not on our website.
   useEffect(() => {
     getUserActivity()
@@ -30,13 +22,13 @@ export default function MainNavbar() {
        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Developer Listing</span>
        </Link>
 
-       <form class="ml-lg max-w-sm mx-auto w-full">
-    <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-            <i class="fa-solid fa-magnifying-glass text-gray-500 text-lg"></i>
+       <form className="ml-lg max-w-sm mx-auto w-full">
+    <div className="relative">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <i className="fa-solid fa-magnifying-glass text-gray-500 text-lg"></i>
         </div>
-        <input type="search" id="search" class="block w-full p-4 pl-12 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="New Developer..." required />
-        <button type="submit" class="text-white absolute right-3 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Search</button>
+        <input type="search" id="search" className="block w-full p-4 pl-12 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="New Developer..." required />
+        <button type="submit" className="text-white absolute right-3 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Search</button>
     </div>
 </form>
 
@@ -49,10 +41,10 @@ export default function MainNavbar() {
           <Link to="/contact" className='text-gray-900 dark:text-white hover:text-blue-700'>Contact Us</Link>
         </ul>
           {/* if(!userActivity){ */}
-          {!userActivity ?  (
-          <Link to='/login' className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg">Get Started/Login</Link>
+          {userActivity ?  (
+          <Link to='/logout' className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg">Logout</Link>
           ):(
-          <Link to='/logout' className="absolute right-2 text-white bg-blue-500 hover:bg-blue-800 px-4 py-3 rounded-lg">Logout</Link>
+          <Link to='/login' className="absolute right-2 text-white bg-blue-500 hover:bg-blue-800 px-4 py-3 rounded-lg">Get Started/Login</Link>
 )}
       </div>
     </nav>

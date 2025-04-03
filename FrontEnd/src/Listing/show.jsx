@@ -5,20 +5,25 @@ import MainNavbar from "../Layout/mainNavbar";
 import Footer from "../Layout/footer";
 import { getAllItems } from '../service/api';
 import { Link } from "react-router-dom";
+import axios from "axios";
 export default function Show() {
   const [tools, setTools] = useState([]);
+  const [comments, setComments]=useState([])
   useEffect(() => {
     const setId = async () => {
       try {
         const response=await getAllItems();
         setTools(response.data.tools)
+
+        //extracting the length of the total comments:
+        const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
+        setComments(commentsResponse.data);
       } catch (error) {
         console.error(`Error on UseEffect fetching data, ${error}`);
       }
     }
     setId()
   }, [])
-console.log(tools);
   return (
     <>
       <MainNavbar />
@@ -55,7 +60,7 @@ console.log(tools);
                   <span>Launched: {tool.releaseYear}</span>
                   <span>•</span>
                   {/* <span>{tool.comments.length}</span> */}
-                  <span>Commennts: 45</span>
+                  <span>Commennts: {comments.length}</span>
                 </div>
 
                 <div className="mt-6 flex justify-end">

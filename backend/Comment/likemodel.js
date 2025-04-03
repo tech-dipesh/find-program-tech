@@ -7,21 +7,22 @@ const likeDislikeSchema=new Schema({
     type: Schema.Types.ObjectId,
     ref: 'newTool',
     required: true,
-    // unique: true
+    unique: true
   },
   Likes: {
     type: Number,
-    default: 0
+    // type: Schema.type.ObjectId,
+    default: 0,
+      ref: 'signupListing'
   },
   disLike: {
     type: Number,
-    default: 0
+    // type: Schema.type.ObjectId,
+    default: 0,
+      ref: 'signupListing'
   }
 },
 { 
   //only unique constraint i can add on the database.
   timestamps: true 
 })  
-
-// module.exports.Approval = mongoose.model("Approval", likeDislikeSchema);
-module.exports = mongoose.model("Approval", likeDislikeSchema);

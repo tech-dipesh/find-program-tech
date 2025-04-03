@@ -22,8 +22,8 @@ export const Comment = () => {
   useEffect(() => {
     const fetchingComment = async (data) => {
       try {
+        setComments([])
         let response = await API.get(`/tools/${id}/comment`,
-          
           //  {  "content-type": "application/json",
         // },
           // { withCredentials: true }

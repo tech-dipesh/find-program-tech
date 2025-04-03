@@ -10,7 +10,7 @@ import { Comment } from "./comment.jsx";
 export default function Showindividual() {
   const { id } = useParams();
   const [show, setshow] = useState(null);
-
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     const fetchTool = async (data) => {
       try {
@@ -18,6 +18,9 @@ export default function Showindividual() {
         if (Array.isArray(response.data.tools)) {
           const tool = response.data.tools.find(t => t._id === id);
           setshow(tool);
+          //just passing the to
+        const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
+        setComments(commentsResponse.data);
         } else {
           setshow(response.data.tools);
         }
@@ -85,7 +88,7 @@ export default function Showindividual() {
 
                   <div className="mt-4 flex items-center gap-6 text-gray-600">
                     <span>🚀 Launched: {show.releaseYear}</span>
-                    <span>💬 5 Comments</span>
+                    <span>💬 {comments.length} Comments</span>
                     <span> 10 <i className="fa-solid fa-heart ml-2"></i></span>
                   </div>
 
