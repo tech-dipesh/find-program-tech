@@ -106,8 +106,10 @@ export const Comment = () => {
                   />
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="font-semibold">{Comment.userName}</h3>
-                    {/* <span className="text-gray-500 text-sm">{Comment.date}</span> */}
+                    {/* //as i have to add the two case so that's why i am facing the error. */}
+                    {/* <h3 className="font-semibold">{Comment.userName}</h3> */}
+                    <h3 className="font-semibold">{Comment.userName?.userName || 'guest'}</h3>
+                    {/* converting only date */}
                     <span className="text-gray-500 text-sm"> {new Date(Comment.date).toLocaleDateString()}</span>
                   </div>
                   <p className="text-gray-700">{Comment.Comment}</p>

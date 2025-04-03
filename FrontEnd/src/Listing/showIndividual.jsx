@@ -29,7 +29,6 @@ export default function Showindividual() {
   }, [id]);
 
   if (!show) return <div className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Loading...</div>;
-  console.log(show)
 
   // useEffect(() => {
   //   let Comment=async ()

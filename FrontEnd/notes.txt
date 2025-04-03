@@ -224,3 +224,6 @@ i face the several error: the tool i have used is, useNavigate from teh react-ro
 
 as for the useEffect while extracting the id from the useParams as useparams is a function react-router-dom which we importing, as we need to call a useParams, useParams().
 also on the axios.post(`http:localhost:5000/tools/${id}/comment`) (it should be the {id} not {:id} as it doesn't need to fetch at a id with req.params.id)
+
+i've implement the comment listing in any individual tool, which i have done with two axios.post and axios.get method on axios.get i only find all of the userName that matched and with useState show all of the listings. on the other hand, post method is first check the constraint is that matche or not both client side and server side and then after that it will save on teh inside the same userName with that userName, with the best possible way.
+  
