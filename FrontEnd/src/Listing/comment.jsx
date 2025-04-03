@@ -50,6 +50,7 @@ export const Comment = () => {
     //   withCredentials: true })
       const response = await postComment
       (id, { Comment: data.Comment });
+      console.log(response.data);
 
       // setCommentItem(newComment.data)
       // this is for the new comment wrap into the list with new comments
@@ -57,7 +58,14 @@ export const Comment = () => {
       // it will reset the form when the form is submitted with blank value:
       reset()
     } catch (error) {
-      console.error("error message", error.message)
+      // console.error("error message", error.message)
+      if (error.response && error.response.status === 401) {
+        alert("Please log in to post comments");
+        navigate("/login")
+      } else {
+        console.log("The error on teh catch error of onSubmit");
+        // res.json({message: "The error on teh catch error of onSubmit"})
+      }
     }
   }
   return (

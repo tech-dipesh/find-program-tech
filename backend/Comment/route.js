@@ -69,18 +69,18 @@ module.exports.disLike = async (req, res) => {
 module.exports.postComment=async (req, res)=>{
   try {
     let postId=req.params.id;
-
-    // let listing=await signupListing.findById(req.params.id)
-    // if(!listing){
-    //   // throw new expressError("404", "listings is not found inside the comment modules")
-    //   res.status(404).json({message: "Listing is not avaible that you are look for"})
+    console.log("Request Body", req.body);
+    console.log("User INfo", req.user);
+    // if(!req.user){
+    //   return res.status(500).json({message: "User is not logged in"})
     // }
+    
     let newComment=await new CommentListing({
       // Comment: req.body.signupListing.Comment,
       // userName: req.body.signupListing.userName
       _id: new mongoose.Types.ObjectId(),
       Comment: req.body.Comment,
-      userName: req.user._id ? req.user._id: null,
+      userName: req.user._id || "guest",
       date: new Date(),
       // track the individual comment id
       postId: postId

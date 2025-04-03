@@ -13,17 +13,17 @@ const Toolvalidate=new Schema({
   },
   companyName: {
       type: String,
-      min: 3,
+      minLength: 3,
   },
   releaseYear:{
     type: Number,
-    min: [1800, "The minimum year should be the 1800."],
-    max: [2025, "you can write more than 2025"]
+    minLength: [1800, "The minimum year should be the 1800."],
+    maxLength: [2025, "you can write more than 2025"]
   },
   useCase:{
     type: String,
-    min:[15, "Minimum should be more than 5 characters."],
-    max:[50, "Maximum should be less than 5 characters."],
+    minLength:[15, "Minimum should be more than 5 characters."],
+    maxLength:[50, "Maximum should be less than 5 characters."],
   },
   techStack: {
     type: String,

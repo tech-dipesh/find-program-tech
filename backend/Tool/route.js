@@ -37,6 +37,7 @@ router.route("/")
 
 router.route("/:id/comment")
 .get( wrapAsync(getComment))
+// .post( wrapAsync, isLoggedIn(postComment))
 .post( wrapAsync(postComment))
 
 router.route("/:id")
