@@ -87,6 +87,7 @@ module.exports.postComment=async (req, res)=>{
     })
     let savedComment=await newComment.save();
     res.status(200).json(savedComment)
+    // res.status(200).json({savedComment, currUser: req.user})
   } catch (error) {
     console.error("Error on catch error", error)
     res.status(500).json({message: "Error on the comment on individual listing", error: error.message})

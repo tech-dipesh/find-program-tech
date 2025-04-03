@@ -18,7 +18,7 @@ export default function Show() {
     }
     setId()
   }, [])
-
+console.log(tools);
   return (
     <>
       <MainNavbar />
@@ -54,7 +54,8 @@ export default function Show() {
                 <div className="mt-4 flex items-center gap-4 text-sm text-gray-500">
                   <span>Launched: {tool.releaseYear}</span>
                   <span>•</span>
-                  <span>Comments: 45</span>
+                  {/* <span>{tool.comments.length}</span> */}
+                  <span>Commennts: 45</span>
                 </div>
 
                 <div className="mt-6 flex justify-end">
