@@ -4,6 +4,16 @@ const signupListing=require("./model.js");
 const expressError=require("../middleware/expressError.js");
 const { default: mongoose } = require("mongoose");
 
+module.exports.userActivity=async(req, res)=>{
+  try {
+    console.log("session", req.session);
+    console.log("User logged in", req.user);
+    res.status(200).json({currUser: req.user})
+  } catch (error) {
+    res.status(500).json("Error ocured on the userActivity router and the error is", error.message)
+  }
+}
+
 module.exports.signupGet = async (req, res) => {
   try {
     let newUser=await signupListing.find({})

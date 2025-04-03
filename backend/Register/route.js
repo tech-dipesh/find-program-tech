@@ -5,6 +5,8 @@ const expressErrorMiddleware=require("../middleware/expressError.js")
 const wrapAsync=require("../middleware/wrapAsync.js")
 const registerController=require("./controller.js");
 
+router.get("/current-user", (registerController.userActivity))
+
 router.route("/signup")
 .get(wrapAsync (registerController.signupGet))
 .post(wrapAsync(registerController.signupPost));
