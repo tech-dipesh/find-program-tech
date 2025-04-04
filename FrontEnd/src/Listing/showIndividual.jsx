@@ -99,7 +99,7 @@ export default function Showindividual() {
                 </div>
               </div>
             </div>
-            <Upvote />
+            {/* <Upvote /> */}
             {/* <Description /> */}
             <div className="bg-white rounded-xl shadow-md p-6 mb-8">
               <div className="mb-8">

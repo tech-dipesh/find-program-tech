@@ -85,24 +85,26 @@ export default function Upvote() {
 
   const handleLike = async () => {
     try {
-      const res = await likeItem(id);
-      setLikes(res.data.likes);
-      setDislikes(res.data.dislikes);
+      const response = await likeItem(id);
+      // Make sure these match what you're sending from backend
+      setLikes(response.data.likes);
+      setDislikes(response.data.dislikes);
       setError(null);
     } catch (error) {
-      setError("Failed to like. Please login!");
+      setError(error.response?.data?.error || "Please login to vote");
       console.error("Like error:", error);
     }
   };
-
+  
   const handleDislike = async () => {
     try {
-      const res = await disLikeItem(id);
-      setDislikes(res.data.dislikes);
-      setLikes(res.data.likes);
+      const response = await disLikeItem(id);
+      // Make sure these match what you're sending from backend
+      setLikes(response.data.likes);
+      setDislikes(response.data.dislikes);
       setError(null);
     } catch (error) {
-      setError("Failed to dislike. Please login!");
+      setError(error.response?.data?.error || "Please login to vote");
       console.error("Dislike error:", error);
     }
   };

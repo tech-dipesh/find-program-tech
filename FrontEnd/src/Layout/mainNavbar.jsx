@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import logo from "../assets/logo.png";
 import "./mainNavbar.css";
-import {Link} from "react-router-dom";
-import { getUserActivity  } from '../service/api';
-
+import {Link, useNavigate} from "react-router-dom";
+import { getUserActivity, logOut  } from '../service/api';
+//for similar to the connect-flash
+import { ToastContainer, toast } from 'react-toastify';
 export default function MainNavbar() {
   const [userActivity, setUserActivity]=useState()
-  
+  const navigate=useNavigate()
   //it's for the checking whether user is logged in or not on our website.
   useEffect(() => {
     getUserActivity()
@@ -14,8 +15,22 @@ export default function MainNavbar() {
       .catch(() => setUserActivity(null));
   }, []);
 
+  const logOutClick=async(e)=>{
+    e.preventDefault()
+    try {
+      await logOut()
+      toast.success('Successfully logged out!');
+      setUserActivity(null);
+      // useNavigate("/")
+      navigate("/")
+    } catch (error) {
+      toast.error("Failed to logged out")
+      console.error("Errro on frontend onclick functionality ", error)
+    }
+  }
   return (
     <nav className="fixed bg-white  z-40 dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
+      <ToastContainer autoClose={5000}/>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
        <Link to="/" className="flex items-center -ml-30 space-x-3">
        <img src={logo} className="h-8" alt="Developer Logo" />
@@ -42,7 +57,8 @@ export default function MainNavbar() {
         </ul>
           {/* if(!userActivity){ */}
           {userActivity ?  (
-          <Link to='/logout' className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg">Logout</Link>
+          // <Link to='/logout' className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg">Logout</Link>
+          <a onClick={logOutClick} className="absolute right-2 text-white bg-blue-700 hover:bg-blue-800 px-4 py-3 rounded-lg cursor-pointer">Logout</a>
           ):(
           <Link to='/login' className="absolute right-2 text-white bg-blue-500 hover:bg-blue-800 px-4 py-3 rounded-lg">Get Started/Login</Link>
 )}

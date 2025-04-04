@@ -19,5 +19,5 @@ export const postComment = (id, commentData) =>
   API.post(`/tools/${id}/comment`, commentData); 
 export const likeItem = (id, likeData) => API.post(`/tools/${id}/like`, likeData);
 export const disLikeItem = (id, disLikeData) => API.post(`/tools/${id}/dislike`, disLikeData);
-
+export const logOut=()=>API.get(`/logout`)
 export default API;

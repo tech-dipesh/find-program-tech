@@ -80,12 +80,20 @@ module.exports.logoutGet = async (req, res) => {
   try {
     req.logout((err)=>{
       if(err){
-        next(err);
+        // next(err);
+       return res.status(500).json({message: "Error while logout while calling the req.logut", err})
       }
-      req.flash("success", "you have succesfully logged out!")
-      res.redirect("index.ejs", )
+      req.session.destroy((err)=>{
+        if(err){
+         return res.status(500).json({message: "Error while destroying/removeing user session with passpot"})
+        }
+      return  res.status(200).json({message: "Succesfully logged out"})
+      })
+      // res.redirect("index.ejs", )
     })
   } catch (error) {
-    res.send(`error on the logout get route and the error is: ${error}`);
+    // res.send(`error on the logout get route and the error is: ${error}`);
+    console.error("Error occured on the logout", error)
+    res.status(500).json("Error on the logout route", error.message)
   }
 };

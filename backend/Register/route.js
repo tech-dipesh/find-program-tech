@@ -18,7 +18,6 @@ router.route("/login")
 
 router.route("/logout")
   .get(wrapAsync(registerController.logoutGet))
-  .post(wrapAsync(registerController.logoutPost));
 
 
 module.exports=router;
