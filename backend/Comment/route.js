@@ -10,20 +10,21 @@ module.exports.Like = async (req, res) => {
     try {
       const id = req.params.id;
       // let approval = await Approval.findOne({ toolId: id });
-      // if (!approval) {
-      //   approval = new Approval({ 
-      //     toolId: id,
-      //     Likes: 1,
-      //     disLike: 0
-      //   });
-      // } else {
-      //   approval.Likes += 1;
-      // }
-      const post=await Approval.findById(Id)
+      let approval = await Approval.findOne({ toolId: id });
+      if (!approval) {
+        approval = new Approval({ 
+          toolId: id,
+          Likes: 1,
+          disLike: 0
+        });
+      } else {
+        approval.Likes += 1;
+      }
+      const post=await Approval.findById({toolId: id})
       post.Likes+=1
       await post.save();
       // res.redirect(`/tools/${id}`);
-      res.json({likes: post.likes})
+      res.json({likes: post.Likes})
     } catch (error) {
       console.error('Error on the like route:', error);
       res.redirect(`/tools/${id}`);
@@ -64,7 +65,7 @@ module.exports.disLike = async (req, res) => {
 
     await approval.save();
     res.json(500).json({disLike: approval.dislike})
-    res.redirect(`/tools/${id}`);
+    // res.redirect(`/tools/${id}`);
   } catch (error) {
     console.error("Dislike error:", error);
     req.flash("error", "Failed to process dislike");
