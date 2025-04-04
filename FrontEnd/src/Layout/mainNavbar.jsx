@@ -4,9 +4,11 @@ import "./mainNavbar.css";
 import {Link, useNavigate} from "react-router-dom";
 import { getUserActivity, logOut  } from '../service/api';
 //for similar to the connect-flash
+import { toastSuccess, toastError } from '../Miscellaneous/react-toast';
 import { ToastContainer, toast } from 'react-toastify';
 export default function MainNavbar() {
   const [userActivity, setUserActivity]=useState()
+  
   const navigate=useNavigate()
   //it's for the checking whether user is logged in or not on our website.
   useEffect(() => {
@@ -19,12 +21,15 @@ export default function MainNavbar() {
     e.preventDefault()
     try {
       await logOut()
-      toast.success('Successfully logged out!');
+      // {toastSuccess}
+      toastSuccess("Succesfully logged out.")
+      // toast.success('Successfully logged out!');
       setUserActivity(null);
       // useNavigate("/")
       navigate("/")
     } catch (error) {
-      toast.error("Failed to logged out")
+      // toast.error("Failed to logged out")
+      toastError("🦄 Failed to logged out, please try again.")
       console.error("Errro on frontend onclick functionality ", error)
     }
   }
