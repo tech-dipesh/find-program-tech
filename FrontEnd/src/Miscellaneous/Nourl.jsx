@@ -3,9 +3,11 @@ import React from 'react'
 import MainNavbar from '../Layout/mainNavbar'
 import Footer from '../Layout/footer'
 import { Link } from 'react-router-dom'
+import { toastError } from './react-toast'
 export const NoUrl = () => {
   return (
     <>
+    {toastError="Please make sure requested url is exist."}
   <MainNavbar />
    <div className="flex flex-col min-h-screen justify-center items-center bg-gray-900">
   <div className="bg-gray-800 p-6 rounded-md shadow-lg mb-20 max-w-lg text-center m-30">

@@ -22,7 +22,7 @@ export default function MainNavbar() {
     try {
       await logOut()
       // {toastSuccess}
-      toastSuccess("Succesfully logged out.")
+      toastError("Succesfully logged out.")
       // toast.success('Successfully logged out!');
       setUserActivity(null);
       // useNavigate("/")

@@ -62,6 +62,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { likeItem, disLikeItem } from "../service/api";
 import axios from "axios";
+import { toastError, toastSuccess } from "../Miscellaneous/react-toast";
 
 export default function Upvote() {
   const { id } = useParams();
@@ -90,8 +91,10 @@ export default function Upvote() {
       setLikes(response.data.likes);
       setDislikes(response.data.dislikes);
       setError(null);
+      toastSuccess("Succesfully Liked on this Tool.")
     } catch (error) {
       setError(error.response?.data?.error || "Please login to vote");
+      toastError("🦄 Failed to Like on the Tool.")
       console.error("Like error:", error);
     }
   };
@@ -103,8 +106,10 @@ export default function Upvote() {
       setLikes(response.data.likes);
       setDislikes(response.data.dislikes);
       setError(null);
+      toastError("Succesfully dislike the Tool")
     } catch (error) {
       setError(error.response?.data?.error || "Please login to vote");
+      toastError("🦄 Failed to DisLike on the Tool please try again later.")
       console.error("Dislike error:", error);
     }
   };

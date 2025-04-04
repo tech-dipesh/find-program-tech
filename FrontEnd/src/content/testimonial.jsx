@@ -14,7 +14,7 @@ export default function Testimonial(){
               <div className="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
                 <p className="text-gray-600 dark:text-gray-300 mb-6">"It just build we can say that it is not perfect but with everyone helps, we can make the perfect tool."</p>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 overflow-hidden rounded-full rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img src={Software2} alt="Senior Software Developer" /></div>
+                  <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img src={Software2} alt="Senior Software Developer" /></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white">John Developer</h4>
                     <p className="text-gray-500 dark:text-gray-400">Senior Engineer</p>

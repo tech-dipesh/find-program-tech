@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import FormError from "../Miscellaneous/Error";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toastError, toastSuccess } from "../Miscellaneous/react-toast";
 export default function Signup() {
   let navigate=useNavigate();
   const {
@@ -24,8 +25,10 @@ export default function Signup() {
         withCredentials: true
       })
       navigate("/");
+      toastSuccess("congratulations you just sign up.")
     } catch (error) {
       console.error("Eror on the signup onSubmit function and the error is:", error)
+      toastError("🦄 Please try again for the Signup")
     }
   }
 

@@ -5,6 +5,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import API, { postComment } from '../service/api';
 // import API, { CommentItem, CommentItem as postCommentAPI } from '../service/api';
 import axios from 'axios';
+import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
 
 export const Comment = () => {
   let [comments, setComments] = useState([])
@@ -28,11 +29,10 @@ export const Comment = () => {
         // },
           // { withCredentials: true }
         );
-
         setComments(response.data)
           // navigate("/resid")
       } catch (error) {
-        console.error("Error on the comment post id listings", error)
+        toastError("Error while fetching the documents.")
       }
     }
     if(id){
@@ -56,14 +56,18 @@ export const Comment = () => {
       // this is for the new comment wrap into the list with new comments
       setComments(prevComment=>[...prevComment, response.data])
       // it will reset the form when the form is submitted with blank value:
+      toastSuccess("New comment is added");
       reset()
     } catch (error) {
       // console.error("error message", error.message)
       if (error.response && error.response.status === 401) {
         alert("Please log in to post comments");
+        toastError("🦄 Please login first to post any new comments.")
         navigate("/login")
       } else {
         console.log("The error on teh catch error of onSubmit");
+        navigate("/login")
+        toastError("🦄 Error on while posting new comments, please try again first.")
         // res.json({message: "The error on teh catch error of onSubmit"})
       }
     }

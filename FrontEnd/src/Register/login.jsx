@@ -4,6 +4,7 @@ import MainNavbar from "../Layout/mainNavbar";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { toastError, toastSuccess } from "../Miscellaneous/react-toast";
 export default function Login() {
   let Navigate=useNavigate()
   const {
@@ -20,11 +21,17 @@ export default function Login() {
         },
         withCredentials: true,
       }); 
-      console.log("Login is succesfull", response.data);
+      // console.log("Login is succesfull", response.data);
       Navigate("/");
+      // have to use the settimeout for fix not showing toastsuccess.
+      setTimeout(() => {
+        toastSuccess("Congxratulations login is successful")
+      }, 10);
     } catch (error) {
+      toastError("🦄 Face errros while login")
       console.error("Error on login:", error);
      if(error.response){
+      toastError("🦄 Please try again")
       console.log("Server Error:", error.response.data);
      }
     }

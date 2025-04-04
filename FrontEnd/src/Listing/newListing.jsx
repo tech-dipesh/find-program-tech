@@ -5,6 +5,7 @@ import MainNavbar from "../Layout/mainNavbar"
 import Footer from "../Layout/footer.jsx"
 // import Footer from "../Layout/footer"
 import axios from "axios"
+import { toastError, toastSuccess } from "../Miscellaneous/react-toast.jsx"
 export default function Newlisting() {
   const {
     register,
@@ -15,7 +16,7 @@ export default function Newlisting() {
 
   const onSubmit = async (formData) => {
     try {
-      console.log("your form data is", formData);
+      // console.log("your form data is", formData);
       // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
       let formData = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
@@ -23,10 +24,11 @@ export default function Newlisting() {
         },
         withCredentials: true
       })
-
+      toastSuccess("Succesfully created a new listings.")
       // console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
       // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
+      toastError("Errror on while sending data to backend to create a new listings.")
       console.error("Error on the while submitting data from the frontend to sending data to backend:", error.response ? error.response.data : error.message)
     }
     // console.log(data) 
