@@ -1,16 +1,13 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import "./mainNavbar.css";
-import { Link, useNavigate } from "react-router-dom";
-import { getUserActivity, logOut } from '../service/api';
-//for similar to the connect-flash
-import { toastError } from '../Miscellaneous/react-toast';
+
 import { ToastContainer, toast } from 'react-toastify';
-import Showindividual from '../Listing/showIndividual';
-// Showindividual
+import Searchfeature from './searchfeature';
+import {  getUserActivity, logOut } from '../service/api';
 export default function MainNavbar() {
 const [userActivity, setUserActivity] = useState()
-const [search, setsearch] = useState()
   const navigate = useNavigate()
   //it's for the checking whether user is logged in or not on our website.
   useEffect(() => {
@@ -36,20 +33,7 @@ const [search, setsearch] = useState()
     }
   }
 
-  // let allName=show.name;
-  // let allNames=allName.toLowerCase();
 
-  // const filterItems=useMemo(() => {
-  //   return show.filter((show)=> 
-  //     show.Name.toLowerCase()==setsearch)},
-  //    [search]
-  //   )
-    const filteredItems = useMemo(() => {
-      // if (!search || !tools) return [];
-      return tools.filter((tool) => 
-        tool.Name && tool.Name.toLowerCase().includes(search.toLowerCase())
-      );
-    }, [search, tools]);
    
   return (
     <nav className="fixed bg-white  z-40 dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
@@ -59,42 +43,7 @@ const [search, setsearch] = useState()
           <img src={logo} className="h-8" alt="Developer Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Developer Listing</span>
         </Link>
-
-        <form className="ml-lg max-w-sm mx-auto w-full">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-              <i className="fa-solid fa-magnifying-glass text-gray-500 text-lg"></i>
-            </div>
-            <input type="search" id="search" className="block w-full p-4 pl-12 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="New Developer..." onChange={((i)=>setsearch(i.target.value) )}/>
-            <button type="submit" className="text-white absolute right-3 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Search</button>
-          </div>
-        </form>
-
-    {/* {search &&filterItems.length>0
-      {show.map((all)=>{
-        <div className="text-center text-2xl align-top top-10" key={all._id}>
-          <h3 className='text-blue-600'>{show.Name}</h3>
-        </div>
-      })
-      }:
-    } */}
-    
-        {search && filteredItems.length > 0 && (
-          <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white shadow-lg rounded-lg p-2 w-full max-w-sm">
-            {filteredItems.map((item) => (
-              <Link 
-                to={`/tools/${item._id}`} 
-                key={item._id}
-                className="block p-2 hover:bg-gray-100 rounded"
-                onClick={() => setsearch('')}
-              >
-                <h3 className='text-blue-600'>{item.Name}</h3>
-              </Link>
-            ))}
-          </div>
-        )}
-
-
+    <Searchfeature/>
         <ul className="flex space-x-6 mr-10 font-medium">
           <Link to="/tools" className='text-gray-900 dark:text-white hover:text-blue-700'>All Listings</Link>
           <Link to="/tools" className='text-gray-900 dark:text-white hover:text-blue-700'>Random Listings</Link>
