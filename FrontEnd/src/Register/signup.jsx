@@ -25,7 +25,9 @@ export default function Signup() {
         withCredentials: true
       })
       navigate("/");
-      toastSuccess("congratulations you just sign up.")
+      setTimeout(() => {
+        toastSuccess("congratulations you just sign up.")
+      }, 20);
     } catch (error) {
       console.error("Eror on the signup onSubmit function and the error is:", error)
       toastError("🦄 Please try again for the Signup")

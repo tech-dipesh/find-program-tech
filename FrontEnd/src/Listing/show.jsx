@@ -53,7 +53,7 @@ export default function Show() {
                 </div>
 
                 <p className="mt-4 text-gray-600 text-md">
-                  {tool.Description}
+                  {tool.useCase}
                 </p>
 
                 <div className="mt-4 flex items-center gap-4 text-sm text-gray-500">

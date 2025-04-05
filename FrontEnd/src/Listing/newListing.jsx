@@ -6,7 +6,9 @@ import Footer from "../Layout/footer.jsx"
 // import Footer from "../Layout/footer"
 import axios from "axios"
 import { toastError, toastSuccess } from "../Miscellaneous/react-toast.jsx"
+import { Navigate, useNavigate } from "react-router-dom"
 export default function Newlisting() {
+  const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -24,7 +26,11 @@ export default function Newlisting() {
         },
         withCredentials: true
       })
-      toastSuccess("Succesfully created a new listings.")
+      navigate("/tools")
+      setTimeout(() => {
+        
+        toastSuccess("Succesfully created a new listings.")
+      }, 20);
       // console.log(`Frontend data is: ${newTool.data}`);
     } catch (error) {
       // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
@@ -95,7 +101,6 @@ export default function Newlisting() {
           {/* <FormError error={errors.companyName} /> */}
           {/* {firstError && <FormError error={errors.companyName} />} */}
 
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -105,12 +110,25 @@ export default function Newlisting() {
                 type="number"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 {...register("releaseYear",
-                  { required: { value: true, message: "Make sure to Write the release year." }, min: { value: 1920, message: "Write legiit Relase Year, After 1920" }, max: { value: new Date().getFullYear() + 1, message: "Over 2025 can't be existed." } }
+                  { required: { value: true, message: "Make sure to Write the release year." }, min: { value: 1920, message: "Write legit Relase Year, After 1920" }, max: { value: new Date().getFullYear() + 1, message: "Over 2025 can't be existed." } }
                 )}
               />
             </div>
-            {/* {firstError && <FormError error={errors.releaseYear} />} */}
-            {/* 
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Company Url *
+              </label>
+              <input
+                type="text"
+                className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="htpps://page.com"
+                {...register("webLink",
+                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 20, message: "Product url can't be more than 20 Character Length", }, pattern: {value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url."} }
+                )}
+              />
+            </div>
+          </div>
+          {/* {firstError && <FormError error={errors.releaseYear} />} */}
+          {/* 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Tool Logo *
@@ -120,7 +138,6 @@ export default function Newlisting() {
                 <span className="text-gray-500">Drag & drop or click to upload</span>
               </div>
             </div> */}
-          </div>
           {/* <FormError error={errors.oneLine} /> */}
 
 
@@ -134,7 +151,7 @@ export default function Newlisting() {
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 'Automated API testing platform for developers'"
               {...register("useCase",
-                { required: { value: true, message: "Please write the Use Case" }, maxLength: {value: 5, message: "Minimum should be more than 5 characters."}, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
+                { required: { value: true, message: "Please write the Use Case" }, minLength: { value: 5, message: "Minimum should be more than 5 characters." }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
               )}
             />
           </div>

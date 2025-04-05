@@ -76,14 +76,18 @@ export default function Showindividual() {
                         </span>
                       </div>
                     </div>
+                    {console.log("WebLink inside render:", show.webLink)}
+                    {console.log("WebLink inside render:", show)}
+                    
                     <a
-                      href="https://www.youtube.com"
-                      className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit Website
-                    </a>
+  href={show.webLink}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
+>
+  Visit Website
+</a>
+
                   </div>
 
                   <div className="mt-4 flex items-center gap-6 text-gray-600">

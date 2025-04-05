@@ -6,7 +6,6 @@ const expressError = require("../middleware/expressError.js");
 const data = require("../data/data.js");
 const newSchema = require("../middleware/schema.js");
 const modelListing = require("./model.js");
-const newTool = require("./model.js");
 let Approval = require("../Comment/likemodel.js");
 const { validationResult } = require("express-validator");
 const signupListing = require("../Register/model.js");
@@ -124,13 +123,14 @@ module.exports.showIdPost = async (req, res) => {
     // let userName=await signupListing.find({userName})
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
     // let user=await signupListing.findOne({userName: req.body.userName});
-    let { Name, companyName, releaseYear, useCase, Description, techStack} = req.body;
+    let { Name, companyName, releaseYear, useCase, webLink, Description, techStack} = req.body;
 
     const newTool = await modelListing.create({
       Name, 
       companyName,  
       releaseYear,
       useCase,
+      webLink,
       // Logo,
       techStack,
       Description,

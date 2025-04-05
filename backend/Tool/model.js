@@ -25,6 +25,12 @@ const Toolvalidate=new Schema({
     minLength:[5, "Minimum should be more than 5 characters."],
     maxLength:[50, "Maximum should be less than 5 characters."],
   },
+  webLink: {
+    type: String,
+    required: true,
+    //match is for the pattern which should match.
+    match: [/^https:\/\/.+\..+/, 'Website must start with https:// and contain a dot']
+  },
   techStack: {
     type: String,
     required: true
