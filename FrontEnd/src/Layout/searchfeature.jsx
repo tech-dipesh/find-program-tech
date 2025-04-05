@@ -66,7 +66,7 @@ useEffect(() => {
       }:
     } */}
     
-        {search && filteredItems.length > 0 && (
+        {/* {search && filteredItems.length > 0 && (
           <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white shadow-lg rounded-lg p-2 w-full max-w-sm">
             {filteredItems.map((item) => (
               <Link 
@@ -76,11 +76,64 @@ useEffect(() => {
                 onClick={() => setSearch('')}
               >
                 <h3 className='text-blue-600'>{item.Name}</h3>
+                <h4 className='text-blue-600'>{item.releaseYear}</h4>
+                <h4 className='text-blue-600'>{item.useCase}</h>
+
               </Link>
             ))}
           </div>
-        )}
-
+        )} */}
+{search && filteredItems.length > 0 && (
+  <div className="fixed inset-0 bg-black/30 z-40 flex items-center justify-center">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white shadow-xl rounded-xl w-full max-w-md overflow-hidden">
+      <div className="p-3 bg-gray-50 border-b flex justify-between items-center">
+        <h3 className="font-medium text-gray-700">Search Results</h3>
+        <button 
+          onClick={() => setSearch('')}
+          className="text-gray-500 hover:text-gray-700 h-6 w-6 flex items-center justify-center"
+        >
+          <span className="block relative w-4 h-4">
+            <span className="block absolute w-4 h-0.5 bg-current top-1/2 -translate-y-1/2 rotate-45"></span>
+            <span className="block absolute w-4 h-0.5 bg-current top-1/2 -translate-y-1/2 -rotate-45"></span>
+          </span>
+        </button>
+      </div>
+      
+      <div className="max-h-96 overflow-y-auto py-2">
+        {filteredItems.map((item) => (
+          <Link
+            to={`/tools/${item._id}`}
+            key={item._id}
+            className="flex items-start px-4 py-3 transition hover:bg-blue-50 border-b border-gray-100 last:border-b-0"
+            onClick={() => setSearch('')}
+          >
+            <div className="flex-shrink-0 mr-3 mt-1">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
+                {item.Name.charAt(0).toUpperCase()}
+              </div>
+            </div>
+            
+            <div className="flex-grow">
+              <h3 className="font-medium text-blue-600">{item.Name}</h3>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+                  {item.releaseYear}
+                </span>
+                <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                  {item.useCase}
+                </span>
+              </div>
+            </div>
+            
+            <div className="flex-shrink-0 self-center text-gray-400 hover:text-blue-600">
+              <span className="block font-bold text-lg">&rsaquo;</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
     </>
   )

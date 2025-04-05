@@ -67,7 +67,9 @@ export const Comment = () => {
       } else {
         console.log("The error on teh catch error of onSubmit");
         navigate("/login")
-        toastError("🦄 Error on while posting new comments, please try again first.")
+        setTimeout(() => {
+          toastError("🦄 Please login first to post any new comments.")
+        }, 50);
         // res.json({message: "The error on teh catch error of onSubmit"})
       }
     }
