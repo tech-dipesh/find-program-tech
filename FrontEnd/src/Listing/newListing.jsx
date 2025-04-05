@@ -18,7 +18,7 @@ export default function Newlisting() {
     try {
       // console.log("your form data is", formData);
       // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
-      let formData = await axios.post("http://localhost:5000/tools", formData, {
+      let response = await axios.post("http://localhost:5000/tools", formData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -134,7 +134,7 @@ export default function Newlisting() {
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 'Automated API testing platform for developers'"
               {...register("useCase",
-                { required: { value: true, message: "Please write the Use Case" }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
+                { required: { value: true, message: "Please write the Use Case" }, maxLength: {value: 5, message: "Minimum should be more than 5 characters."}, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
               )}
             />
           </div>

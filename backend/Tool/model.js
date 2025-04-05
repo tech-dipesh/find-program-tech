@@ -22,7 +22,7 @@ const Toolvalidate=new Schema({
   },
   useCase:{
     type: String,
-    minLength:[15, "Minimum should be more than 5 characters."],
+    minLength:[5, "Minimum should be more than 5 characters."],
     maxLength:[50, "Maximum should be less than 5 characters."],
   },
   techStack: {
