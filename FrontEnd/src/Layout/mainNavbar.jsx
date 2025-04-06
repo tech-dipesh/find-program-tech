@@ -6,6 +6,7 @@ import "./mainNavbar.css";
 import { ToastContainer, toast } from 'react-toastify';
 import Searchfeature from './searchfeature';
 import {  getUserActivity, logOut } from '../service/api';
+import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
 export default function MainNavbar() {
 const [userActivity, setUserActivity] = useState()
   const navigate = useNavigate()
@@ -16,16 +17,16 @@ const [userActivity, setUserActivity] = useState()
       .catch(() => setUserActivity(null));
   }, []);
 
+  //Logged out the user
   const logOutClick = async (e) => {
     e.preventDefault()
     try {
       await logOut()
-      // {toastSuccess}
-      toastError("Succesfully logged out.")
-      // toast.success('Successfully logged out!');
       setUserActivity(null);
-      // useNavigate("/")
       navigate("/")
+      setTimeout(() => {
+        toastError("Succesfully logged out.")
+      }, 50);
     } catch (error) {
       // toast.error("Failed to logged out")
       toastError("🦄 Failed to logged out, please try again.")
@@ -33,8 +34,6 @@ const [userActivity, setUserActivity] = useState()
     }
   }
 
-
-   
   return (
     <nav className="fixed bg-white  z-40 dark:bg-gray-900 w-full border-b border-gray-200 dark:border-gray-600 navbar">
       <ToastContainer autoClose={5000} />

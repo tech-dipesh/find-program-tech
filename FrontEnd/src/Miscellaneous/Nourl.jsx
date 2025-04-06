@@ -1,15 +1,19 @@
 import { AlertCircle } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainNavbar from '../Layout/mainNavbar'
 import Footer from '../Layout/footer'
 import { Link } from 'react-router-dom'
 import { toastError } from './react-toast'
 export const NoUrl = () => {
+  //it will render every time when state ic changed
+  useEffect(() => {
+     toastError("Pleas e make sure requested url is exist.")
+}, [])
+
   return (
     <>
-    {toastError="Please make sure requested url is exist."}
   <MainNavbar />
-   <div className="flex flex-col min-h-screen justify-center items-center bg-gray-900">
+   <div className="flex flex-col min-h-screen justify-center items-center bg-gray-900 z-5000">
   <div className="bg-gray-800 p-6 rounded-md shadow-lg mb-20 max-w-lg text-center m-30">
     <div className="flex flex-col items-center space-y-4">
       <AlertCircle className="h-12 w-12 text-red-500" />

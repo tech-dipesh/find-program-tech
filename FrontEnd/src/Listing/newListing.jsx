@@ -7,8 +7,60 @@ import Footer from "../Layout/footer.jsx"
 import axios from "axios"
 import { toastError, toastSuccess } from "../Miscellaneous/react-toast.jsx"
 import { Navigate, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { getUserActivity } from "../service/api.jsx"
 export default function Newlisting() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true)
+  // Check user is logged in or not
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        setLoading(true);
+        const response = await getUserActivity();
+        if (!response.data.currUser) {
+          navigate('/login');
+          setTimeout(() => {
+            toastError("Please login to create a new listing.");
+          }, 50);
+        }
+        setLoading(false)
+      } catch (error) {
+        console.error("Auth check error", error)
+        navigate('/login');
+        // toastError("Please login to create a new listing.");
+        setLoading(false)
+      }
+    };
+    checkAuth();
+  }, [navigate]);
+
+  const onSubmit = async (formData) => {
+    try {
+      const response = await axios.post("http://localhost:5000/tools", formData, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json' }
+      });
+      // ... success handling
+    } catch (error) {
+      if (error.response?.status === 401) {
+        // navigate('/login');
+        toastError("Please login to create a new listing.");
+        setTimeout(() => {
+          navigate("/login")
+        }, 20);
+      } else {
+        toastError("Errror on while sending data to backend to create a new listings.")
+        console.error("Error on the while submitting data from the frontend to sending data to backend:", error.response ? error.response.data : error.message)
+    
+      }
+    }
+  };
+
+
+
+
+
   const {
     register,
     handleSubmit,
@@ -16,31 +68,7 @@ export default function Newlisting() {
     formState: { errors, isSubmitting },
   } = useForm()
 
-  const onSubmit = async (formData) => {
-    try {
-      // console.log("your form data is", formData);
-      // let newTool=await axios.post("http://localhost:5000/tools/new", formData, {
-      let response = await axios.post("http://localhost:5000/tools", formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true
-      })
-      navigate("/tools")
-      setTimeout(() => {
-        
-        toastSuccess("Succesfully created a new listings.")
-      }, 20);
-      // console.log(`Frontend data is: ${newTool.data}`);
-    } catch (error) {
-      // throw new Error(`Error on the fetching data from the frontend to backend the error is: ${error}`);
-      toastError("Errror on while sending data to backend to create a new listings.")
-      console.error("Error on the while submitting data from the frontend to sending data to backend:", error.response ? error.response.data : error.message)
-    }
-    // console.log(data) 
-    // console.log(data.Name)
-  }
-
+ 
 
   //it will only get the only one error at the time.
   const firstError = Object.values(errors)[0];

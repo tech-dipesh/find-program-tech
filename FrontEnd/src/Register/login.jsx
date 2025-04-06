@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toastError, toastSuccess } from "../Miscellaneous/react-toast";
+
 export default function Login() {
   let Navigate=useNavigate()
   const {
@@ -23,10 +24,9 @@ export default function Login() {
       }); 
       // console.log("Login is succesfull", response.data);
       Navigate("/");
-      // have to use the settimeout for fix not showing toastsuccess.
       setTimeout(() => {
-        toastSuccess("Congxratulations login is successful")
-      }, 10);
+        toastSuccess("Congratulations login is successful")
+      }, 50);
     } catch (error) {
       toastError("🦄 Face errros while login")
       console.error("Error on login:", error);
@@ -38,9 +38,6 @@ export default function Login() {
   };
 
  
-      
-     
-// if
   return (
     <>
     {/* {setError} */}

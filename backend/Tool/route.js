@@ -30,7 +30,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 router.route("/")
   .get(wrapAsync(controllerTool.showIdGet))
-  .post( wrapAsync(controllerTool.showIdPost));
+  .post(isLoggedIn, wrapAsync(controllerTool.showIdPost));
 
   // router.post("/:id/Like", wrapAsync(Like))
   // router.post("/:id/disLike",  wrapAsync(disLike));;
