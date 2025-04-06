@@ -24,7 +24,7 @@ let {Like, disLike}=require("../Comment/route.js");
 //   .get(isLoggedIn, wrapAsync(controllerTool.idEditGet))
 //   .put(isLoggedIn, wrapAsync(controllerTool.idEditPut));
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("new.ejs");
 });
 

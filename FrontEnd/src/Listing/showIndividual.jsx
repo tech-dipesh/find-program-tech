@@ -19,8 +19,8 @@ export default function Showindividual() {
           const tool = response.data.tools.find(t => t._id === id);
           setshow(tool);
           //just passing the to
-        const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
-        setComments(commentsResponse.data);
+          const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
+          setComments(commentsResponse.data);
         } else {
           setshow(response.data.tools);
         }
@@ -36,7 +36,7 @@ export default function Showindividual() {
   // useEffect(() => {
   //   let Comment=async ()
   // }, [])
- 
+
   return (
     <>
       <MainNavbar />
@@ -76,17 +76,15 @@ export default function Showindividual() {
                         </span>
                       </div>
                     </div>
-                    {console.log("WebLink inside render:", show.webLink)}
-                    {console.log("WebLink inside render:", show)}
-                    
+
                     <a
-  href={show.webLink}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
->
-  Visit Website
-</a>
+                      href={show.webLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
+                    >
+                      Visit Website
+                    </a>
 
                   </div>
 
@@ -110,7 +108,7 @@ export default function Showindividual() {
                 <h2 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">In-Depth Overview</h2>
                 <div className="text-gray-600 leading-relaxed space-y-4">
                   <p className="text-lg font-medium text-gray-700">
-                   {show.Description}
+                    {show.Description}
                   </p>
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-gray-800 mb-2">Core Features:</h3>
@@ -128,7 +126,7 @@ export default function Showindividual() {
                 </div>
               </div>
             </div>
-           <Comment/>
+            <Comment />
           </div>
         </div>
       </main>
