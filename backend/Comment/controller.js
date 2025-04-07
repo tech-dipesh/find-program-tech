@@ -3,7 +3,7 @@ const router = express.Router();
 const Approval = require("./likemodel.js");
 const modelListing = require("../Tool/model.js");
 const signupListing = require("../Register/model.js");
-const { CommentListing, formData}  = require("./model.js");
+const { CommentListing, contactForm}  = require("./model.js");
 const Post=require("../Tool/model.js")
 const { default: mongoose } = require("mongoose");
 
@@ -94,12 +94,23 @@ module.exports.getComment=async(req, res)=>{
 }
 
 
-module.exports.contactform=async (req, res)=>{
+module.exports.contactModule=async (req, res)=>{
   try {
-    let {fName, }=req.body;
-    let 
+    let {fName, Email, Message}=req.body;
+    console.log(req.body);
+    // let contactData=await formData.create({
+    //   fName, Email, Message
+    // })
+    let contactData=new contactForm({
+      fName, 
+      Email,
+      Message
+    })
+    await contactData.save();
+    console.log("contact data is send", contactData);
+    res.status(201).json(contactData);
   } catch (error) {
     console.error("Error on while submitting a new contact form");
-    res.statu(500).json({message: "Error while submitting a contact form, please try again later."})
+    res.status(500).json({message: "Error while submitting a contact form, please try again later."})
   }
 }

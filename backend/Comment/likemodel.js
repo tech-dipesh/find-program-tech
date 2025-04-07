@@ -26,9 +26,9 @@ const likeDislikeSchema=new Schema({
   //only unique constraint i can add on the database.
   timestamps: true 
 })  
-module.exports.approvalListing = mongoose.model("approvalListing", approvalListing);
+module.exports.approvalListing = mongoose.model("approvalListing", likeDislikeSchema);
 
-const contactForm=new Schema({
+const formData=new Schema({
   fName: {
     type: String,
     minLength: [5, "Please write the full Name"]
@@ -45,4 +45,4 @@ const contactForm=new Schema({
   }
 })
 
-module.exports.formData=mongoose.model("formData", contactForm)
+module.exports.contactForm=mongoose.model("contactForm", formData)

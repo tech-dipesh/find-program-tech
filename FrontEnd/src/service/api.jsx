@@ -15,9 +15,8 @@ export const updateItem = (id, updatedItem) => API.put(`/tools/${id}`, updatedIt
 export const deleteItem = (id) => API.delete(`/tools/${id}`);
 // export const CommentItem = (id, commentData) => API.post(`/tools/${id}/comment`, CommentItem);
 export const postComment = (id, commentData) => API.post(`/tools/${id}/comment`, commentData); 
-
 //Miscelleuuns
-export const ContactForm=()=>API.post("/contact");
+export const ContactForm=(contactData)=>API.post("/contact", contactData);
 
 // Login Credential
 export const likeItem = (id, likeData) => API.post(`/tools/${id}/like`, likeData);

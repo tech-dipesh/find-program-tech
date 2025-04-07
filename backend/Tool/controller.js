@@ -115,7 +115,8 @@ module.exports.showIdGet = async (req, res) => {
 module.exports.showIdPost = async (req, res) => {
   console.log(`Requested data is: ${req.body}`);
   try {
-    console.log(req.user);
+    // console.log(req.user);
+    
     // if(!req.user._id){
     //   req.flash("error",e "Please First login before creating a new listing")
     //   return res.redirect("/tools/new")

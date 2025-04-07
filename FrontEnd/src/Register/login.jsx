@@ -14,7 +14,7 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       let response = await axios.post("http://localhost:5000/login", data, {
         headers: {
