@@ -32,7 +32,8 @@ export const Comment = () => {
         setComments(response.data)
           // navigate("/resid")
       } catch (error) {
-        toastError("Error while fetching the documents.")
+        toastError(error)
+        console.error(error.message)
       }
     }
     if(id){

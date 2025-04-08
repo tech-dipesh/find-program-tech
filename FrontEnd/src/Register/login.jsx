@@ -28,7 +28,8 @@ export default function Login() {
         toastSuccess("Congratulations login is successful")
       }, 50);
     } catch (error) {
-      toastError("🦄 Face errros while login")
+      // toastError("🦄 Face errros while login")
+      toastError(error)
       console.error("Error on login:", error);
      if(error.response){
       toastError("🦄 Please try again")

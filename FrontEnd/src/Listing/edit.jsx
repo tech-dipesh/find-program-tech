@@ -38,22 +38,17 @@ export const Edit = () => {
   //     toastError("Error while updating the code", error);
   //   }
   // }
-  const onSubmit = async(formData) => {
+  const onSubmit = async (formData) => {
     try {
-      // Use your API service instead of direct axios
       const response = await updateItem(id, formData);
+      console.log("Update successful:", response.data);
       navigate(`/tools/${id}`);
-      setTimeout(() => {
-        toastSuccess("Successfully updated the list")
-      }, 50);
+      toastSuccess("Listing updated successfully!");
+    } catch (error) {
+      console.error("Update error:", error.response?.data || error.message);
+      toastError("Failed to update listing. Please try again.");
     }
-    catch (error) {
-      console.error(error);
-      navigate(`/tools/${id}`);
-      toastError("Error while updating the code", error);
-    }
-  }
-
+  };
 
   // //useEffect will rerende when id is changed, 
   useEffect(() => {
