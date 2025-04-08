@@ -7,7 +7,7 @@ import { toastError } from './react-toast'
 export const NoUrl = () => {
   //it will render every time when state ic changed
   useEffect(() => {
-     toastError("Pleas e make sure requested url is exist.")
+     toastError("Please make sure requested url is exist.")
 }, [])
 
   return (

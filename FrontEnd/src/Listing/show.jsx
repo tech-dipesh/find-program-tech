@@ -6,6 +6,7 @@ import Footer from "../Layout/footer";
 import { getAllItems } from '../service/api';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Loading from "../Miscellaneous/Loading";
 export default function Show() {
   const [tools, setTools] = useState([]);
   const [comments, setComments]=useState([])
@@ -24,6 +25,8 @@ export default function Show() {
     }
     setId()
   }, [])
+
+  if(!tools) return <Loading/>
   return (
     <>
       <MainNavbar />

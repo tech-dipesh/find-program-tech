@@ -9,6 +9,7 @@ import { toastError, toastSuccess } from "../Miscellaneous/react-toast.jsx"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getUserActivity } from "../service/api.jsx"
+import Loading from "../Miscellaneous/Loading.jsx"
 export default function Newlisting() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true)
@@ -73,6 +74,7 @@ export default function Newlisting() {
   //it will only get the only one error at the time.
   const firstError = Object.values(errors)[0];
 
+  if(!loading) return <Loading/>
   return (
     <>
       <MainNavbar />

@@ -7,6 +7,7 @@ import getItemById from "../service/api";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Comment } from "./comment.jsx";
+import Loading from "../Miscellaneous/Loading.jsx";
 export default function Showindividual() {
   const { id } = useParams();
   const [show, setshow] = useState(null);
@@ -33,7 +34,8 @@ export default function Showindividual() {
     fetchTool();
   }, [id]);
 
-  if (!show) return <div className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Loading...</div>;
+  // if (!show) return <div className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Loading...</div>;
+  if(!show) return <Loading/>
 
   // useEffect(() => {
   //   let Comment=async ()
