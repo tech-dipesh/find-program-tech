@@ -11,6 +11,7 @@ import Newlisting from './Listing/newListing.jsx'
 import ContactForm from './Miscellaneous/contactForm.jsx'
 import Axios from "axios"
 import { NoUrl } from './Miscellaneous/Nourl.jsx';
+import { Edit } from './Listing/edit.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<Show />} />
           <Route path="new" element={<Newlisting />} />
           <Route path=":id" element={<Showindividual />} />
+          <Route path=":id/edit" element={<Edit/>} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />

@@ -11,7 +11,7 @@ const API = axios.create({
 export const getAllItems = () => API.get('/tools');
 export const getItemById = (id) => API.get(`/tools/${id}`);
 export const createItem = (newItem) => API.post('/tools', newItem);
-export const updateItem = (id, updatedItem) => API.put(`/tools/${id}`, updatedItem);
+export const updateItem = (id, updatedItem) => API.put(`/tools/${id}/edit`, updatedItem);
 export const deleteItem = (id) => API.delete(`/tools/${id}`);
 // export const CommentItem = (id, commentData) => API.post(`/tools/${id}/comment`, CommentItem);
 export const postComment = (id, commentData) => API.post(`/tools/${id}/comment`, commentData); 

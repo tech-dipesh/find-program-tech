@@ -15,23 +15,27 @@ module.exports.idEditGet = async (req, res) => {
     let tools = await modelListing.findById(id);
     res.render("edit.ejs", { tools });
   } catch (error) {
-    res.send(`error on the edit id get route and the error is: ${error}`);
+    // res.send(`error on the edit id get route and the error is: ${error}`);
+    res.status(500).json({message: `Error on the id edit get ${error.message}`})
   }
 };
 
 module.exports.idEditPut = async (req, res) => {
   try {
     let id = req.params.id;
-    let { Name, Logo, releaseYear, useCase, techStack, Description, userName } =
+    let { Name, companyName, releaseYear, useCase, webLink, Description, techStack } =
       req.body;
     let update = await modelListing.findByIdAndUpdate(
       id,
-      { Name, Logo, releaseYear, useCase, techStack, Description, userName },
+      { Name, companyName, releaseYear, useCase, webLink, Description, techStack },
       { new: true }
     );
-    res.redirect(`/tools/${id}`);
+    // res.redirect(`/tools/${id}`);
+    res.status(200).json(update)
   } catch (error) {
-    res.send(`error on the edit post route and the error is, ${error}`);
+    // res.send(`error on the edit post route and the error is, ${error}`);
+    console.error("Error whle id edit put");
+    res.status(500).json({message: `error while updating the listings ${error.message}`})
   }
 };
 
@@ -39,10 +43,11 @@ module.exports.deleteListing = async (req, res) => {
   try {
     let postId = req.params.id;
     await modelListing.findByIdAndDelete(postId);
-    res.redirect(`/tools`);
+    // res.redirect(`/tools`);
+    res.status(200).json();
     console.log(`${postId} is deleted`);
   } catch (error) {
-    res.status(402).send(`Error on the deleteRoute ${error}`);
+    res.status(500).json(`Error on the deleteRoute ${error}`);
   }
 };
 

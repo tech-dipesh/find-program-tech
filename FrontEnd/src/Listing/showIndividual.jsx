@@ -11,11 +11,13 @@ export default function Showindividual() {
   const { id } = useParams();
   const [show, setshow] = useState(null);
   const [comments, setComments] = useState([]);
+  const [deleted, setdeleted] = useState()
   useEffect(() => {
-    const fetchTool = async (data) => {
+    const fetchTool = async (data) => { 
       try {
         const response = await getItemById(id);
-        if (Array.isArray(response.data.tools)) {
+        // if (Array.isArray(response.data.tools)) {
+        if (response.data.tools) {
           const tool = response.data.tools.find(t => t._id === id);
           setshow(tool);
           //just passing the to
@@ -63,6 +65,11 @@ export default function Showindividual() {
                       <h1 className="text-3xl font-bold text-gray-900 mb-2">{show.Name}</h1>
                       <div className="flex gap-2 mb-3">
                         <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                          Founder: {show.companyName}
+                        </span>
+                      </div>
+                      <div className="flex gap-2 mb-3">
+                        <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                           API Tools
                         </span>
                         <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
@@ -77,11 +84,23 @@ export default function Showindividual() {
                       </div>
                     </div>
 
+                    {/* <a
+                      // href={show.webLink}
+                      href={show._id}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
+                    >
+                      Edit
+                    </a> */}
+                    <Link to={`/tools/${show._id}/edit`} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer">
+                      Edit
+                    </Link>
                     <a
                       href={show.webLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
+                      className="mt-45 ml-155 absolute px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer"
                     >
                       Visit Website
                     </a>
@@ -111,16 +130,16 @@ export default function Showindividual() {
                     {show.Description}
                   </p>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-800 mb-2">Core Features:</h3>
+                    <h3 className="font-semibold text-gray-800 mb-2">Stack:</h3>
                     <ul className="list-none space-y-3">
                       <li className="flex items-start">
                         <span className="text-green-500 mr-2 mt-1">✓</span>
-                        Event-driven architecture for scalable network applications
+                        {show.techStack}
                       </li>
-                      <li className="flex items-start">
+                      {/* <li className="flex items-start">
                         <span className="text-green-500 mr-2 mt-1">✓</span>
                         Non-blocking I/O model for high performance
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>

@@ -51,7 +51,6 @@ export const Comment = () => {
       const response = await postComment
       (id, { Comment: data.Comment });
       console.log(response.data);
-
       // setCommentItem(newComment.data)
       // this is for the new comment wrap into the list with new comments
       setComments(prevComment=>[...prevComment, response.data])
