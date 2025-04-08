@@ -19,7 +19,7 @@ useEffect(() => {
     .catch(err => {
       console.error("Error fetching tools:", err);
       // Optional: Show error toast
-      toastError("Failed to load listings");
+      // toastError("Failed to load listings");
     });
 }, []);
 
