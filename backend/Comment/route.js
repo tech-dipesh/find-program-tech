@@ -18,3 +18,5 @@ router.route("/:id/comment")
 
 //contacr form
 router.post("/contact", wrapAsync(contactModule));
+
+module.exports=router;

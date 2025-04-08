@@ -24,7 +24,9 @@ export default function ContactForm() {
       const response = await submitContactForm(data);
       console.log(response);
       navigate("/");
-      toastSuccess("Successfully submitted your message");
+      setTimeout(() => {
+        toastSuccess("Successfully submitted your message");
+      }, 40);
     } catch (error) {
       console.error("Error while submitting a contact form", error);
       toastError("Please try again");

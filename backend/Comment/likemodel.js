@@ -26,7 +26,7 @@ const likeDislikeSchema=new Schema({
   //only unique constraint i can add on the database.
   timestamps: true 
 })  
-module.exports.approvalListing = mongoose.model("approvalListing", likeDislikeSchema);
+const approvalListing = mongoose.model("approvalListing", likeDislikeSchema);
 
 const formData=new Schema({
   fName: {
@@ -36,6 +36,7 @@ const formData=new Schema({
   Email: {
     type: String,
       match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Please put the correct Email Address.'],
+      default: "notgiven@gmail.com",
       required: false,
       unique: [true, "Please Make sure that your Email is not exist."]
   },
@@ -45,4 +46,6 @@ const formData=new Schema({
   }
 })
 
-module.exports.contactForm=mongoose.model("contactForm", formData)
+// module.exports.contactForm=mongoose.model("contactForm", formData)
+const contactForm = mongoose.model("contactForm", formData);
+module.exports = { approvalListing, contactForm };

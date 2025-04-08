@@ -9,6 +9,8 @@ const expressError = require("./middleware/expressError.js");
 let registerRoute = require("./Register/route.js");
 let listingRoute = require("./Tool/route.js");
 let User=require("./Register/model.js");
+// let commentRoute=require("./Comment/route.js")
+const commentRoute = require("./Comment/route");
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
@@ -112,6 +114,7 @@ app.use(( req, res, next) => {
 app.use("/tools", listingRoute)
 // app.use("/new", listingRoute)
 app.use("/", registerRoute);
+app.use("/", commentRoute);
 // app.use(expressError);
 
 // app.use("*", (req, res) => {
