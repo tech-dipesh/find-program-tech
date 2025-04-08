@@ -14,7 +14,7 @@ export default function Home() {
     }, 100);
   }, [])
   
-  if(!loading){
+  if(loading){
     return <Loading/>
   }
 
