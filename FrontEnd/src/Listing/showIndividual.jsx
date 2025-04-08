@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Comment } from "./comment.jsx";
 import Loading from "../Miscellaneous/Loading.jsx";
+import Delete from "./delete.jsx";
 export default function Showindividual() {
   const { id } = useParams();
   const [show, setshow] = useState(null);
@@ -71,11 +72,11 @@ export default function Showindividual() {
                         </span>
                       </div>
                       <div className="flex gap-2 mb-3">
-                        <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                        {/* <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                           API Tools
-                        </span>
+                        </span> */}
                         <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
-                          Backend
+                          {show.techStack}
                         </span>
 
                       </div>
@@ -112,7 +113,7 @@ export default function Showindividual() {
                   <div className="mt-4 flex items-center gap-6 text-gray-600">
                     <span>🚀 Launched: {show.releaseYear}</span>
                     <span>💬 {comments.length} Comments</span>
-                    <span> 10 <i className="fa-solid fa-heart ml-2"></i></span>
+                    <span> 1<i className="fa-solid fa-heart ml-2"></i></span>
                   </div>
 
                   <p className="mt-6 text-gray-700 leading-relaxed">
@@ -121,6 +122,7 @@ export default function Showindividual() {
                   </p>
                 </div>
               </div>
+            <Delete/>
             </div>
             {/* <Upvote /> */}
             {/* <Description /> */}

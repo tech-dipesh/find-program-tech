@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toastError, toastSuccess } from '../Miscellaneous/react-toast'
 import axios from 'axios'
 import Loading from '../Miscellaneous/Loading'
+import Delete from './delete'
 //get the url id
 export const Edit = () => {
   const [edit, setedit] = useState(null)
@@ -21,34 +22,41 @@ export const Edit = () => {
   } = useForm()
 
 
-  // const onSubmit = async(formData) => {
-  //   // console.log(formData);
-  //   try {
+  const onSubmit = async(formData) => {
+    try {
       
-  //     // console.log(data);
-  //     const response=await axios.put(`/tools/${id}`, formData,)
+      // console.log(data);
+      const response=await updateItem(id, formData)
+      navigate(`/tools/${id}`);
+      setTimeout(() => {
+        toastSuccess("Successfully updated the list")
+      }, 50);
+    }
+    catch (error) {
+      console.error(error);
+      navigate(`/tools/${id}`);
+      setTimeout(() => {
+        toastError("Error while updating the code", error);
+      }, 50);
+      console.log("Error occured when updating the list");
+    }
+  }
+  // const onSubmit = async (formData) => {
+  //   try {
+  //     const response = await updateItem(id, formData);
+      
   //     navigate(`/tools/${id}`);
   //     setTimeout(() => {
-  //       toastSuccess("Successfully updated the list")
+        
+  //       toastSuccess("Listing updated successfully!");
   //     }, 50);
+  //   } catch (error) {
+  //     console.error("Update error:", error);
+  //     console.error("Error details:", error.response?.data || error.message);
+  //     toastError("Failed to update listing. Please try again.");
   //   }
-  //   catch (error) {
-  //     console.error(error);
-  //     navigate(`/tools/${id}`);
-  //     toastError("Error while updating the code", error);
-  //   }
-  // }
-  const onSubmit = async (formData) => {
-    try {
-      const response = await updateItem(id, formData);
-      console.log("Update successful:", response.data);
-      navigate(`/tools/${id}`);
-      toastSuccess("Listing updated successfully!");
-    } catch (error) {
-      console.error("Update error:", error.response?.data || error.message);
-      toastError("Failed to update listing. Please try again.");
-    }
-  };
+  // };
+
 
   // //useEffect will rerende when id is changed, 
   useEffect(() => {
@@ -86,9 +94,11 @@ export const Edit = () => {
   return (
     <React.Fragment>
       <MainNavbar />
-      <div className="h-screen place-items-center grid content-center">
-        <form className="w-2/3 space-y-6 mt-30" onSubmit={handleSubmit(onSubmit)}>
+        <div className="absolute ml-90 mt-25">
         {firstError && <FormError error={firstError} />}
+        </div>
+      <div className="h-screen place-items-center grid content-center">
+        <form className="w-2/3 space-y-6 mt-50" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -230,6 +240,7 @@ export const Edit = () => {
         </form>
       </div>
       <Footer />
+      <Delete/>
     </React.Fragment>
   )
 }
