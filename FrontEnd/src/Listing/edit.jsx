@@ -177,6 +177,24 @@ export const Edit = () => {
               />
             </div>
           </div>
+
+          {/* Logo Url Edit */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Logo in url form *
+              <span className="ml-2 text-xs text-gray-500">(Upload image (Coming Soon))</span>
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              placeholder="Sorry for the incovinence we only accept the Logo in url form for making website a quicker."
+              {...register("Logo",
+                { required:false, minLength: { value: 5, message: "Please edit a legiit url." }, maxLength: { value: 150, message: "Url can't be more than 150 characater length." } }
+              )}
+            />
+          </div>
+
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               One-Liner Use Case *

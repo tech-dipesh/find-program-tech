@@ -38,7 +38,7 @@ export default function Show() {
               <div className="relative flex flex-col p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div className="flex items-start gap-4">
                   <img
-                    src={Node}
+                    src={tool.Logo || "https://i.postimg.cc/K8wWMRWj/image.png"}
                     alt="Tool Logo"
                     className="w-12 h-12 rounded-lg object-contain"
                   />
@@ -46,10 +46,7 @@ export default function Show() {
                     <h2 className="text-xl font-bold text-gray-800">{tool.Name}</h2>
                     <div className="mt-2 flex gap-2">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-medium">
-                        API Tools
-                      </span>
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
-                        Debugging
+                        {tool.techStack}
                       </span>
                     </div>
                   </div>

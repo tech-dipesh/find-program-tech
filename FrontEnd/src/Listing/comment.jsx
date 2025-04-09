@@ -106,7 +106,7 @@ export const Comment = () => {
             <div className="border-b pb-6">
               <div className="flex items-start gap-4">
                 <img
-                  src={Nodejs}
+                  src="https://i.postimg.cc/K8wWMRWj/image.png"
                   alt="Nodejs"
                   className="w-10 h-10 rounded-full object-cover"
                   />

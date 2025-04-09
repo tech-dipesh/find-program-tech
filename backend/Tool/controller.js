@@ -23,11 +23,11 @@ module.exports.idEditGet = async (req, res) => {
 module.exports.idEditPut = async (req, res) => {
   try {
     let id = req.params.id;
-    let { Name, companyName, releaseYear, useCase, webLink, Description, techStack } =
+    let { Name, companyName, Logo, releaseYear, useCase, webLink, Description, techStack } =
       req.body;
     let update = await modelListing.findByIdAndUpdate(
       id,
-      { Name, companyName, releaseYear, useCase, webLink, Description, techStack },
+      { Name, companyName, Logo, releaseYear, useCase, webLink, Description, techStack },
       { new: true }
     );
     // res.redirect(`/tools/${id}`);
@@ -133,11 +133,12 @@ module.exports.showIdPost = async (req, res) => {
     //this is for convertint the userName to id
     const user = await signupListing.findOne({ userName: req.user.userName });
 
-    let { Name, companyName, releaseYear, useCase, webLink, Description, techStack} = req.body;
+    let { Name, companyName,Logo, releaseYear, useCase, webLink, Description, techStack} = req.body;
 
     const newTool = await modelListing.create({
       Name, 
       companyName,  
+      Logo,
       releaseYear,
       useCase,
       webLink,

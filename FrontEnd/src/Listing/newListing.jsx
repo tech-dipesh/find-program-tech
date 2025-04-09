@@ -138,6 +138,22 @@ export default function Newlisting() {
               />
             </div>
           </div>
+        {/* Logo */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Logo in url form *
+              <span className="ml-2 text-xs text-gray-500">(Upload image (Coming Soon))</span>
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              placeholder="Sorry for the incovinence we only accept the Logo in url form for making website a quicker."
+              {...register("Logo",
+                { required:false, minLength: { value: 5, message: "Please add a legiit url." }, maxLength: { value: 150, message: "Url can't be more than 150 characater length." } }
+              )}
+            />
+          </div>
+
           {/* <FormError error={errors.companyName} /> */}
           {/* {firstError && <FormError error={errors.companyName} />} */}
 

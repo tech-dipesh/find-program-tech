@@ -12,9 +12,11 @@ const Toolvalidate=new Schema({
   },
   Logo:{
     type: String,
+    required: false, 
+    default: "https://i.postimg.cc/K8wWMRWj/image.png",
     set: (v) =>
       v === ""
-        ? "https://i.sstatic.net/pwbPp7fg.jpg"
+        ? "https://i.postimg.cc/K8wWMRWj/image.png"
         : v,
   },
   companyName: {

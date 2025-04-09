@@ -86,8 +86,8 @@ export default function Showindividual() {
             <div className="bg-white rounded-xl shadow-md p-6 mb-8">
               <div className="flex items-start gap-6">
                 <img
-                  src={Nodejs}
-                  alt="Nodejs"
+                  src={show.Logo}
+                  // alt="{s}"
                   className="w-20 h-20 rounded-lg object-contain"
                 />
                 <div className="flex-1">
