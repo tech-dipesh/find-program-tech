@@ -6,6 +6,7 @@ const signupListing = require("../Register/model.js");
 const { CommentListing}  = require("./model.js");
 const Post=require("../Tool/model.js")
 const { default: mongoose } = require("mongoose");
+const newTool = require("../Tool/model.js");
 
 module.exports.Like = async (req, res) => {
     try {
@@ -85,7 +86,7 @@ module.exports.getComment=async(req, res)=>{
   try {
     let postId=req.params.id
     // let postId=new objectId(req.params.id);
-    const comments=await CommentListing.find({postId}).populate("userName", "userName")
+    const comments=await CommentListing.find({postId}).populate("newTool")
     res.status(200).json(comments)
   } catch (error) {
     console.error("Error on get comments and the error is", error.message)

@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const Schema=mongoose.Schema;
 const signupListing=require("../Register/model.js");
+const { CommentListing } = require("../Comment/model.js");
 
 const Toolvalidate=new Schema({
   Name: String,
@@ -50,6 +51,10 @@ const Toolvalidate=new Schema({
     type: String,
     default: Date()
   },
+  Comment:{
+    type: Schema.Types.ObjectId,
+    ref:"CommentListing"
+  }
   // userName: {
   //   type: String,
   //   required: true

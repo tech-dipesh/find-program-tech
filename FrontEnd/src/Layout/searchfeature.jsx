@@ -40,7 +40,7 @@ useEffect(() => {
       // tool?.Name?.toLowerCase?.().includes(search?.toLowerCase() || '')
       //first it will extract the tool.Name from the above and just check with the search query and try to match it
       // tool.Name.toLowerCase().includes(search?.toLowerCase()|| "") //this code is working for me but better approach would be safe searching with pass the condition
-      //the includes condition is check whether both 2 value are same or not  like we can check on email validation with email.includes("@")
+      //checking with optional chaining with inclued keyword for both of one.
       tool?.Name?.toLowerCase()?.includes(search?.toLowerCase() || "")
       );
     }, [search, tools]);
