@@ -130,4 +130,8 @@ app.listen(5000, () => {
   console.log(`port is listening to: localhost:${port}`);
 });
 
-app.all("*",(req, res)=>res.redirect("tools"));
+app.use("*",(req, res)=>{
+  // res.redirect("tools")
+  res.status(500).json({error: "Route not found"})
+}
+);
