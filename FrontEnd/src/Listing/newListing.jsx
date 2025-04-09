@@ -8,7 +8,7 @@ import axios from "axios"
 import { toastError, toastSuccess } from "../Miscellaneous/react-toast.jsx"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { getUserActivity } from "../service/api.jsx"
+import { getUserActivity, createItem } from "../service/api.jsx"
 import Loading from "../Miscellaneous/Loading.jsx"
 export default function Newlisting() {
   const navigate = useNavigate();
@@ -37,11 +37,19 @@ export default function Newlisting() {
   }, [navigate]);
 
   const onSubmit = async (formData) => {
+    // console.log(formData);
     try {
-      const response = await axios.post("http://localhost:5000/tools", formData, {
-        withCredentials: true,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      // const response = await axios.post("http://localhost:5000/tools", formData, {
+      //   withCredentials: true,
+      //   headers: { 'Content-Type': 'application/json' }
+      // });
+      const response = await createItem(formData);
+    
+      // Success handling
+      toastSuccess("Listing created successfully!");
+      setTimeout(() => {
+        navigate("/tools"); // Navigate to the listings page
+      }, 500);
       // ... success handling
     } catch (error) {
       if (error.response?.status === 401) {
@@ -52,7 +60,9 @@ export default function Newlisting() {
         }, 20);
       } else {
         toastError("Errror on while sending data to backend to create a new listings.")
+        //this is the ternarny operator
         console.error("Error on the while submitting data from the frontend to sending data to backend:", error.response ? error.response.data : error.message)
+        
     
       }
     }
@@ -74,7 +84,7 @@ export default function Newlisting() {
   //it will only get the only one error at the time.
   const firstError = Object.values(errors)[0];
 
-  if(!loading) return <Loading/>
+  if(loading) return <Loading/>
   return (
     <>
       <MainNavbar />
@@ -152,7 +162,7 @@ export default function Newlisting() {
                 type="text"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="htpps://page.com"
                 {...register("webLink",
-                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 20, message: "Product url can't be more than 20 Character Length", }, pattern: {value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url."} }
+                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 35, message: "Product url can't be more than 35 Character Length", }, pattern: {value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url."} }
                 )}
               />
             </div>
@@ -181,7 +191,7 @@ export default function Newlisting() {
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 'Automated API testing platform for developers'"
               {...register("useCase",
-                { required: { value: true, message: "Please write the Use Case" }, minLength: { value: 5, message: "Minimum should be more than 5 characters." }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
+                { required: { value: true, message: "Please write the Use Case" }, minLength: { value: 5, message: "Minimum should be more than 5 characters." }, maxLength: { value: 50, message: "useCase can't be more than 50 characater length." } }
               )}
             />
           </div>

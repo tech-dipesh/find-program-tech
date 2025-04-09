@@ -3,47 +3,75 @@ import Nodejs from "../assets/nodejs.webp";
 import Upvote from "./upvote";
 import MainNavbar from "../Layout/mainNavbar";
 import Footer from "../Layout/footer";
-import getItemById from "../service/api";
-import { Link, useParams } from "react-router-dom";
+import {getItemById, getUserActivity} from "../service/api";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Comment } from "./comment.jsx";
 import Loading from "../Miscellaneous/Loading.jsx";
 import Delete from "./delete.jsx";
 export default function Showindividual() {
+  let navigate=useNavigate()
   const { id } = useParams();
   const [show, setshow] = useState(null);
   const [comments, setComments] = useState([]);
   const [deleted, setdeleted] = useState()
+
+  const [isLoggedIn, setisLoggedIn] = useState(false)
+  
+  
   useEffect(() => {
     const fetchTool = async (data) => { 
       try {
         const response = await getItemById(id);
         // if (Array.isArray(response.data.tools)) {
-        if (response.data.tools) {
-          const tool = response.data.tools.find(t => t._id === id);
-          setshow(tool);
-          //just passing the to
-          const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
-          setComments(commentsResponse.data);
-        } else {
-          setshow(response.data.tools);
+          if (response.data.tools) {
+            const tool = response.data.tools.find(t => t._id === id);
+            setshow(tool);
+            //just passing the to
+            const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
+            setComments(commentsResponse.data);
+          } else {
+            setshow(response.data.tools);
+          }
+        } catch (error) {
+          console.error('showindividual.jsx', error.message);
+          
         }
-      } catch (error) {
-        console.error('Error fetching tool:', error);
+      };
+      fetchTool();
+    }, [id]);
+
+    useEffect(() => {
+      const checkUser=async()=>{
+        try {
+          const resp=await getUserActivity()
+          // console.log("Show username", show);
+          // console.log("REspones curruser useraname", resp.data.currUser._id);
+
+          // if(!resp.data.user) setisLoggedIn (true)
+          let isCreator=resp.data.currUser && resp.data.currUser._id===show.userName;
+            // setisLoggedIn(!!resp.data.currUser.userName===show.userName)
+            setisLoggedIn(isCreator)
+          }
+      catch (error) {
+        console.error("Please Logged in first", error.message)
+        setisLoggedIn(false)
       }
-    };
-    fetchTool();
-  }, [id]);
+    }
+        checkUser()
+    }, [show])
 
-  // if (!show) return <div className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Loading...</div>;
-  if(!show) return <Loading/>
 
-  // useEffect(() => {
-  //   let Comment=async ()
-  // }, [])
-
-  return (
-    <>
+    
+    // if (!show) return <div className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Loading...</div>;
+    if(!show) return <Loading/>
+    
+    // useEffect(() => {
+      //   let Comment=async ()
+      // }, [])
+      
+      return (
+        <>
       <MainNavbar />
       <main>
         <div className="min-h-screen bg-gray-50 py-8 px-4">
@@ -96,9 +124,12 @@ export default function Showindividual() {
                     >
                       Edit
                     </a> */}
+                    {/* if(!getUserActivity) */}
+                    {isLoggedIn? (
                     <Link to={`/tools/${show._id}/edit`} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer">
                       Edit
                     </Link>
+                    ):<></>}
                     <a
                       href={show.webLink}
                       target="_blank"
@@ -122,7 +153,7 @@ export default function Showindividual() {
                   </p>
                 </div>
               </div>
-            <Delete/>
+            {isLoggedIn? (<Delete/>) :<></> }
             </div>
             {/* <Upvote /> */}
             {/* <Description /> */}

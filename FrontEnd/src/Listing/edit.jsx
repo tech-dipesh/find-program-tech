@@ -172,7 +172,7 @@ export const Edit = () => {
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="moved page url"
                 //  value={edit.webLink}
                 {...register("webLink",
-                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 20, message: "Product url can't be more than 20 Character Length", }, pattern: { value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url." } }
+                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 35, message: "Product url can't be more than 35 Character Length", }, pattern: { value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url." } }
                 )}
               />
             </div>
@@ -188,7 +188,7 @@ export const Edit = () => {
               placeholder="Updated One Liner"
               //  value={edit.useCase}
               {...register("useCase",
-                { required: { value: true, message: "Please write the Use Case" }, minLength: { value: 5, message: "Minimum should be more than 5 characters." }, maxLength: { value: 20, message: "useCase can't be more than 20 characater length." } }
+                { required: { value: true, message: "Please write the Use Case" }, minLength: { value: 5, message: "Minimum should be more than 5 characters." }, maxLength: { value: 50, message: "useCase can't be more than 50 characater length." } }
               )}
             />
           </div>

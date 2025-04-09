@@ -9,7 +9,7 @@ export default function Hero(){
             Discover Your Next <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dev Toolkit</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Join a community-driven platform where developers explore, share, and elevate their tooling ecosystem.
+            Join with me to build the next Developer Tool.
           </p>
           <div className="flex justify-center space-x-4">
             <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg transition-all transform hover:scale-105">

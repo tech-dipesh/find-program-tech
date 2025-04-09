@@ -4,6 +4,11 @@ const signupListing=require("../Register/model.js");
 
 const Toolvalidate=new Schema({
   Name: String,
+  // userName: "signupListing",
+  userName:{
+    type: Schema.Types.ObjectId,
+    ref: "signupListing"
+  },
   Logo:{
     type: String,
     set: (v) =>
@@ -29,7 +34,9 @@ const Toolvalidate=new Schema({
     type: String,
     required: true,
     //match is for the pattern which should match.
-    match: [/^https:\/\/.+\..+/, 'Website must start with https:// and contain a dot']
+    match: [/^https:\/\/.+\..+/, 'Website must start with https:// and contain a dot'],
+    maxLength: [35, "product url can't be more than 35 characters"],
+    minLength: [3, "please write the legiit name"]
   },
   techStack: {
     type: String,

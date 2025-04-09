@@ -79,7 +79,7 @@ module.exports.deleteListing = async (req, res) => {
 module.exports.individualListingGet = async (req, res) => {
   try {
     const id = req.params.id;
-    const tools = await modelListing.findById(id);
+    const tools = await modelListing.findById(id).populate("signupListing");
     const approval = await Approval.findOne({ toolId: id });
     if (!isValidObjectId(id)) {
       req.flash("error", "Invalid tool ID format");
@@ -118,7 +118,7 @@ module.exports.showIdGet = async (req, res) => {
   }
 };
 module.exports.showIdPost = async (req, res) => {
-  console.log(`Requested data is: ${req.body}`);
+  // console.log(`Requested data is: ${req.body}`);
   try {
     // console.log(req.user);
     
@@ -129,6 +129,10 @@ module.exports.showIdPost = async (req, res) => {
     // let userName=await signupListing.find({userName})
     // let Customer=await modelListing.create({Name: "New Nepali Pride tool", releaseYear: 2000, useCase: "For developing the humanity tool", UserName: userId})
     // let user=await signupListing.findOne({userName: req.body.userName});
+
+    //this is for convertint the userName to id
+    const user = await signupListing.findOne({ userName: req.user.userName });
+
     let { Name, companyName, releaseYear, useCase, webLink, Description, techStack} = req.body;
 
     const newTool = await modelListing.create({
@@ -141,6 +145,7 @@ module.exports.showIdPost = async (req, res) => {
       techStack,
       Description,
       // userName: req.user.userName,
+      userName: user._id
     });
     // console.log(newTool);
     const tool=await newTool.save()
