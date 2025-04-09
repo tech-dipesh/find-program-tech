@@ -72,7 +72,7 @@ module.exports.loginPost = async (req, res) => {
     res.json({ message: 'Login successful' });
   } catch (error) {
     // res.send(`error on the login post route and the error is: ${error}`);
-    res.status(402).json({message: "sever error on login post"});
+    res.status(402).json({message: "sever error on login post", error});
   }
 };
 

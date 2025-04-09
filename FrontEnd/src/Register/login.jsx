@@ -32,7 +32,7 @@ export default function Login() {
       toastError(error)
       console.error("Error on login:", error);
      if(error.response){
-      toastError("🦄 Please try again")
+      toastError(error.response.data)
       console.log("Server Error:", error.response.data);
      }
     }

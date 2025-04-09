@@ -9,7 +9,7 @@ import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
 
 export const Comment = () => {
   let [comments, setComments] = useState([])
-
+  usest
   let navigate = useNavigate([])
   let { id } = useParams();
   const { register,
@@ -42,6 +42,7 @@ export const Comment = () => {
   }, [id, comments.length])
 
   const onsubmit = async (data) => {
+    if(!islo)
     try {
       // const response = await axios.post(`http://localhost:5000/{id}/comment`,
     //   {Comment: data.comment},
