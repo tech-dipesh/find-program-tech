@@ -14,7 +14,7 @@ export default function Testimonial(){
               <div className="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
                 <p className="text-gray-600 dark:text-gray-300 mb-6">"Be First to feature here"</p>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img src={Software2} alt="Senior Software Developer" /></div>
+                  <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img src="https://i.postimg.cc/K8wWMRWj/image.png" alt="Senior Software Developer" /></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white">"Your Respected Name"</h4>
                     <p className="text-gray-500 dark:text-gray-400">Senior Engineer</p>
@@ -24,7 +24,7 @@ export default function Testimonial(){
               <div className="p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
                 <p className="text-gray-600 dark:text-gray-300 mb-6">"You could be here"</p>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img className="rounded-4xl" src={Software1} alt="Software develeloper junior" /></div>
+                  <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700 mr-4"><img className="rounded-4xl" src="https://i.postimg.cc/K8wWMRWj/image.png" alt="Software develeloper junior" /></div>
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white">"Your Respected Name"</h4>
                     <p className="text-gray-500 dark:text-gray-400">"Junior Developer"</p>
