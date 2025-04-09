@@ -216,7 +216,7 @@ export default function Newlisting() {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Detailed Description *
             </label>
-            <input
+            <textarea
               className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent h-32"
               placeholder="Describe features, benefits, and unique value proposition"
               {...register("Description",
