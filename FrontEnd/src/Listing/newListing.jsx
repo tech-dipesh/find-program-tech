@@ -178,7 +178,7 @@ export default function Newlisting() {
                 type="text"
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="htpps://page.com"
                 {...register("webLink",
-                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 35, message: "Product url can't be more than 35 Character Length", }, pattern: {value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url."} }
+                  { required: { value: true, message: "Product url is required." }, minLength: { value: 5, message: "It should have at least 5 character Length" }, maxLength: { value: 45, message: "Product url can't be more than 45 Character Length", }, pattern: {value: /^https:\/\/.+\..+/, message: "Make sure you write the valid url."} }
                 )}
               />
             </div>

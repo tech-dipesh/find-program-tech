@@ -1,33 +1,45 @@
-#Mega Project
-This is my mega project. Which included entire frontend backend system from the scratch.
+**Technologies & Concepts Learned that i have learned in this mega project:**
 
-# TechnoLogies:
+1. **Backend Development:**
+   - **Node.js/Express:** REST API setup, routing, middleware (helmet, cors, express-session).
+   - **Authentication:** Passport.js (LocalStrategy), session management, hashing/salting passwords.
+   - **Database:** MongoDB/Mongoose (schema design, population, CRUD operations, references).
+   - **Validation:** Joi schema validation, error handling with `connect-flash`.
+   - **File Handling:** Multer + Cloudinary for image uploads.
+   - **Deployment:** Render (backend), Vercel(frontend), environment variables (dotenv).
 
-## FrontEnd
+2. **Frontend Development:**
+   - **React:** Component architecture, React Router (nested routes, useParams, navigation), hooks (useState, useEffect, useMemo).
+   - **Styling:** Tailwind CSS.
+   - **Form Management:** react-hook-form, form validation, error handling.
+   - **State Management:** Context API, Axios for API calls.
+   - **UI/UX:** React Toastify for notifications, lazy loading, conditional rendering.
 
-<ul>
-  <li>React.Js<li>
-  <li>TailwindCss<li>
-</ul>
+3. **Full-Stack Integration:**
+   - **CORS Configuration:** Cross-origin requests, headers, credentials.
+   - **Proxy Setup:** Vite proxy for API routes.
+   - **Authentication Flow:** JWT/cookie-based auth, protected routes (edit/delete permissions).
+   - **Real-Time Features:** Search/filter, upvote/downvote, comments with dynamic updates.
 
-## BackEnd
+4. **Main Concepts:**
+   - Middleware chaining (validation → auth → handlers).
+   - Schema relationships (user ↔ listings ↔ comments).
+   - Async/await error handling (try/catch blocks).
+   - Deployment (env variables, platform constraints).
+   - Security (password hashing, rate limiting).
 
-<ul>
-  <li>Node.Js<li>
-  <li>Express.Js<li>
-  <li>MongoDb<li>
-</ul>
+**Problem I have Faced:**
+- Fixed CORS with explicit headers/credentials.
+- Debugged route priority conflicts (`/:id` vs `/new`).
+- Implemented protected routes via middleware + frontend checks.
+- Solved comment population issues with Mongoose `.populate()`.
+- Managed React state synchronization (useEffect dependencies).
+
+**Architectural Patterns:**
+- MVC pattern (Models for MongoDB, Controllers for logic, Views in React).
+- RESTful API design (GET/POST/PUT/DELETE endpoints).
+- Component-based UI with reusable Tailwind templates.
 
 
-# Lesson
-I face lot's of error during this project, which helps me to build the solid foundation of the Full Stack.
-
-# Next 
-I will later work on the project that include the WebSocket, TailWind and the WebRTC, which would be the Real Time Updation And lot's of things.
-
-# Setup On Your Local Server:
-1. Open the Terminal and type folllowing code: ```git clone https://github.com/tech-dipesh/find-program-tech.git```
-2. Type ```npm install```
-3. Type ```code .``` to open the vs Code
-4. Type ```cd frontend``` to go to frontend page
-5. Type ```npm run dev``` to run the server
+**You Can Check Out on here**:
+https://daily-stack.vercel.app/
