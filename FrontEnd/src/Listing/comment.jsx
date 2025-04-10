@@ -65,7 +65,7 @@ export const Comment = () => {
   }
   return (
     <>
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6 mb-30 mt-20">
         <h2 className="text-2xl font-semibold mb-6">Comments: {comments.length}</h2>
         <form className="mb-8" onSubmit={handleSubmit(onsubmit)}>
           {errors.Comment && <span className="flex items-center justify-center mt-2 ml-1/2 text-m text-red-500">{errors.Comment.message}</span>}
