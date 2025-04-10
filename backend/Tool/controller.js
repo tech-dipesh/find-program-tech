@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const { isValidObjectId } = require("mongoose");
+
 const expressError = require("../middleware/expressError.js");
 const data = require("../data/data.js");
 const newSchema = require("../middleware/schema.js");
 const modelListing = require("./model.js");
-let Approval = require("../Comment/likemodel.js");
+let {approvalListing} = require("../Comment/likemodel.js");
 const { validationResult } = require("express-validator");
 const signupListing = require("../Register/model.js");
 module.exports.idEditGet = async (req, res) => {
@@ -79,11 +80,12 @@ module.exports.deleteListing = async (req, res) => {
 module.exports.individualListingGet = async (req, res) => {
   try {
     const id = req.params.id;
-    const tools = await modelListing.findById(id).populate("signupListing");
-    const approval = await Approval.findOne({ toolId: id });
+    // const tools = await modelListing.findById(id).populate("userName");
+    const approval = await approvalListing.findOne({ toolId: id });
     if (!isValidObjectId(id)) {
       req.flash("error", "Invalid tool ID format");
-      return res.redirect("/tools");
+      // return res.redirect("/tools");
+      return res.status(500).json({message: error})
     }
     // res.render("showindividual.ejs", {
     //   tools,

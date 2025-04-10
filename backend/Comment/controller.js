@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {Approval, contactForm} = require("./likemodel.js");
+const {approvalListing, contactForm} = require("./likemodel.js");
 const modelListing = require("../Tool/model.js");
 const signupListing = require("../Register/model.js");
 const { CommentListing}  = require("./model.js");
@@ -11,7 +11,7 @@ const newTool = require("../Tool/model.js");
 module.exports.Like = async (req, res) => {
     try {
       const id = req.params.id;
-      let approval = await Approval.findOne({ toolId: id });
+      let approval = await approvalListing.findOne({ toolId: id });
       
       if (!approval) {
         approval = new Approval({
@@ -34,7 +34,7 @@ module.exports.Like = async (req, res) => {
 module.exports.disLike = async (req, res) => {
   try {
     const id = req.params.id;
-    let approval = await Approval.findOne({ toolId: id });
+    let approval = await approvalListing.findOne({ toolId: id });
    
     if (!approval) {
       approval = new Approval({
@@ -88,7 +88,13 @@ module.exports.getComment=async(req, res)=>{
   try {
     let postId=req.params.id
     // let postId=new objectId(req.params.id);
-    const comments=await CommentListing.find({postId}).populate("userName", "userName")
+    // const comments=await CommentListing.find({postId}).populate("userName", "userName")
+    // In backend/Comment/controller.js - getComment function
+const comments = await CommentListing.find({ postId })
+.populate({
+  path: 'userName',
+  select: 'userName' // Only get the username field
+});
     res.status(200).json(comments)
   } catch (error) {
     console.error("Error on get comments and the error is", error.message)
