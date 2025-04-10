@@ -3,6 +3,8 @@ const router = express.Router();
 const wrapAsync = require("../middleware/wrapAsync.js");
 const { getComment, postComment, handleVote, getVotes, contactModule } = require("./controller.js");
 const { isLoggedIn } = require("../middleware/isLoggedIn.js");
+
+
  // router.post("/:id/Like", wrapAsync(Like))
   // router.post("/:id/disLike",  wrapAsync(disLike));;
 
@@ -12,8 +14,8 @@ router.get('/:id/votes', wrapAsync(getVotes));
 
 router.route("/:id/comment")
 .get( wrapAsync(getComment))
-// .post( wrapAsync, isLoggedIn(postComment))
-.post(isLoggedIn, wrapAsync(postComment))
+.post( wrapAsync(postComment))
+// .post(isLoggedIn, wrapAsync(postComment))
 
 
 //contact form

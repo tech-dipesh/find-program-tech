@@ -62,13 +62,13 @@ module.exports.postComment=async (req, res)=>{
     // if(!req.user){
     //   return res.status(500).json({message: "User is not logged in"})
     // }
-    
+    const userId=req.user? req.user._id : null;
     let newComment=await new CommentListing({
       // Comment: req.body.signupListing.Comment,
       // userName: req.body.signupListing.userName
       // _id: new mongoose.Types.ObjectId(),
       Comment: req.body.Comment,
-      userName: req.user._id || "guest",
+      userName: req.user._id,
       date: new Date(),
       // track the individual comment id
       postId: postId
@@ -81,6 +81,7 @@ module.exports.postComment=async (req, res)=>{
     res.status(500).json({message: "Error on the comment on individual listing", error: error.message})
   }
 }
+
 
 module.exports.getComment=async(req, res)=>{
   try {

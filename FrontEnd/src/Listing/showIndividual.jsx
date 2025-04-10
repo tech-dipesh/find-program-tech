@@ -34,8 +34,7 @@ export default function Showindividual() {
             setshow(response.data.tools);
           }
         } catch (error) {
-          console.error('showindividual.jsx', error.message);
-          
+          console.error('showindividual.jsx', error);
         }
       };
       fetchTool();

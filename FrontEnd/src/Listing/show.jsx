@@ -4,10 +4,12 @@ import Node from "../assets/nodejs.webp";
 import MainNavbar from "../Layout/mainNavbar";
 import Footer from "../Layout/footer";
 import { getAllItems } from '../service/api';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Miscellaneous/Loading";
+
 export default function Show() {
+  const {id}=useParams()
   const [tools, setTools] = useState([]);
   const [comments, setComments]=useState([])
   useEffect(() => {
@@ -15,12 +17,12 @@ export default function Show() {
       try {
         const response=await getAllItems();
         setTools(response.data.tools)
-
         //extracting the length of the total comments:
         const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
         setComments(commentsResponse.data);
       } catch (error) {
-        console.error(`Error on UseEffect fetching data, ${error}`);
+        // console.error(`Error on UseEffect fetching data, ${error}`);
+        console.error(error)
       }
     }
     setId()

@@ -38,7 +38,7 @@ const Toolvalidate=new Schema({
     required: true,
     //match is for the pattern which should match.
     match: [/^https:\/\/.+\..+/, 'Website must start with https:// and contain a dot'],
-    maxLength: [35, "product url can't be more than 35 characters"],
+    maxLength: [45, "product url can't be more than 45 characters"],
     minLength: [3, "please write the legiit name"]
   },
   techStack: {

@@ -9,7 +9,7 @@ import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
 
 export const Comment = () => {
   let [comments, setComments] = useState([])
-  usest
+  const [isLoggedin, setisLoggedin] = useState(false)
   let navigate = useNavigate([])
   let { id } = useParams();
   const { register,
@@ -18,7 +18,7 @@ export const Comment = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  // const onSubmit = (data) => console.log(data)
 
   useEffect(() => {
     const fetchingComment = async (data) => {
@@ -42,7 +42,6 @@ export const Comment = () => {
   }, [id, comments.length])
 
   const onsubmit = async (data) => {
-    if(!islo)
     try {
       // const response = await axios.post(`http://localhost:5000/{id}/comment`,
     //   {Comment: data.comment},
@@ -50,9 +49,8 @@ export const Comment = () => {
     //    "content-type": "application/json",
     //  },
     //   withCredentials: true })
-      const response = await postComment
-      (id, { Comment: data.Comment });
-      console.log(response.data);
+      const response = await postComment(id, { Comment: data.Comment });
+      console.log("response data", response.data);
       // setCommentItem(newComment.data)
       // this is for the new comment wrap into the list with new comments
       setComments(prevComment=>[...prevComment, response.data])
@@ -60,19 +58,7 @@ export const Comment = () => {
       toastSuccess("New comment is added");
       reset()
     } catch (error) {
-      // console.error("error message", error.message)
-      if (error.response && error.response.status === 401) {
-        alert("Please log in to post comments");
-        toastError("🦄 Please login first to post any new comments.")
-        navigate("/login")
-      } else {
-        console.log("The error on teh catch error of onSubmit");
-        navigate("/login")
-        setTimeout(() => {
-          toastError("🦄 Please login first to post any new comments.")
-        }, 50);
-        // res.json({message: "The error on teh catch error of onSubmit"})
-      }
+      toastError(error.response?.data?.message ||"Error posting the new comment")
     }
   }
   return (
