@@ -10,7 +10,7 @@ import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
 export const Comment = () => {
   let [comments, setComments] = useState([])
   const [isLoggedin, setisLoggedin] = useState(false)
-  let navigate = useNavigate([])
+  let navigate = useNavigate()
   let { id } = useParams();
   const { register,
     handleSubmit,
@@ -49,16 +49,18 @@ export const Comment = () => {
     //    "content-type": "application/json",
     //  },
     //   withCredentials: true })
-      const response = await postComment(id, { Comment: data.Comment });
+    const response = await postComment(id, { Comment: data.Comment }, );
       console.log("response data", response.data);
-      // setCommentItem(newComment.data)
-      // this is for the new comment wrap into the list with new comments
-      setComments(prevComment=>[...prevComment, response.data])
-      // it will reset the form when the form is submitted with blank value:
-      toastSuccess("New comment is added");
-      reset()
+      // // setCommentItem(newComment.data)
+      // // this is for the new comment wrap into the list with new comments
+      // setComments(prevComment=>[...prevComment, response.data])
+      // // it will reset the form when the form is submitted with blank value:
+      // toastSuccess("New comment is added");
+      // reset()
     } catch (error) {
-      toastError(error.response?.data?.message ||"Error posting the new comment")
+      toastError(error.response?.data?.message)
+      console.log("Error catch error log", error)
+      console.error("Error catch error console error", error)
     }
   }
   return (

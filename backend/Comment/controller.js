@@ -53,22 +53,23 @@ module.exports.disLike = async (req, res) => {
     res.status(500).json({ error: 'Failed to process dislike' });
   }
 };
-module.exports.postComment=async (req, res)=>{
+module.exports.postComment= async (req, res)=>{
   try {
     let postId=req.params.id;
     // let postId=new objectId(req.params.id)
     console.log("Request Body", req.body);
     console.log("User INfo", req.user);
-    // if(!req.user){
-    //   return res.status(500).json({message: "User is not logged in"})
-    // }
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ message: "Unauthorized: Please login first." });
+    }    
     const userId=req.user? req.user._id : null;
     let newComment=await new CommentListing({
       // Comment: req.body.signupListing.Comment,
       // userName: req.body.signupListing.userName
       // _id: new mongoose.Types.ObjectId(),
       Comment: req.body.Comment,
-      userName: req.user._id,
+      // userName: req.user._id,
+      userName: userId,
       date: new Date(),
       // track the individual comment id
       postId: postId
@@ -87,7 +88,7 @@ module.exports.getComment=async(req, res)=>{
   try {
     let postId=req.params.id
     // let postId=new objectId(req.params.id);
-    const comments=await CommentListing.find({postId}).populate("newTool")
+    const comments=await CommentListing.find({postId}).populate("userName", "userName")
     res.status(200).json(comments)
   } catch (error) {
     console.error("Error on get comments and the error is", error.message)

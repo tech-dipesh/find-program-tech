@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const signupListing = require("../Register/model.js");
-const newTool=require("../Register/model.js")
+const newTool=require("../Register/model.js");
+const { required } = require("joi");
 const CommentSchema = new Schema({
   // _id: Schema.Types.ObjectId,
   Comment: {
@@ -12,6 +13,7 @@ const CommentSchema = new Schema({
   userName: {
     type: Schema.Types.ObjectId,
     ref: "signupListing",
+    // required: false
   },
   date:{
     type: Date,

@@ -28,7 +28,7 @@ export default function Show() {
     setId()
   }, [])
 
-  if(!tools) return <Loading/>
+  // if(!tools) return <Loading/>
   return (
     <>
       <MainNavbar />
