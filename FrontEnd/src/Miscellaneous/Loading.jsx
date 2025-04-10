@@ -4,7 +4,7 @@ export default function Loading() {
   infinity.register()
   return (
     <React.Fragment>
-      <div className="fixed top-1/2 left-1/2 transform w-[400px] h-[300px] bg-white shadow-lg rounded-xl">
+      <div className="fixed top-1/2 left-2/4">
       <l-infinity
         size="200"
         stroke="4"

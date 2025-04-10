@@ -3,7 +3,7 @@ import Node from "../assets/nodejs.webp";
 // import Express from "../assets/express-js.png";
 import MainNavbar from "../Layout/mainNavbar";
 import Footer from "../Layout/footer";
-import { getAllItems } from '../service/api';
+import { getAllItems, postComment } from '../service/api';
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../Miscellaneous/Loading";
@@ -12,23 +12,37 @@ export default function Show() {
   const {id}=useParams()
   const [tools, setTools] = useState([]);
   const [comments, setComments]=useState([])
+
   useEffect(() => {
     const setId = async () => {
       try {
         const response=await getAllItems();
         setTools(response.data.tools)
-        //extracting the length of the total comments:
         const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
         setComments(commentsResponse.data);
       } catch (error) {
-        // console.error(`Error on UseEffect fetching data, ${error}`);
         console.error(error)
       }
     }
     setId()
   }, [])
+  
 
-  // if(!tools) return <Loading/>
+  useEffect(() => {
+    const fetchToolAndComments = async () => {
+      try {
+        const toolResponse = await getItemById(id);
+        const commentResponse = await API.get(`/tools/${id}/comment`);
+        setTools([toolResponse.data.tool]);
+        setComments(commentResponse.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    if (id) fetchToolAndComments();
+  }, [id]);
+  
+  if(!tools) return <Loading/>
   return (
     <>
       <MainNavbar />

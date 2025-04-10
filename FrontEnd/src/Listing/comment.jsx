@@ -23,7 +23,7 @@ export const Comment = () => {
   useEffect(() => {
     const fetchingComment = async (data) => {
       try {
-        setComments([])
+        // setComments([])
         let response = await API.get(`/tools/${id}/comment`,
           //  {  "content-type": "application/json",
         // },
@@ -53,14 +53,17 @@ export const Comment = () => {
       console.log("response data", response.data);
       // // setCommentItem(newComment.data)
       // // this is for the new comment wrap into the list with new comments
-      // setComments(prevComment=>[...prevComment, response.data])
+      setComments(prevComment=>[...prevComment, response.data])
       // // it will reset the form when the form is submitted with blank value:
-      // toastSuccess("New comment is added");
-      // reset()
+      toastSuccess("New comment is added");
+      reset()
     } catch (error) {
-      toastError(error.response?.data?.message)
-      console.log("Error catch error log", error)
-      console.error("Error catch error console error", error)
+      // console.log("Error catch error log", error)
+      navigate("/login");
+      setTimeout(() => {
+        toastError(error.response?.data?.message)
+      }, 10);
+      // console.error("Error catch error console error", error)
     }
   }
   return (

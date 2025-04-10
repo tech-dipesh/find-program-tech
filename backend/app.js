@@ -114,7 +114,7 @@ app.use(( req, res, next) => {
 app.use("/tools", listingRoute)
 // app.use("/new", listingRoute)
 app.use("/", registerRoute);
-app.use("/tools", commentRoute);
+app.use("/", commentRoute);
 // app.use(expressError);
 
 // app.use("*", (req, res) => {

@@ -92,11 +92,10 @@ module.exports.individualListingGet = async (req, res) => {
     //   Like: approval ? approval.Likes : 0,
     //   disLike: approval ? approval.disLike : 0,
     // });
-    res.json({success: true, tools, Like: approval ? approval.Likes:0, disLike:approval?approval.disLike: 0})
+    res.json({success: true, Like: approval ? approval.Likes:0, disLike:approval?approval.disLike: 0})
   } catch (error) {
-    console.error("Error fetching individual tool:", error);
-    req.flash("error", "Failed to fetch tool details");
-    res.redirect("/tools");
+    res.status(500).json({message: error})
+    console.log(error);
   }
 };
 
@@ -115,7 +114,7 @@ module.exports.showIdGet = async (req, res) => {
     res.json({success: true, tools})
   } catch (error) {
     // console.error("Error fetching tools:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ message: error });
     // res.send(`Error on the show id get route: ${error}`);
   }
 };
@@ -156,7 +155,8 @@ module.exports.showIdPost = async (req, res) => {
     // res.redirect("/tools", { currUser: req.user });
     res.status(201).json(tool)
   } catch (error) {
-    req.flash("error", "error on the show id post route, and the error is: ");
+    // req.flash("error", "error on the show id post route, and the error is: ");
+    console.log(error);
     // res.send(`error on the show id post route, and the error is: ${error}`);
     res.status(500).json({ error: error.message });
   }
