@@ -43,3 +43,29 @@
 
 **You Can Check Out on here**:
 https://daily-stack.vercel.app/
+
+
+
+
+**How to run locally**
+1.Go to command prompt
+<br>
+2. type: ```git clone https://github.com/tech-dipesh/find-program-tech```
+<br>
+3. type: ```cd find-program-tech```
+<br>
+3. type: ```cd backend``` (This is for running a backend server)
+<br>
+4. type: ```npm i```
+<br>
+5. After sucessfull installation we need to run the frontend server.
+<br>
+6. type: ```cd ..```
+<br>
+7. type: ```cd frontend```
+<br>
+8. type: ```npm i```
+<br>
+9. type: ```npm run dev```
+<br>
+10. Now you are good to go.
