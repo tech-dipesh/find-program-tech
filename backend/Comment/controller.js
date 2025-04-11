@@ -56,10 +56,10 @@ module.exports.disLike = async (req, res) => {
 module.exports.postComment= async (req, res)=>{
   try {
     let postId=req.params.id;
-    // let postId=new objectId(req.params.id)
-    console.log("Request Body", req.body);
+    console.log("Request Body", req.sessionId);
     console.log("User INfo", req.user);
     if (!req.user || !req.user._id) {
+      console.log("No user found on session");
       return res.status(401).json({ message: "Unauthorized: Please login first." });
     }    
     const userId=req.user? req.user._id : null;
@@ -75,8 +75,8 @@ module.exports.postComment= async (req, res)=>{
       postId: postId
     })
     let savedComment=await newComment.save();
-    res.status(200).json(savedComment)
-    // res.status(200).json({savedComment, currUser: req.user})
+    // res.status(200).json(savedComment)
+    res.status(200).json({savedComment, currUser: req.user})
   } catch (error) {
     console.error("Error on catch error", error)
     res.status(500).json({message: "Error on the comment on individual listing", error: error.message})

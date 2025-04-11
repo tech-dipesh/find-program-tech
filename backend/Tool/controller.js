@@ -80,19 +80,25 @@ module.exports.deleteListing = async (req, res) => {
 module.exports.individualListingGet = async (req, res) => {
   try {
     const id = req.params.id;
-    // const tools = await modelListing.findById(id).populate("userName");
+    // const tool = await modelListing.findById(id)
+    const tool = await modelListing.findById(id).populate("userName");
     const approval = await approvalListing.findOne({ toolId: id });
     if (!isValidObjectId(id)) {
-      req.flash("error", "Invalid tool ID format");
-      // return res.redirect("/tools");
-      return res.status(500).json({message: error})
+      // req.flash("error", "Invalid tool ID format");
+      return res.status(500).json({error: error.message})
     }
     // res.render("showindividual.ejs", {
     //   tools,
     //   Like: approval ? approval.Likes : 0,
     //   disLike: approval ? approval.disLike : 0,
     // });
-    res.json({success: true, Like: approval ? approval.Likes:0, disLike:approval?approval.disLike: 0})
+    // res.json({success: true, Like: approval ? approval.Likes:0, disLike:approval?approval.disLike: 0})
+    res.json({ 
+      success: true, 
+      tool,
+      likes: approval ? approval.Likes : 0,
+      dislikes: approval ? approval.disLike : 0
+    });
   } catch (error) {
     res.status(500).json({message: error})
     console.log(error);

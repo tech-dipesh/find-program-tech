@@ -9,6 +9,7 @@ import axios from "axios";
 import { Comment } from "./comment.jsx";
 import Loading from "../Miscellaneous/Loading.jsx";
 import Delete from "./delete.jsx";
+import { toastError } from "../Miscellaneous/react-toast.jsx";
 export default function Showindividual() {
   let navigate=useNavigate()
   const { id } = useParams();
@@ -18,23 +19,20 @@ export default function Showindividual() {
 
   const [isLoggedIn, setisLoggedIn] = useState(false)
   
-  
-  useEffect(() => {
-    const fetchTool = async (data) => { 
-      try {
-        const response = await getItemById(id);
-        // if (Array.isArray(response.data.tools)) {
-          if (response.data.tools) {
-            const tool = response.data.tools.find(t => t._id === id);
-            setshow(tool);
-            //just passing the to
+
+
+    useEffect(() => {
+      const fetchTool = async () => { 
+        try {
+          const response = await getItemById(id);
+          if (response.data.tool) {
+            setshow(response.data.tool);
             const commentsResponse = await axios.get(`http://localhost:5000/tools/${id}/comment`);
             setComments(commentsResponse.data);
-          } else {
-            setshow(response.data.tools);
           }
         } catch (error) {
-          console.error('showindividual.jsx', error);
+          console.error('showindividual.jsx', error.message);
+          toastError(error.message)
         }
       };
       fetchTool();

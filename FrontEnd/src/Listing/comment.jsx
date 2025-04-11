@@ -6,6 +6,7 @@ import API, { postComment } from '../service/api';
 // import API, { CommentItem, CommentItem as postCommentAPI } from '../service/api';
 import axios from 'axios';
 import { toastError, toastSuccess } from '../Miscellaneous/react-toast';
+import { toast } from 'react-toastify';
 
 export const Comment = () => {
   let [comments, setComments] = useState([])
@@ -43,6 +44,7 @@ export const Comment = () => {
 
   const onsubmit = async (data) => {
     try {
+      console.log("Comment is ", data.Comment);
       // const response = await axios.post(`http://localhost:5000/{id}/comment`,
     //   {Comment: data.comment},
     //   {headers: {
@@ -51,19 +53,15 @@ export const Comment = () => {
     //   withCredentials: true })
     const response = await postComment(id, { Comment: data.Comment }, );
       console.log("response data", response.data);
-      // // setCommentItem(newComment.data)
-      // // this is for the new comment wrap into the list with new comments
       setComments(prevComment=>[...prevComment, response.data])
-      // // it will reset the form when the form is submitted with blank value:
       toastSuccess("New comment is added");
       reset()
     } catch (error) {
-      // console.log("Error catch error log", error)
-      navigate("/login");
-      setTimeout(() => {
-        toastError(error.response?.data?.message)
-      }, 10);
-      // console.error("Error catch error console error", error)
+      toastError(error.message)
+      if (error.response?.status === 401) {
+          navigate("/login");
+          toastError(error?.response?.message)
+      }
     }
   }
   return (
