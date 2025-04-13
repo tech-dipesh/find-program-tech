@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { isValidObjectId } = require("mongoose");
 
 const expressError = require("../middleware/expressError.js");
-const data = require("../data/data.js");
+// const data = require("../data/data.js");
 const newSchema = require("../middleware/schema.js");
 const modelListing = require("./model.js");
 let {approvalListing} = require("../Comment/likemodel.js");
