@@ -1,7 +1,7 @@
 import axios from "axios";
 // In FrontEnd/src/api.js
 const API = axios.create({
-  baseURL: 'https://find-program-tech.onrender.com',
+  baseURL: 'https://find-program-tech-1.onrender.com',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
